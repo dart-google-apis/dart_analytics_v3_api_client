@@ -1135,7 +1135,7 @@ class GaDataQuery {
   String dimensions;
 
   /** End date. */
-  String end-date;
+  String end_date;
 
   /** Comma-separated list of dimension or metric filters. */
   String filters;
@@ -1144,7 +1144,7 @@ class GaDataQuery {
   String ids;
 
   /** Maximum results per page. */
-  int max-results;
+  int max_results;
 
   /** List of analytics metrics. */
   List<String> metrics;
@@ -1156,10 +1156,10 @@ class GaDataQuery {
   List<String> sort;
 
   /** Start date. */
-  String start-date;
+  String start_date;
 
   /** Start index. */
-  int start-index;
+  int start_index;
 
   /** Create new GaDataQuery from JSON data */
   GaDataQuery.fromJson(Map json) {
@@ -1167,7 +1167,7 @@ class GaDataQuery {
       dimensions = json["dimensions"];
     }
     if (json.containsKey("end-date")) {
-      end-date = json["end-date"];
+      end_date = json["end-date"];
     }
     if (json.containsKey("filters")) {
       filters = json["filters"];
@@ -1176,7 +1176,7 @@ class GaDataQuery {
       ids = json["ids"];
     }
     if (json.containsKey("max-results")) {
-      max-results = json["max-results"];
+      max_results = json["max-results"];
     }
     if (json.containsKey("metrics")) {
       metrics = [];
@@ -1194,10 +1194,10 @@ class GaDataQuery {
       });
     }
     if (json.containsKey("start-date")) {
-      start-date = json["start-date"];
+      start_date = json["start-date"];
     }
     if (json.containsKey("start-index")) {
-      start-index = json["start-index"];
+      start_index = json["start-index"];
     }
   }
 
@@ -1208,8 +1208,8 @@ class GaDataQuery {
     if (dimensions != null) {
       output["dimensions"] = dimensions;
     }
-    if (end-date != null) {
-      output["end-date"] = end-date;
+    if (end_date != null) {
+      output["end-date"] = end_date;
     }
     if (filters != null) {
       output["filters"] = filters;
@@ -1217,8 +1217,8 @@ class GaDataQuery {
     if (ids != null) {
       output["ids"] = ids;
     }
-    if (max-results != null) {
-      output["max-results"] = max-results;
+    if (max_results != null) {
+      output["max-results"] = max_results;
     }
     if (metrics != null) {
       output["metrics"] = new List();
@@ -1235,11 +1235,11 @@ class GaDataQuery {
         output["sort"].add(item);
       });
     }
-    if (start-date != null) {
-      output["start-date"] = start-date;
+    if (start_date != null) {
+      output["start-date"] = start_date;
     }
-    if (start-index != null) {
-      output["start-index"] = start-index;
+    if (start_index != null) {
+      output["start-index"] = start_index;
     }
 
     return output;
@@ -2102,7 +2102,7 @@ class McfDataQuery {
   String dimensions;
 
   /** End date. */
-  String end-date;
+  String end_date;
 
   /** Comma-separated list of dimension or metric filters. */
   String filters;
@@ -2111,7 +2111,7 @@ class McfDataQuery {
   String ids;
 
   /** Maximum results per page. */
-  int max-results;
+  int max_results;
 
   /** List of analytics metrics. */
   List<String> metrics;
@@ -2123,10 +2123,10 @@ class McfDataQuery {
   List<String> sort;
 
   /** Start date. */
-  String start-date;
+  String start_date;
 
   /** Start index. */
-  int start-index;
+  int start_index;
 
   /** Create new McfDataQuery from JSON data */
   McfDataQuery.fromJson(Map json) {
@@ -2134,7 +2134,7 @@ class McfDataQuery {
       dimensions = json["dimensions"];
     }
     if (json.containsKey("end-date")) {
-      end-date = json["end-date"];
+      end_date = json["end-date"];
     }
     if (json.containsKey("filters")) {
       filters = json["filters"];
@@ -2143,7 +2143,7 @@ class McfDataQuery {
       ids = json["ids"];
     }
     if (json.containsKey("max-results")) {
-      max-results = json["max-results"];
+      max_results = json["max-results"];
     }
     if (json.containsKey("metrics")) {
       metrics = [];
@@ -2161,10 +2161,10 @@ class McfDataQuery {
       });
     }
     if (json.containsKey("start-date")) {
-      start-date = json["start-date"];
+      start_date = json["start-date"];
     }
     if (json.containsKey("start-index")) {
-      start-index = json["start-index"];
+      start_index = json["start-index"];
     }
   }
 
@@ -2175,8 +2175,8 @@ class McfDataQuery {
     if (dimensions != null) {
       output["dimensions"] = dimensions;
     }
-    if (end-date != null) {
-      output["end-date"] = end-date;
+    if (end_date != null) {
+      output["end-date"] = end_date;
     }
     if (filters != null) {
       output["filters"] = filters;
@@ -2184,8 +2184,8 @@ class McfDataQuery {
     if (ids != null) {
       output["ids"] = ids;
     }
-    if (max-results != null) {
-      output["max-results"] = max-results;
+    if (max_results != null) {
+      output["max-results"] = max_results;
     }
     if (metrics != null) {
       output["metrics"] = new List();
@@ -2202,11 +2202,11 @@ class McfDataQuery {
         output["sort"].add(item);
       });
     }
-    if (start-date != null) {
-      output["start-date"] = start-date;
+    if (start_date != null) {
+      output["start-date"] = start_date;
     }
-    if (start-index != null) {
-      output["start-index"] = start-index;
+    if (start_index != null) {
+      output["start-index"] = start_index;
     }
 
     return output;
