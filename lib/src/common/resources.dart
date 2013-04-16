@@ -44,13 +44,13 @@ class DataGaResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<GaData> get(String ids, String start_date, String end_date, String metrics, {String dimensions, String filters, int max_results, String segment, String sort, int start_index, Map optParams}) {
-    var completer = new Completer();
+  async.Future<GaData> get(core.String ids, core.String start_date, core.String end_date, core.String metrics, {core.String dimensions, core.String filters, core.int max_results, core.String segment, core.String sort, core.int start_index, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "data/ga";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (dimensions != null) queryParams["dimensions"] = dimensions;
     if (end_date == null) paramErrors.add("end_date is required");
     if (end_date != null) queryParams["end-date"] = end_date;
@@ -116,13 +116,13 @@ class DataMcfResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<McfData> get(String ids, String start_date, String end_date, String metrics, {String dimensions, String filters, int max_results, String sort, int start_index, Map optParams}) {
-    var completer = new Completer();
+  async.Future<McfData> get(core.String ids, core.String start_date, core.String end_date, core.String metrics, {core.String dimensions, core.String filters, core.int max_results, core.String sort, core.int start_index, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "data/mcf";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (dimensions != null) queryParams["dimensions"] = dimensions;
     if (end_date == null) paramErrors.add("end_date is required");
     if (end_date != null) queryParams["end-date"] = end_date;
@@ -166,6 +166,8 @@ class ManagementResource extends Resource {
   ManagementCustomDataSourcesResource get customDataSources => _customDataSources;
   ManagementDailyUploadsResource _dailyUploads;
   ManagementDailyUploadsResource get dailyUploads => _dailyUploads;
+  ManagementExperimentsResource _experiments;
+  ManagementExperimentsResource get experiments => _experiments;
   ManagementGoalsResource _goals;
   ManagementGoalsResource get goals => _goals;
   ManagementProfilesResource _profiles;
@@ -179,6 +181,7 @@ class ManagementResource extends Resource {
   _accounts = new ManagementAccountsResource(client);
   _customDataSources = new ManagementCustomDataSourcesResource(client);
   _dailyUploads = new ManagementDailyUploadsResource(client);
+  _experiments = new ManagementExperimentsResource(client);
   _goals = new ManagementGoalsResource(client);
   _profiles = new ManagementProfilesResource(client);
   _segments = new ManagementSegmentsResource(client);
@@ -201,13 +204,13 @@ class ManagementAccountsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Accounts> list({int max_results, int start_index, Map optParams}) {
-    var completer = new Completer();
+  async.Future<Accounts> list({core.int max_results, core.int start_index, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "management/accounts";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (max_results != null) queryParams["max-results"] = max_results;
     if (start_index != null) queryParams["start-index"] = start_index;
     if (optParams != null) {
@@ -252,13 +255,13 @@ class ManagementCustomDataSourcesResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<CustomDataSources> list(String accountId, String webPropertyId, {int max_results, int start_index, Map optParams}) {
-    var completer = new Completer();
+  async.Future<CustomDataSources> list(core.String accountId, core.String webPropertyId, {core.int max_results, core.int start_index, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (accountId == null) paramErrors.add("accountId is required");
     if (accountId != null) urlParams["accountId"] = accountId;
     if (max_results != null) queryParams["max-results"] = max_results;
@@ -309,13 +312,13 @@ class ManagementDailyUploadsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Map> delete(String accountId, String webPropertyId, String customDataSourceId, String date, String type, {Map optParams}) {
-    var completer = new Completer();
+  async.Future<core.Map> delete(core.String accountId, core.String webPropertyId, core.String customDataSourceId, core.String date, core.String type, {core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/dailyUploads/{date}";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (accountId == null) paramErrors.add("accountId is required");
     if (accountId != null) urlParams["accountId"] = accountId;
     if (customDataSourceId == null) paramErrors.add("customDataSourceId is required");
@@ -371,13 +374,13 @@ class ManagementDailyUploadsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<DailyUploads> list(String accountId, String webPropertyId, String customDataSourceId, String start_date, String end_date, {int max_results, int start_index, Map optParams}) {
-    var completer = new Completer();
+  async.Future<DailyUploads> list(core.String accountId, core.String webPropertyId, core.String customDataSourceId, core.String start_date, core.String end_date, {core.int max_results, core.int start_index, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/dailyUploads";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (accountId == null) paramErrors.add("accountId is required");
     if (accountId != null) urlParams["accountId"] = accountId;
     if (customDataSourceId == null) paramErrors.add("customDataSourceId is required");
@@ -439,14 +442,14 @@ class ManagementDailyUploadsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<DailyUploadAppend> upload(String accountId, String webPropertyId, String customDataSourceId, String date, int appendNumber, String type, {String content, String contentType, bool reset, Map optParams}) {
-    var completer = new Completer();
+  async.Future<DailyUploadAppend> upload(core.String accountId, core.String webPropertyId, core.String customDataSourceId, core.String date, core.int appendNumber, core.String type, {core.String content, core.String contentType, core.bool reset, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/dailyUploads/{date}/uploads";
     var uploadUrl = "/upload/analytics/v3/management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/dailyUploads/{date}/uploads";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (accountId == null) paramErrors.add("accountId is required");
     if (accountId != null) urlParams["accountId"] = accountId;
     if (appendNumber == null) paramErrors.add("appendNumber is required");
@@ -489,6 +492,311 @@ class ManagementDailyUploadsResource extends Resource {
   }
 }
 
+class ManagementExperimentsResource extends Resource {
+
+  ManagementExperimentsResource(Client client) : super(client) {
+  }
+
+  /**
+   * Delete an experiment.
+   *
+   * [accountId] - Account ID to which the experiment belongs
+   *
+   * [webPropertyId] - Web property ID to which the experiment belongs
+   *
+   * [profileId] - Profile ID to which the experiment belongs
+   *
+   * [experimentId] - ID of the experiment to delete
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<core.Map> delete(core.String accountId, core.String webPropertyId, core.String profileId, core.String experimentId, {core.Map optParams}) {
+    var completer = new async.Completer();
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/experiments/{experimentId}";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (experimentId == null) paramErrors.add("experimentId is required");
+    if (experimentId != null) urlParams["experimentId"] = experimentId;
+    if (profileId == null) paramErrors.add("profileId is required");
+    if (profileId != null) urlParams["profileId"] = profileId;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      return completer.future;
+    }
+
+    var response;
+    response = _client.request(url, "DELETE", urlParams: urlParams, queryParams: queryParams);
+    response
+      .then((data) => completer.complete(data))
+      .catchError((e) { completer.completeError(e); return true; });
+    return completer.future;
+  }
+
+  /**
+   * Returns an experiment to which the user has access.
+   *
+   * [accountId] - Account ID to retrieve the experiment for.
+   *
+   * [webPropertyId] - Web property ID to retrieve the experiment for.
+   *
+   * [profileId] - Profile ID to retrieve the experiment for.
+   *
+   * [experimentId] - Experiment ID to retrieve the experiment for.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<Experiment> get(core.String accountId, core.String webPropertyId, core.String profileId, core.String experimentId, {core.Map optParams}) {
+    var completer = new async.Completer();
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/experiments/{experimentId}";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (experimentId == null) paramErrors.add("experimentId is required");
+    if (experimentId != null) urlParams["experimentId"] = experimentId;
+    if (profileId == null) paramErrors.add("profileId is required");
+    if (profileId != null) urlParams["profileId"] = profileId;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      return completer.future;
+    }
+
+    var response;
+    response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
+    response
+      .then((data) => completer.complete(new Experiment.fromJson(data)))
+      .catchError((e) { completer.completeError(e); return true; });
+    return completer.future;
+  }
+
+  /**
+   * Create a new experiment.
+   *
+   * [request] - Experiment to send in this request
+   *
+   * [accountId] - Account ID to create the experiment for.
+   *
+   * [webPropertyId] - Web property ID to create the experiment for.
+   *
+   * [profileId] - Profile ID to create the experiment for.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<Experiment> insert(Experiment request, core.String accountId, core.String webPropertyId, core.String profileId, {core.Map optParams}) {
+    var completer = new async.Completer();
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/experiments";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (profileId == null) paramErrors.add("profileId is required");
+    if (profileId != null) urlParams["profileId"] = profileId;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      return completer.future;
+    }
+
+    var response;
+    response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
+    response
+      .then((data) => completer.complete(new Experiment.fromJson(data)))
+      .catchError((e) { completer.completeError(e); return true; });
+    return completer.future;
+  }
+
+  /**
+   * Lists experiments to which the user has access.
+   *
+   * [accountId] - Account ID to retrieve experiments for.
+   *
+   * [webPropertyId] - Web property ID to retrieve experiments for.
+   *
+   * [profileId] - Profile ID to retrieve experiments for.
+   *
+   * [max_results] - The maximum number of experiments to include in this response.
+   *
+   * [start_index] - An index of the first experiment to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+   *   Minimum: 1
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<Experiments> list(core.String accountId, core.String webPropertyId, core.String profileId, {core.int max_results, core.int start_index, core.Map optParams}) {
+    var completer = new async.Completer();
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/experiments";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (max_results != null) queryParams["max-results"] = max_results;
+    if (profileId == null) paramErrors.add("profileId is required");
+    if (profileId != null) urlParams["profileId"] = profileId;
+    if (start_index != null) queryParams["start-index"] = start_index;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      return completer.future;
+    }
+
+    var response;
+    response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
+    response
+      .then((data) => completer.complete(new Experiments.fromJson(data)))
+      .catchError((e) { completer.completeError(e); return true; });
+    return completer.future;
+  }
+
+  /**
+   * Update an existing experiment. This method supports patch semantics.
+   *
+   * [request] - Experiment to send in this request
+   *
+   * [accountId] - Account ID of the experiment to update.
+   *
+   * [webPropertyId] - Web property ID of the experiment to update.
+   *
+   * [profileId] - Profile ID of the experiment to update.
+   *
+   * [experimentId] - Experiment ID of the experiment to update.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<Experiment> patch(Experiment request, core.String accountId, core.String webPropertyId, core.String profileId, core.String experimentId, {core.Map optParams}) {
+    var completer = new async.Completer();
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/experiments/{experimentId}";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (experimentId == null) paramErrors.add("experimentId is required");
+    if (experimentId != null) urlParams["experimentId"] = experimentId;
+    if (profileId == null) paramErrors.add("profileId is required");
+    if (profileId != null) urlParams["profileId"] = profileId;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      return completer.future;
+    }
+
+    var response;
+    response = _client.request(url, "PATCH", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
+    response
+      .then((data) => completer.complete(new Experiment.fromJson(data)))
+      .catchError((e) { completer.completeError(e); return true; });
+    return completer.future;
+  }
+
+  /**
+   * Update an existing experiment.
+   *
+   * [request] - Experiment to send in this request
+   *
+   * [accountId] - Account ID of the experiment to update.
+   *
+   * [webPropertyId] - Web property ID of the experiment to update.
+   *
+   * [profileId] - Profile ID of the experiment to update.
+   *
+   * [experimentId] - Experiment ID of the experiment to update.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<Experiment> update(Experiment request, core.String accountId, core.String webPropertyId, core.String profileId, core.String experimentId, {core.Map optParams}) {
+    var completer = new async.Completer();
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/experiments/{experimentId}";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (experimentId == null) paramErrors.add("experimentId is required");
+    if (experimentId != null) urlParams["experimentId"] = experimentId;
+    if (profileId == null) paramErrors.add("profileId is required");
+    if (profileId != null) urlParams["profileId"] = profileId;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      completer.completeError(new ArgumentError(paramErrors.join(" / ")));
+      return completer.future;
+    }
+
+    var response;
+    response = _client.request(url, "PUT", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
+    response
+      .then((data) => completer.complete(new Experiment.fromJson(data)))
+      .catchError((e) { completer.completeError(e); return true; });
+    return completer.future;
+  }
+}
+
 class ManagementGoalsResource extends Resource {
 
   ManagementGoalsResource(Client client) : super(client) {
@@ -510,13 +818,13 @@ class ManagementGoalsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Goals> list(String accountId, String webPropertyId, String profileId, {int max_results, int start_index, Map optParams}) {
-    var completer = new Completer();
+  async.Future<Goals> list(core.String accountId, core.String webPropertyId, core.String profileId, {core.int max_results, core.int start_index, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/goals";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (accountId == null) paramErrors.add("accountId is required");
     if (accountId != null) urlParams["accountId"] = accountId;
     if (max_results != null) queryParams["max-results"] = max_results;
@@ -566,13 +874,13 @@ class ManagementProfilesResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Profiles> list(String accountId, String webPropertyId, {int max_results, int start_index, Map optParams}) {
-    var completer = new Completer();
+  async.Future<Profiles> list(core.String accountId, core.String webPropertyId, {core.int max_results, core.int start_index, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/profiles";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (accountId == null) paramErrors.add("accountId is required");
     if (accountId != null) urlParams["accountId"] = accountId;
     if (max_results != null) queryParams["max-results"] = max_results;
@@ -616,13 +924,13 @@ class ManagementSegmentsResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Segments> list({int max_results, int start_index, Map optParams}) {
-    var completer = new Completer();
+  async.Future<Segments> list({core.int max_results, core.int start_index, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "management/segments";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (max_results != null) queryParams["max-results"] = max_results;
     if (start_index != null) queryParams["start-index"] = start_index;
     if (optParams != null) {
@@ -664,13 +972,13 @@ class ManagementWebpropertiesResource extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  Future<Webproperties> list(String accountId, {int max_results, int start_index, Map optParams}) {
-    var completer = new Completer();
+  async.Future<Webproperties> list(core.String accountId, {core.int max_results, core.int start_index, core.Map optParams}) {
+    var completer = new async.Completer();
     var url = "management/accounts/{accountId}/webproperties";
-    var urlParams = new Map();
-    var queryParams = new Map();
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
 
-    var paramErrors = new List();
+    var paramErrors = new core.List();
     if (accountId == null) paramErrors.add("accountId is required");
     if (accountId != null) urlParams["accountId"] = accountId;
     if (max_results != null) queryParams["max-results"] = max_results;

@@ -7,25 +7,25 @@ class Account {
   AccountChildLink childLink;
 
   /** Time the account was created. */
-  String created;
+  core.String created;
 
   /** Account ID. */
-  String id;
+  core.String id;
 
   /** Resource type for Analytics account. */
-  String kind;
+  core.String kind;
 
   /** Account name. */
-  String name;
+  core.String name;
 
   /** Link for this account. */
-  String selfLink;
+  core.String selfLink;
 
   /** Time the account was last modified. */
-  String updated;
+  core.String updated;
 
   /** Create new Account from JSON data */
-  Account.fromJson(Map json) {
+  Account.fromJson(core.Map json) {
     if (json.containsKey("childLink")) {
       childLink = new AccountChildLink.fromJson(json["childLink"]);
     }
@@ -50,8 +50,8 @@ class Account {
   }
 
   /** Create JSON Object for Account */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (childLink != null) {
       output["childLink"] = childLink.toJson();
@@ -79,7 +79,7 @@ class Account {
   }
 
   /** Return String representation of Account */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -87,13 +87,13 @@ class Account {
 class AccountChildLink {
 
   /** Link to the list of web properties for this account. */
-  String href;
+  core.String href;
 
   /** Type of the child link. Its value is "analytics#webproperties". */
-  String type;
+  core.String type;
 
   /** Create new AccountChildLink from JSON data */
-  AccountChildLink.fromJson(Map json) {
+  AccountChildLink.fromJson(core.Map json) {
     if (json.containsKey("href")) {
       href = json["href"];
     }
@@ -103,8 +103,8 @@ class AccountChildLink {
   }
 
   /** Create JSON Object for AccountChildLink */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (href != null) {
       output["href"] = href;
@@ -117,7 +117,7 @@ class AccountChildLink {
   }
 
   /** Return String representation of AccountChildLink */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -125,31 +125,31 @@ class AccountChildLink {
 class Accounts {
 
   /** A list of accounts. */
-  List<Account> items;
+  core.List<Account> items;
 
   /** The maximum number of entries the response can contain, regardless of the actual number of entries returned. Its value ranges from 1 to 1000 with a value of 1000 by default, or otherwise specified by the max-results query parameter. */
-  int itemsPerPage;
+  core.int itemsPerPage;
 
   /** Collection type. */
-  String kind;
+  core.String kind;
 
   /** Next link for this account collection. */
-  String nextLink;
+  core.String nextLink;
 
   /** Previous link for this account collection. */
-  String previousLink;
+  core.String previousLink;
 
   /** The starting index of the entries, which is 1 by default or otherwise specified by the start-index query parameter. */
-  int startIndex;
+  core.int startIndex;
 
   /** The total number of results for the query, regardless of the number of results in the response. */
-  int totalResults;
+  core.int totalResults;
 
   /** Email ID of the authenticated user */
-  String username;
+  core.String username;
 
   /** Create new Accounts from JSON data */
-  Accounts.fromJson(Map json) {
+  Accounts.fromJson(core.Map json) {
     if (json.containsKey("items")) {
       items = [];
       json["items"].forEach((item) {
@@ -180,11 +180,11 @@ class Accounts {
   }
 
   /** Create JSON Object for Accounts */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new List();
+      output["items"] = new core.List();
       items.forEach((item) {
         output["items"].add(item.toJson());
       });
@@ -215,7 +215,7 @@ class Accounts {
   }
 
   /** Return String representation of Accounts */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -223,41 +223,41 @@ class Accounts {
 class CustomDataSource {
 
   /** Account ID to which this custom data source belongs. */
-  String accountId;
+  core.String accountId;
 
   /** Child link for this custom data source. Points to the list of daily uploads for this custom data source. */
   CustomDataSourceChildLink childLink;
 
   /** Time this custom data source was created. */
-  String created;
+  core.String created;
 
   /** Description of custom data source. */
-  String description;
+  core.String description;
 
   /** Custom data source ID. */
-  String id;
+  core.String id;
 
   /** Resource type for Analytics custom data source. */
-  String kind;
+  core.String kind;
 
   /** Name of this custom data source. */
-  String name;
+  core.String name;
 
   /** Parent link for this custom data source. Points to the web property to which this custom data source belongs. */
   CustomDataSourceParentLink parentLink;
-  List<String> profilesLinked;
+  core.List<core.String> profilesLinked;
 
   /** Link for this Analytics custom data source. */
-  String selfLink;
+  core.String selfLink;
 
   /** Time this custom data source was last modified. */
-  String updated;
+  core.String updated;
 
   /** Web property ID of the form UA-XXXXX-YY to which this custom data source belongs. */
-  String webPropertyId;
+  core.String webPropertyId;
 
   /** Create new CustomDataSource from JSON data */
-  CustomDataSource.fromJson(Map json) {
+  CustomDataSource.fromJson(core.Map json) {
     if (json.containsKey("accountId")) {
       accountId = json["accountId"];
     }
@@ -300,8 +300,8 @@ class CustomDataSource {
   }
 
   /** Create JSON Object for CustomDataSource */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (accountId != null) {
       output["accountId"] = accountId;
@@ -328,7 +328,7 @@ class CustomDataSource {
       output["parentLink"] = parentLink.toJson();
     }
     if (profilesLinked != null) {
-      output["profilesLinked"] = new List();
+      output["profilesLinked"] = new core.List();
       profilesLinked.forEach((item) {
         output["profilesLinked"].add(item);
       });
@@ -347,7 +347,7 @@ class CustomDataSource {
   }
 
   /** Return String representation of CustomDataSource */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -355,13 +355,13 @@ class CustomDataSource {
 class CustomDataSourceParentLink {
 
   /** Link to the web property to which this custom data source belongs. */
-  String href;
+  core.String href;
 
   /** Value is "analytics#webproperty". */
-  String type;
+  core.String type;
 
   /** Create new CustomDataSourceParentLink from JSON data */
-  CustomDataSourceParentLink.fromJson(Map json) {
+  CustomDataSourceParentLink.fromJson(core.Map json) {
     if (json.containsKey("href")) {
       href = json["href"];
     }
@@ -371,8 +371,8 @@ class CustomDataSourceParentLink {
   }
 
   /** Create JSON Object for CustomDataSourceParentLink */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (href != null) {
       output["href"] = href;
@@ -385,7 +385,7 @@ class CustomDataSourceParentLink {
   }
 
   /** Return String representation of CustomDataSourceParentLink */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -393,13 +393,13 @@ class CustomDataSourceParentLink {
 class CustomDataSourceChildLink {
 
   /** Link to the list of daily uploads for this custom data source. */
-  String href;
+  core.String href;
 
   /** Value is "analytics#dailyUploads". */
-  String type;
+  core.String type;
 
   /** Create new CustomDataSourceChildLink from JSON data */
-  CustomDataSourceChildLink.fromJson(Map json) {
+  CustomDataSourceChildLink.fromJson(core.Map json) {
     if (json.containsKey("href")) {
       href = json["href"];
     }
@@ -409,8 +409,8 @@ class CustomDataSourceChildLink {
   }
 
   /** Create JSON Object for CustomDataSourceChildLink */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (href != null) {
       output["href"] = href;
@@ -423,7 +423,7 @@ class CustomDataSourceChildLink {
   }
 
   /** Return String representation of CustomDataSourceChildLink */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -431,31 +431,31 @@ class CustomDataSourceChildLink {
 class CustomDataSources {
 
   /** Collection of custom data sources. */
-  List<CustomDataSource> items;
+  core.List<CustomDataSource> items;
 
   /** The maximum number of resources the response can contain, regardless of the actual number of resources returned. Its value ranges from 1 to 1000 with a value of 1000 by default, or otherwise specified by the max-results query parameter. */
-  int itemsPerPage;
+  core.int itemsPerPage;
 
   /** Collection type. */
-  String kind;
+  core.String kind;
 
   /** Link to next page for this custom data source collection. */
-  String nextLink;
+  core.String nextLink;
 
   /** Link to previous page for this custom data source collection. */
-  String previousLink;
+  core.String previousLink;
 
   /** The starting index of the resources, which is 1 by default or otherwise specified by the start-index query parameter. */
-  int startIndex;
+  core.int startIndex;
 
   /** The total number of results for the query, regardless of the number of results in the response. */
-  int totalResults;
+  core.int totalResults;
 
   /** Email ID of the authenticated user */
-  String username;
+  core.String username;
 
   /** Create new CustomDataSources from JSON data */
-  CustomDataSources.fromJson(Map json) {
+  CustomDataSources.fromJson(core.Map json) {
     if (json.containsKey("items")) {
       items = [];
       json["items"].forEach((item) {
@@ -486,11 +486,11 @@ class CustomDataSources {
   }
 
   /** Create JSON Object for CustomDataSources */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new List();
+      output["items"] = new core.List();
       items.forEach((item) {
         output["items"].add(item.toJson());
       });
@@ -521,7 +521,7 @@ class CustomDataSources {
   }
 
   /** Return String representation of CustomDataSources */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -529,40 +529,40 @@ class CustomDataSources {
 class DailyUpload {
 
   /** Account ID to which this daily upload belongs. */
-  String accountId;
+  core.String accountId;
 
   /** Number of appends for this date. */
-  int appendCount;
+  core.int appendCount;
 
   /** Time this daily upload was created. */
-  String createdTime;
+  core.String createdTime;
 
   /** Custom data source ID to which this daily upload belongs. */
-  String customDataSourceId;
+  core.String customDataSourceId;
 
   /** Date associated with daily upload. */
-  String date;
+  core.String date;
 
   /** Resource type for Analytics daily upload. */
-  String kind;
+  core.String kind;
 
   /** Time this daily upload was last modified. */
-  String modifiedTime;
+  core.String modifiedTime;
 
   /** Parent link for a daily upload. Points to the custom data source to which this daily upload belongs. */
   DailyUploadParentLink parentLink;
 
   /** Change log for last 10 changes in chronological order. */
-  List<DailyUploadRecentChanges> recentChanges;
+  core.List<DailyUploadRecentChanges> recentChanges;
 
   /** Link for this daily upload. */
-  String selfLink;
+  core.String selfLink;
 
   /** Web property ID of the form UA-XXXXX-YY to which this daily upload belongs. */
-  String webPropertyId;
+  core.String webPropertyId;
 
   /** Create new DailyUpload from JSON data */
-  DailyUpload.fromJson(Map json) {
+  DailyUpload.fromJson(core.Map json) {
     if (json.containsKey("accountId")) {
       accountId = json["accountId"];
     }
@@ -602,8 +602,8 @@ class DailyUpload {
   }
 
   /** Create JSON Object for DailyUpload */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (accountId != null) {
       output["accountId"] = accountId;
@@ -630,7 +630,7 @@ class DailyUpload {
       output["parentLink"] = parentLink.toJson();
     }
     if (recentChanges != null) {
-      output["recentChanges"] = new List();
+      output["recentChanges"] = new core.List();
       recentChanges.forEach((item) {
         output["recentChanges"].add(item.toJson());
       });
@@ -646,16 +646,16 @@ class DailyUpload {
   }
 
   /** Return String representation of DailyUpload */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
 class DailyUploadRecentChanges {
-  String change;
-  String time;
+  core.String change;
+  core.String time;
 
   /** Create new DailyUploadRecentChanges from JSON data */
-  DailyUploadRecentChanges.fromJson(Map json) {
+  DailyUploadRecentChanges.fromJson(core.Map json) {
     if (json.containsKey("change")) {
       change = json["change"];
     }
@@ -665,8 +665,8 @@ class DailyUploadRecentChanges {
   }
 
   /** Create JSON Object for DailyUploadRecentChanges */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (change != null) {
       output["change"] = change;
@@ -679,7 +679,7 @@ class DailyUploadRecentChanges {
   }
 
   /** Return String representation of DailyUploadRecentChanges */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -687,13 +687,13 @@ class DailyUploadRecentChanges {
 class DailyUploadParentLink {
 
   /** Link to the custom data source to which this daily upload belongs. */
-  String href;
+  core.String href;
 
   /** Value is "analytics#customDataSource". */
-  String type;
+  core.String type;
 
   /** Create new DailyUploadParentLink from JSON data */
-  DailyUploadParentLink.fromJson(Map json) {
+  DailyUploadParentLink.fromJson(core.Map json) {
     if (json.containsKey("href")) {
       href = json["href"];
     }
@@ -703,8 +703,8 @@ class DailyUploadParentLink {
   }
 
   /** Create JSON Object for DailyUploadParentLink */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (href != null) {
       output["href"] = href;
@@ -717,7 +717,7 @@ class DailyUploadParentLink {
   }
 
   /** Return String representation of DailyUploadParentLink */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -725,26 +725,26 @@ class DailyUploadParentLink {
 class DailyUploadAppend {
 
   /** Account Id to which this daily upload append belongs. */
-  String accountId;
+  core.String accountId;
 
   /** Append number. */
-  int appendNumber;
+  core.int appendNumber;
 
   /** Custom data source Id to which this daily upload append belongs. */
-  String customDataSourceId;
+  core.String customDataSourceId;
 
   /** Date associated with daily upload append. */
-  String date;
+  core.String date;
 
   /** Resource type for Analytics daily upload append. */
-  String kind;
-  String nextAppendLink;
+  core.String kind;
+  core.String nextAppendLink;
 
   /** Web property Id of the form UA-XXXXX-YY to which this daily upload append belongs. */
-  String webPropertyId;
+  core.String webPropertyId;
 
   /** Create new DailyUploadAppend from JSON data */
-  DailyUploadAppend.fromJson(Map json) {
+  DailyUploadAppend.fromJson(core.Map json) {
     if (json.containsKey("accountId")) {
       accountId = json["accountId"];
     }
@@ -769,8 +769,8 @@ class DailyUploadAppend {
   }
 
   /** Create JSON Object for DailyUploadAppend */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (accountId != null) {
       output["accountId"] = accountId;
@@ -798,7 +798,7 @@ class DailyUploadAppend {
   }
 
   /** Return String representation of DailyUploadAppend */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -806,31 +806,31 @@ class DailyUploadAppend {
 class DailyUploads {
 
   /** A collection of daily uploads. */
-  List<DailyUpload> items;
+  core.List<DailyUpload> items;
 
   /** The maximum number of resources the response can contain, regardless of the actual number of resources returned. Its value ranges from 1 to 1000 with a value of 1000 by default, or otherwise specified by the max-results query parameter. */
-  int itemsPerPage;
+  core.int itemsPerPage;
 
   /** Collection type. Value is analytics#dailyUploads. */
-  String kind;
+  core.String kind;
 
   /** Link to next page for this daily upload collection. */
-  String nextLink;
+  core.String nextLink;
 
   /** Link to previous page for this daily upload collection. */
-  String previousLink;
+  core.String previousLink;
 
   /** The starting index of the resources, which is 1 by default or otherwise specified by the start-index query parameter. */
-  int startIndex;
+  core.int startIndex;
 
   /** The total number of results for the query, regardless of the number of results in the response. */
-  int totalResults;
+  core.int totalResults;
 
   /** Email ID of the authenticated user */
-  String username;
+  core.String username;
 
   /** Create new DailyUploads from JSON data */
-  DailyUploads.fromJson(Map json) {
+  DailyUploads.fromJson(core.Map json) {
     if (json.containsKey("items")) {
       items = [];
       json["items"].forEach((item) {
@@ -861,11 +861,11 @@ class DailyUploads {
   }
 
   /** Create JSON Object for DailyUploads */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new List();
+      output["items"] = new core.List();
       items.forEach((item) {
         output["items"].add(item.toJson());
       });
@@ -896,7 +896,458 @@ class DailyUploads {
   }
 
   /** Return String representation of DailyUploads */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
+
+}
+
+/** JSON template for Analytics experiment resource. */
+class Experiment {
+
+  /** Account ID to which this experiment belongs. This field is read-only. */
+  core.String accountId;
+
+  /** Time the experiment was created. This field is read-only. */
+  core.String created;
+
+  /** Notes about this experiment. */
+  core.String description;
+
+  /** The ending time of the experiment (the time the status changed from RUNNING to ENDED). This field is present only if the experiment has ended. This field is read-only. */
+  core.String endTime;
+
+  /** Experiment ID. Required for patch and update. Disallowed for create. */
+  core.String id;
+
+  /** Internal ID for the web property to which this experiment belongs. This field is read-only. */
+  core.String internalWebPropertyId;
+
+  /** Resource type for an Analytics experiment. This field is read-only. */
+  core.String kind;
+
+  /** Specifies the minimum length of the experiment. Can be changed for a running experiment. This field may not be changed for an experiments whose status is ENDED. */
+  core.int minimumExperimentLengthInDays;
+
+  /** Experiment name. This field may not be changed for an experiment whose status is ENDED. This field is required when creating an experiment. */
+  core.String name;
+
+  /** The metric that the experiment is optimizing. Valid values: "ga:goal(n)Completions", "ga:bounces", "ga:pageviews", "ga:timeOnSite", "ga:transactions", "ga:transactionRevenue". This field is required if status is "RUNNING" and servingFramework is one of "REDIRECT" or "API". */
+  core.String objectiveMetric;
+
+  /** Whether the objectiveMetric should be minimized or maximized. Possible values: "MAXIMUM", "MINIMUM". Optional--defaults to "MAXIMUM". Cannot be specified without objectiveMetric. Cannot be modified when status is "RUNNING" or "ENDED". */
+  core.String optimizationType;
+
+  /** Parent link for an experiment. Points to the profile to which this experiment belongs. */
+  ExperimentParentLink parentLink;
+
+  /** Profile ID to which this experiment belongs. This field is read-only. */
+  core.String profileId;
+
+  /** Why the experiment ended. Possible values: "STOPPED_BY_USER", "WINNER_FOUND", "EXPERIMENT_EXPIRED", "ENDED_WITH_NO_WINNER", "GOAL_OBJECTIVE_CHANGED". "ENDED_WITH_NO_WINNER" means that the experiment didn't expire but no winner was projected to be found. If the experiment status is changed via the API to ENDED this field is set to STOPPED_BY_USER. This field is read-only. */
+  core.String reasonExperimentEnded;
+
+  /** Boolean specifying whether variations URLS are rewritten to match those of the original. This field may not be changed for an experiments whose status is ENDED. */
+  core.bool rewriteVariationUrlsAsOriginal;
+
+  /** Link for this experiment. This field is read-only. */
+  core.String selfLink;
+
+  /** The snippet of code to include on the control page(s). This field is read-only. */
+  core.String snippet;
+
+  /** The starting time of the experiment (the time the status changed from READY_TO_RUN to RUNNING). This field is present only if the experiment has started. This field is read-only. */
+  core.String startTime;
+
+  /** Experiment status. Possible values: "DRAFT", "READY_TO_RUN", "RUNNING", "ENDED". Experiments can be created in the "DRAFT", "READY_TO_RUN" or "RUNNING" state. This field is required when creating an experiment. */
+  core.String status;
+
+  /** A floating-point number between 0 and 1. Specifies the fraction of the traffic that participates in the experiment. Can be changed for a running experiment. This field may not be changed for an experiments whose status is ENDED. */
+  core.num trafficCoverage;
+
+  /** Time the experiment was last modified. This field is read-only. */
+  core.String updated;
+
+  /** Array of variations. The first variation in the array is the original. The number of variations may not change once an experiment is in the RUNNING state. At least two variations are required before status can be set to RUNNING. */
+  core.List<ExperimentVariations> variations;
+
+  /** Web property ID to which this experiment belongs. The web property ID is of the form UA-XXXXX-YY. This field is read-only. */
+  core.String webPropertyId;
+
+  /** A floating-point number between 0 and 1. Specifies the necessary confidence level to choose a winner. This field may not be changed for an experiments whose status is ENDED. */
+  core.num winnerConfidenceLevel;
+
+  /** Boolean specifying whether a winner has been found for this experiment. This field is read-only. */
+  core.bool winnerFound;
+
+  /** Create new Experiment from JSON data */
+  Experiment.fromJson(core.Map json) {
+    if (json.containsKey("accountId")) {
+      accountId = json["accountId"];
+    }
+    if (json.containsKey("created")) {
+      created = json["created"];
+    }
+    if (json.containsKey("description")) {
+      description = json["description"];
+    }
+    if (json.containsKey("endTime")) {
+      endTime = json["endTime"];
+    }
+    if (json.containsKey("id")) {
+      id = json["id"];
+    }
+    if (json.containsKey("internalWebPropertyId")) {
+      internalWebPropertyId = json["internalWebPropertyId"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("minimumExperimentLengthInDays")) {
+      minimumExperimentLengthInDays = json["minimumExperimentLengthInDays"];
+    }
+    if (json.containsKey("name")) {
+      name = json["name"];
+    }
+    if (json.containsKey("objectiveMetric")) {
+      objectiveMetric = json["objectiveMetric"];
+    }
+    if (json.containsKey("optimizationType")) {
+      optimizationType = json["optimizationType"];
+    }
+    if (json.containsKey("parentLink")) {
+      parentLink = new ExperimentParentLink.fromJson(json["parentLink"]);
+    }
+    if (json.containsKey("profileId")) {
+      profileId = json["profileId"];
+    }
+    if (json.containsKey("reasonExperimentEnded")) {
+      reasonExperimentEnded = json["reasonExperimentEnded"];
+    }
+    if (json.containsKey("rewriteVariationUrlsAsOriginal")) {
+      rewriteVariationUrlsAsOriginal = json["rewriteVariationUrlsAsOriginal"];
+    }
+    if (json.containsKey("selfLink")) {
+      selfLink = json["selfLink"];
+    }
+    if (json.containsKey("snippet")) {
+      snippet = json["snippet"];
+    }
+    if (json.containsKey("startTime")) {
+      startTime = json["startTime"];
+    }
+    if (json.containsKey("status")) {
+      status = json["status"];
+    }
+    if (json.containsKey("trafficCoverage")) {
+      trafficCoverage = json["trafficCoverage"];
+    }
+    if (json.containsKey("updated")) {
+      updated = json["updated"];
+    }
+    if (json.containsKey("variations")) {
+      variations = [];
+      json["variations"].forEach((item) {
+        variations.add(new ExperimentVariations.fromJson(item));
+      });
+    }
+    if (json.containsKey("webPropertyId")) {
+      webPropertyId = json["webPropertyId"];
+    }
+    if (json.containsKey("winnerConfidenceLevel")) {
+      winnerConfidenceLevel = json["winnerConfidenceLevel"];
+    }
+    if (json.containsKey("winnerFound")) {
+      winnerFound = json["winnerFound"];
+    }
+  }
+
+  /** Create JSON Object for Experiment */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (accountId != null) {
+      output["accountId"] = accountId;
+    }
+    if (created != null) {
+      output["created"] = created;
+    }
+    if (description != null) {
+      output["description"] = description;
+    }
+    if (endTime != null) {
+      output["endTime"] = endTime;
+    }
+    if (id != null) {
+      output["id"] = id;
+    }
+    if (internalWebPropertyId != null) {
+      output["internalWebPropertyId"] = internalWebPropertyId;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (minimumExperimentLengthInDays != null) {
+      output["minimumExperimentLengthInDays"] = minimumExperimentLengthInDays;
+    }
+    if (name != null) {
+      output["name"] = name;
+    }
+    if (objectiveMetric != null) {
+      output["objectiveMetric"] = objectiveMetric;
+    }
+    if (optimizationType != null) {
+      output["optimizationType"] = optimizationType;
+    }
+    if (parentLink != null) {
+      output["parentLink"] = parentLink.toJson();
+    }
+    if (profileId != null) {
+      output["profileId"] = profileId;
+    }
+    if (reasonExperimentEnded != null) {
+      output["reasonExperimentEnded"] = reasonExperimentEnded;
+    }
+    if (rewriteVariationUrlsAsOriginal != null) {
+      output["rewriteVariationUrlsAsOriginal"] = rewriteVariationUrlsAsOriginal;
+    }
+    if (selfLink != null) {
+      output["selfLink"] = selfLink;
+    }
+    if (snippet != null) {
+      output["snippet"] = snippet;
+    }
+    if (startTime != null) {
+      output["startTime"] = startTime;
+    }
+    if (status != null) {
+      output["status"] = status;
+    }
+    if (trafficCoverage != null) {
+      output["trafficCoverage"] = trafficCoverage;
+    }
+    if (updated != null) {
+      output["updated"] = updated;
+    }
+    if (variations != null) {
+      output["variations"] = new core.List();
+      variations.forEach((item) {
+        output["variations"].add(item.toJson());
+      });
+    }
+    if (webPropertyId != null) {
+      output["webPropertyId"] = webPropertyId;
+    }
+    if (winnerConfidenceLevel != null) {
+      output["winnerConfidenceLevel"] = winnerConfidenceLevel;
+    }
+    if (winnerFound != null) {
+      output["winnerFound"] = winnerFound;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of Experiment */
+  core.String toString() => JSON.stringify(this.toJson());
+
+}
+
+/** Parent link for an experiment. Points to the profile to which this experiment belongs. */
+class ExperimentParentLink {
+
+  /** Link to the profile to which this experiment belongs. This field is read-only. */
+  core.String href;
+
+  /** Value is "analytics#profile". This field is read-only. */
+  core.String type;
+
+  /** Create new ExperimentParentLink from JSON data */
+  ExperimentParentLink.fromJson(core.Map json) {
+    if (json.containsKey("href")) {
+      href = json["href"];
+    }
+    if (json.containsKey("type")) {
+      type = json["type"];
+    }
+  }
+
+  /** Create JSON Object for ExperimentParentLink */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (href != null) {
+      output["href"] = href;
+    }
+    if (type != null) {
+      output["type"] = type;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of ExperimentParentLink */
+  core.String toString() => JSON.stringify(this.toJson());
+
+}
+
+class ExperimentVariations {
+
+  /** The name of the variation. This field is required when creating an experiment. This field may not be changed for an experiment whose status is ENDED. */
+  core.String name;
+
+  /** Status of the variation. Possible values: "ACTIVE", "INACTIVE". INACTIVE variations are not served. This field may not be changed for an experiment whose status is ENDED. */
+  core.String status;
+
+  /** The URL of the variation. This field may not be changed for an experiment whose status is RUNNING or ENDED. */
+  core.String url;
+
+  /** Weight that this variation should receive. Only present if the experiment is running. This field is read-only. */
+  core.num weight;
+
+  /** True if the experiment has ended and this variation performed (statistically) significantly better than the original. This field is read-only. */
+  core.bool won;
+
+  /** Create new ExperimentVariations from JSON data */
+  ExperimentVariations.fromJson(core.Map json) {
+    if (json.containsKey("name")) {
+      name = json["name"];
+    }
+    if (json.containsKey("status")) {
+      status = json["status"];
+    }
+    if (json.containsKey("url")) {
+      url = json["url"];
+    }
+    if (json.containsKey("weight")) {
+      weight = json["weight"];
+    }
+    if (json.containsKey("won")) {
+      won = json["won"];
+    }
+  }
+
+  /** Create JSON Object for ExperimentVariations */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (name != null) {
+      output["name"] = name;
+    }
+    if (status != null) {
+      output["status"] = status;
+    }
+    if (url != null) {
+      output["url"] = url;
+    }
+    if (weight != null) {
+      output["weight"] = weight;
+    }
+    if (won != null) {
+      output["won"] = won;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of ExperimentVariations */
+  core.String toString() => JSON.stringify(this.toJson());
+
+}
+
+/** An experiment collection lists Analytics experiments to which the user has access. Each profile can have a set of experiments. Each resource in the Experiment collection corresponds to a single Analytics experiment. */
+class Experiments {
+
+  /** A list of experiments. */
+  core.List<Experiment> items;
+
+  /** The maximum number of resources the response can contain, regardless of the actual number of resources returned. Its value ranges from 1 to 1000 with a value of 1000 by default, or otherwise specified by the max-results query parameter. */
+  core.int itemsPerPage;
+
+  /** Collection type. */
+  core.String kind;
+
+  /** Link to next page for this experiment collection. */
+  core.String nextLink;
+
+  /** Link to previous page for this experiment collection. */
+  core.String previousLink;
+
+  /** The starting index of the resources, which is 1 by default or otherwise specified by the start-index query parameter. */
+  core.int startIndex;
+
+  /** The total number of results for the query, regardless of the number of resources in the result. */
+  core.int totalResults;
+
+  /** Email ID of the authenticated user */
+  core.String username;
+
+  /** Create new Experiments from JSON data */
+  Experiments.fromJson(core.Map json) {
+    if (json.containsKey("items")) {
+      items = [];
+      json["items"].forEach((item) {
+        items.add(new Experiment.fromJson(item));
+      });
+    }
+    if (json.containsKey("itemsPerPage")) {
+      itemsPerPage = json["itemsPerPage"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("nextLink")) {
+      nextLink = json["nextLink"];
+    }
+    if (json.containsKey("previousLink")) {
+      previousLink = json["previousLink"];
+    }
+    if (json.containsKey("startIndex")) {
+      startIndex = json["startIndex"];
+    }
+    if (json.containsKey("totalResults")) {
+      totalResults = json["totalResults"];
+    }
+    if (json.containsKey("username")) {
+      username = json["username"];
+    }
+  }
+
+  /** Create JSON Object for Experiments */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (items != null) {
+      output["items"] = new core.List();
+      items.forEach((item) {
+        output["items"].add(item.toJson());
+      });
+    }
+    if (itemsPerPage != null) {
+      output["itemsPerPage"] = itemsPerPage;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (nextLink != null) {
+      output["nextLink"] = nextLink;
+    }
+    if (previousLink != null) {
+      output["previousLink"] = previousLink;
+    }
+    if (startIndex != null) {
+      output["startIndex"] = startIndex;
+    }
+    if (totalResults != null) {
+      output["totalResults"] = totalResults;
+    }
+    if (username != null) {
+      output["username"] = username;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of Experiments */
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -904,25 +1355,25 @@ class DailyUploads {
 class GaData {
 
   /** Column headers that list dimension names followed by the metric names. The order of dimensions and metrics is same as specified in the request. */
-  List<GaDataColumnHeaders> columnHeaders;
+  core.List<GaDataColumnHeaders> columnHeaders;
 
   /** Determines if Analytics data contains samples. */
-  bool containsSampledData;
+  core.bool containsSampledData;
 
   /** Unique ID for this data response. */
-  String id;
+  core.String id;
 
   /** The maximum number of rows the response can contain, regardless of the actual number of rows returned. Its value ranges from 1 to 10,000 with a value of 1000 by default, or otherwise specified by the max-results query parameter. */
-  int itemsPerPage;
+  core.int itemsPerPage;
 
   /** Resource type. */
-  String kind;
+  core.String kind;
 
   /** Link to next page for this Analytics data query. */
-  String nextLink;
+  core.String nextLink;
 
   /** Link to previous page for this Analytics data query. */
-  String previousLink;
+  core.String previousLink;
 
   /** Information for the profile, for which the Analytics data was requested. */
   GaDataProfileInfo profileInfo;
@@ -931,16 +1382,16 @@ class GaData {
   GaDataQuery query;
 
   /** Link to this page. */
-  String selfLink;
+  core.String selfLink;
 
   /** The total number of rows for the query, regardless of the number of rows in the response. */
-  int totalResults;
+  core.int totalResults;
 
   /** Total values for the requested metrics over all the results, not just the results returned in this response. The order of the metric totals is same as the metric order specified in the request. */
   GaDataTotalsForAllResults totalsForAllResults;
 
   /** Create new GaData from JSON data */
-  GaData.fromJson(Map json) {
+  GaData.fromJson(core.Map json) {
     if (json.containsKey("columnHeaders")) {
       columnHeaders = [];
       json["columnHeaders"].forEach((item) {
@@ -983,11 +1434,11 @@ class GaData {
   }
 
   /** Create JSON Object for GaData */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (columnHeaders != null) {
-      output["columnHeaders"] = new List();
+      output["columnHeaders"] = new core.List();
       columnHeaders.forEach((item) {
         output["columnHeaders"].add(item.toJson());
       });
@@ -1030,7 +1481,7 @@ class GaData {
   }
 
   /** Return String representation of GaData */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -1038,25 +1489,25 @@ class GaData {
 class GaDataProfileInfo {
 
   /** Account ID to which this profile belongs. */
-  String accountId;
+  core.String accountId;
 
   /** Internal ID for the web property to which this profile belongs. */
-  String internalWebPropertyId;
+  core.String internalWebPropertyId;
 
   /** Profile ID. */
-  String profileId;
+  core.String profileId;
 
   /** Profile name. */
-  String profileName;
+  core.String profileName;
 
   /** Table ID for profile. */
-  String tableId;
+  core.String tableId;
 
   /** Web Property ID to which this profile belongs. */
-  String webPropertyId;
+  core.String webPropertyId;
 
   /** Create new GaDataProfileInfo from JSON data */
-  GaDataProfileInfo.fromJson(Map json) {
+  GaDataProfileInfo.fromJson(core.Map json) {
     if (json.containsKey("accountId")) {
       accountId = json["accountId"];
     }
@@ -1078,8 +1529,8 @@ class GaDataProfileInfo {
   }
 
   /** Create JSON Object for GaDataProfileInfo */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (accountId != null) {
       output["accountId"] = accountId;
@@ -1104,7 +1555,7 @@ class GaDataProfileInfo {
   }
 
   /** Return String representation of GaDataProfileInfo */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -1112,19 +1563,19 @@ class GaDataProfileInfo {
 class GaDataTotalsForAllResults {
 
   /** Create new GaDataTotalsForAllResults from JSON data */
-  GaDataTotalsForAllResults.fromJson(Map json) {
+  GaDataTotalsForAllResults.fromJson(core.Map json) {
   }
 
   /** Create JSON Object for GaDataTotalsForAllResults */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
 
     return output;
   }
 
   /** Return String representation of GaDataTotalsForAllResults */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -1132,37 +1583,37 @@ class GaDataTotalsForAllResults {
 class GaDataQuery {
 
   /** List of analytics dimensions. */
-  String dimensions;
+  core.String dimensions;
 
   /** End date. */
-  String end_date;
+  core.String end_date;
 
   /** Comma-separated list of dimension or metric filters. */
-  String filters;
+  core.String filters;
 
   /** Unique table ID. */
-  String ids;
+  core.String ids;
 
   /** Maximum results per page. */
-  int max_results;
+  core.int max_results;
 
   /** List of analytics metrics. */
-  List<String> metrics;
+  core.List<core.String> metrics;
 
   /** Analytics advanced segment. */
-  String segment;
+  core.String segment;
 
   /** List of dimensions or metrics based on which Analytics data is sorted. */
-  List<String> sort;
+  core.List<core.String> sort;
 
   /** Start date. */
-  String start_date;
+  core.String start_date;
 
   /** Start index. */
-  int start_index;
+  core.int start_index;
 
   /** Create new GaDataQuery from JSON data */
-  GaDataQuery.fromJson(Map json) {
+  GaDataQuery.fromJson(core.Map json) {
     if (json.containsKey("dimensions")) {
       dimensions = json["dimensions"];
     }
@@ -1202,8 +1653,8 @@ class GaDataQuery {
   }
 
   /** Create JSON Object for GaDataQuery */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (dimensions != null) {
       output["dimensions"] = dimensions;
@@ -1221,7 +1672,7 @@ class GaDataQuery {
       output["max-results"] = max_results;
     }
     if (metrics != null) {
-      output["metrics"] = new List();
+      output["metrics"] = new core.List();
       metrics.forEach((item) {
         output["metrics"].add(item);
       });
@@ -1230,7 +1681,7 @@ class GaDataQuery {
       output["segment"] = segment;
     }
     if (sort != null) {
-      output["sort"] = new List();
+      output["sort"] = new core.List();
       sort.forEach((item) {
         output["sort"].add(item);
       });
@@ -1246,23 +1697,23 @@ class GaDataQuery {
   }
 
   /** Return String representation of GaDataQuery */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
 class GaDataColumnHeaders {
 
   /** Column Type. Either DIMENSION or METRIC. */
-  String columnType;
+  core.String columnType;
 
   /** Data type. Dimension column headers have only STRING as the data type. Metric column headers have data types for metric values such as INTEGER, DOUBLE, CURRENCY etc. */
-  String dataType;
+  core.String dataType;
 
   /** Column name. */
-  String name;
+  core.String name;
 
   /** Create new GaDataColumnHeaders from JSON data */
-  GaDataColumnHeaders.fromJson(Map json) {
+  GaDataColumnHeaders.fromJson(core.Map json) {
     if (json.containsKey("columnType")) {
       columnType = json["columnType"];
     }
@@ -1275,8 +1726,8 @@ class GaDataColumnHeaders {
   }
 
   /** Create JSON Object for GaDataColumnHeaders */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (columnType != null) {
       output["columnType"] = columnType;
@@ -1292,7 +1743,7 @@ class GaDataColumnHeaders {
   }
 
   /** Return String representation of GaDataColumnHeaders */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -1300,49 +1751,49 @@ class GaDataColumnHeaders {
 class Goal {
 
   /** Account ID to which this goal belongs. */
-  String accountId;
+  core.String accountId;
 
   /** Determines whether this goal is active. */
-  bool active;
+  core.bool active;
 
   /** Time this goal was created. */
-  String created;
+  core.String created;
 
   /** Details for the goal of the type EVENT. */
   GoalEventDetails eventDetails;
 
   /** Goal ID. */
-  String id;
+  core.String id;
 
   /** Internal ID for the web property to which this goal belongs. */
-  String internalWebPropertyId;
+  core.String internalWebPropertyId;
 
   /** Resource type for an Analytics goal. */
-  String kind;
+  core.String kind;
 
   /** Goal name. */
-  String name;
+  core.String name;
 
   /** Parent link for a goal. Points to the profile to which this goal belongs. */
   GoalParentLink parentLink;
 
   /** Profile ID to which this goal belongs. */
-  String profileId;
+  core.String profileId;
 
   /** Link for this goal. */
-  String selfLink;
+  core.String selfLink;
 
   /** Goal type. Possible values are URL_DESTINATION, VISIT_TIME_ON_SITE, VISIT_NUM_PAGES, AND EVENT. */
-  String type;
+  core.String type;
 
   /** Time this goal was last modified. */
-  String updated;
+  core.String updated;
 
   /** Details for the goal of the type URL_DESTINATION. */
   GoalUrlDestinationDetails urlDestinationDetails;
 
   /** Goal value. */
-  num value;
+  core.num value;
 
   /** Details for the goal of the type VISIT_NUM_PAGES. */
   GoalVisitNumPagesDetails visitNumPagesDetails;
@@ -1351,10 +1802,10 @@ class Goal {
   GoalVisitTimeOnSiteDetails visitTimeOnSiteDetails;
 
   /** Web property ID to which this goal belongs. The web property ID is of the form UA-XXXXX-YY. */
-  String webPropertyId;
+  core.String webPropertyId;
 
   /** Create new Goal from JSON data */
-  Goal.fromJson(Map json) {
+  Goal.fromJson(core.Map json) {
     if (json.containsKey("accountId")) {
       accountId = json["accountId"];
     }
@@ -1412,8 +1863,8 @@ class Goal {
   }
 
   /** Create JSON Object for Goal */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (accountId != null) {
       output["accountId"] = accountId;
@@ -1474,7 +1925,7 @@ class Goal {
   }
 
   /** Return String representation of Goal */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -1482,13 +1933,13 @@ class Goal {
 class GoalVisitNumPagesDetails {
 
   /** Type of comparison. Possible values are LESS_THAN, GREATER_THAN, or EQUAL. */
-  String comparisonType;
+  core.String comparisonType;
 
   /** Value used for this comparison. */
-  String comparisonValue;
+  core.String comparisonValue;
 
   /** Create new GoalVisitNumPagesDetails from JSON data */
-  GoalVisitNumPagesDetails.fromJson(Map json) {
+  GoalVisitNumPagesDetails.fromJson(core.Map json) {
     if (json.containsKey("comparisonType")) {
       comparisonType = json["comparisonType"];
     }
@@ -1498,8 +1949,8 @@ class GoalVisitNumPagesDetails {
   }
 
   /** Create JSON Object for GoalVisitNumPagesDetails */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (comparisonType != null) {
       output["comparisonType"] = comparisonType;
@@ -1512,7 +1963,7 @@ class GoalVisitNumPagesDetails {
   }
 
   /** Return String representation of GoalVisitNumPagesDetails */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -1520,13 +1971,13 @@ class GoalVisitNumPagesDetails {
 class GoalVisitTimeOnSiteDetails {
 
   /** Type of comparison. Possible values are LESS_THAN or GREATER_THAN. */
-  String comparisonType;
+  core.String comparisonType;
 
   /** Value used for this comparison. */
-  String comparisonValue;
+  core.String comparisonValue;
 
   /** Create new GoalVisitTimeOnSiteDetails from JSON data */
-  GoalVisitTimeOnSiteDetails.fromJson(Map json) {
+  GoalVisitTimeOnSiteDetails.fromJson(core.Map json) {
     if (json.containsKey("comparisonType")) {
       comparisonType = json["comparisonType"];
     }
@@ -1536,8 +1987,8 @@ class GoalVisitTimeOnSiteDetails {
   }
 
   /** Create JSON Object for GoalVisitTimeOnSiteDetails */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (comparisonType != null) {
       output["comparisonType"] = comparisonType;
@@ -1550,7 +2001,7 @@ class GoalVisitTimeOnSiteDetails {
   }
 
   /** Return String representation of GoalVisitTimeOnSiteDetails */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -1558,13 +2009,13 @@ class GoalVisitTimeOnSiteDetails {
 class GoalParentLink {
 
   /** Link to the profile to which this goal belongs. */
-  String href;
+  core.String href;
 
   /** Value is "analytics#profile". */
-  String type;
+  core.String type;
 
   /** Create new GoalParentLink from JSON data */
-  GoalParentLink.fromJson(Map json) {
+  GoalParentLink.fromJson(core.Map json) {
     if (json.containsKey("href")) {
       href = json["href"];
     }
@@ -1574,8 +2025,8 @@ class GoalParentLink {
   }
 
   /** Create JSON Object for GoalParentLink */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (href != null) {
       output["href"] = href;
@@ -1588,7 +2039,7 @@ class GoalParentLink {
   }
 
   /** Return String representation of GoalParentLink */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -1596,22 +2047,22 @@ class GoalParentLink {
 class GoalUrlDestinationDetails {
 
   /** Determines if the goal URL must exactly match the capitalization of visited URLs. */
-  bool caseSensitive;
+  core.bool caseSensitive;
 
   /** Determines if the first step in this goal is required. */
-  bool firstStepRequired;
+  core.bool firstStepRequired;
 
   /** Match type for the goal URL. Possible values are HEAD, EXACT, or REGEX. */
-  String matchType;
+  core.String matchType;
 
   /** List of steps configured for this goal funnel. */
-  List<GoalUrlDestinationDetailsSteps> steps;
+  core.List<GoalUrlDestinationDetailsSteps> steps;
 
   /** URL for this goal. */
-  String url;
+  core.String url;
 
   /** Create new GoalUrlDestinationDetails from JSON data */
-  GoalUrlDestinationDetails.fromJson(Map json) {
+  GoalUrlDestinationDetails.fromJson(core.Map json) {
     if (json.containsKey("caseSensitive")) {
       caseSensitive = json["caseSensitive"];
     }
@@ -1633,8 +2084,8 @@ class GoalUrlDestinationDetails {
   }
 
   /** Create JSON Object for GoalUrlDestinationDetails */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (caseSensitive != null) {
       output["caseSensitive"] = caseSensitive;
@@ -1646,7 +2097,7 @@ class GoalUrlDestinationDetails {
       output["matchType"] = matchType;
     }
     if (steps != null) {
-      output["steps"] = new List();
+      output["steps"] = new core.List();
       steps.forEach((item) {
         output["steps"].add(item.toJson());
       });
@@ -1659,23 +2110,23 @@ class GoalUrlDestinationDetails {
   }
 
   /** Return String representation of GoalUrlDestinationDetails */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
 class GoalUrlDestinationDetailsSteps {
 
   /** Step name. */
-  String name;
+  core.String name;
 
   /** Step number. */
-  int number;
+  core.int number;
 
   /** URL for this step. */
-  String url;
+  core.String url;
 
   /** Create new GoalUrlDestinationDetailsSteps from JSON data */
-  GoalUrlDestinationDetailsSteps.fromJson(Map json) {
+  GoalUrlDestinationDetailsSteps.fromJson(core.Map json) {
     if (json.containsKey("name")) {
       name = json["name"];
     }
@@ -1688,8 +2139,8 @@ class GoalUrlDestinationDetailsSteps {
   }
 
   /** Create JSON Object for GoalUrlDestinationDetailsSteps */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (name != null) {
       output["name"] = name;
@@ -1705,7 +2156,7 @@ class GoalUrlDestinationDetailsSteps {
   }
 
   /** Return String representation of GoalUrlDestinationDetailsSteps */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -1713,13 +2164,13 @@ class GoalUrlDestinationDetailsSteps {
 class GoalEventDetails {
 
   /** List of event conditions. */
-  List<GoalEventDetailsEventConditions> eventConditions;
+  core.List<GoalEventDetailsEventConditions> eventConditions;
 
   /** Determines if the event value should be used as the value for this goal. */
-  bool useEventValue;
+  core.bool useEventValue;
 
   /** Create new GoalEventDetails from JSON data */
-  GoalEventDetails.fromJson(Map json) {
+  GoalEventDetails.fromJson(core.Map json) {
     if (json.containsKey("eventConditions")) {
       eventConditions = [];
       json["eventConditions"].forEach((item) {
@@ -1732,11 +2183,11 @@ class GoalEventDetails {
   }
 
   /** Create JSON Object for GoalEventDetails */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (eventConditions != null) {
-      output["eventConditions"] = new List();
+      output["eventConditions"] = new core.List();
       eventConditions.forEach((item) {
         output["eventConditions"].add(item.toJson());
       });
@@ -1749,29 +2200,29 @@ class GoalEventDetails {
   }
 
   /** Return String representation of GoalEventDetails */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
 class GoalEventDetailsEventConditions {
 
   /** Type of comparison. Possible values are LESS_THAN, GREATER_THAN or EQUAL. */
-  String comparisonType;
+  core.String comparisonType;
 
   /** Value used for this comparison. */
-  String comparisonValue;
+  core.String comparisonValue;
 
   /** Expression used for this match. */
-  String expression;
+  core.String expression;
 
   /** Type of the match to be performed. Possible values are REGEXP, BEGINS_WITH, or EXACT. */
-  String matchType;
+  core.String matchType;
 
   /** Type of this event condition. Possible values are CATEGORY, ACTION, LABEL, or VALUE. */
-  String type;
+  core.String type;
 
   /** Create new GoalEventDetailsEventConditions from JSON data */
-  GoalEventDetailsEventConditions.fromJson(Map json) {
+  GoalEventDetailsEventConditions.fromJson(core.Map json) {
     if (json.containsKey("comparisonType")) {
       comparisonType = json["comparisonType"];
     }
@@ -1790,8 +2241,8 @@ class GoalEventDetailsEventConditions {
   }
 
   /** Create JSON Object for GoalEventDetailsEventConditions */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (comparisonType != null) {
       output["comparisonType"] = comparisonType;
@@ -1813,7 +2264,7 @@ class GoalEventDetailsEventConditions {
   }
 
   /** Return String representation of GoalEventDetailsEventConditions */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -1821,31 +2272,31 @@ class GoalEventDetailsEventConditions {
 class Goals {
 
   /** A list of goals. */
-  List<Goal> items;
+  core.List<Goal> items;
 
   /** The maximum number of resources the response can contain, regardless of the actual number of resources returned. Its value ranges from 1 to 1000 with a value of 1000 by default, or otherwise specified by the max-results query parameter. */
-  int itemsPerPage;
+  core.int itemsPerPage;
 
   /** Collection type. */
-  String kind;
+  core.String kind;
 
   /** Link to next page for this goal collection. */
-  String nextLink;
+  core.String nextLink;
 
   /** Link to previous page for this goal collection. */
-  String previousLink;
+  core.String previousLink;
 
   /** The starting index of the resources, which is 1 by default or otherwise specified by the start-index query parameter. */
-  int startIndex;
+  core.int startIndex;
 
   /** The total number of results for the query, regardless of the number of resources in the result. */
-  int totalResults;
+  core.int totalResults;
 
   /** Email ID of the authenticated user */
-  String username;
+  core.String username;
 
   /** Create new Goals from JSON data */
-  Goals.fromJson(Map json) {
+  Goals.fromJson(core.Map json) {
     if (json.containsKey("items")) {
       items = [];
       json["items"].forEach((item) {
@@ -1876,11 +2327,11 @@ class Goals {
   }
 
   /** Create JSON Object for Goals */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new List();
+      output["items"] = new core.List();
       items.forEach((item) {
         output["items"].add(item.toJson());
       });
@@ -1911,7 +2362,7 @@ class Goals {
   }
 
   /** Return String representation of Goals */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -1919,25 +2370,25 @@ class Goals {
 class McfData {
 
   /** Column headers that list dimension names followed by the metric names. The order of dimensions and metrics is same as specified in the request. */
-  List<McfDataColumnHeaders> columnHeaders;
+  core.List<McfDataColumnHeaders> columnHeaders;
 
   /** Determines if the Analytics data contains sampled data. */
-  bool containsSampledData;
+  core.bool containsSampledData;
 
   /** Unique ID for this data response. */
-  String id;
+  core.String id;
 
   /** The maximum number of rows the response can contain, regardless of the actual number of rows returned. Its value ranges from 1 to 10,000 with a value of 1000 by default, or otherwise specified by the max-results query parameter. */
-  int itemsPerPage;
+  core.int itemsPerPage;
 
   /** Resource type. */
-  String kind;
+  core.String kind;
 
   /** Link to next page for this Analytics data query. */
-  String nextLink;
+  core.String nextLink;
 
   /** Link to previous page for this Analytics data query. */
-  String previousLink;
+  core.String previousLink;
 
   /** Information for the profile, for which the Analytics data was requested. */
   McfDataProfileInfo profileInfo;
@@ -1946,16 +2397,16 @@ class McfData {
   McfDataQuery query;
 
   /** Link to this page. */
-  String selfLink;
+  core.String selfLink;
 
   /** The total number of rows for the query, regardless of the number of rows in the response. */
-  int totalResults;
+  core.int totalResults;
 
   /** Total values for the requested metrics over all the results, not just the results returned in this response. The order of the metric totals is same as the metric order specified in the request. */
   McfDataTotalsForAllResults totalsForAllResults;
 
   /** Create new McfData from JSON data */
-  McfData.fromJson(Map json) {
+  McfData.fromJson(core.Map json) {
     if (json.containsKey("columnHeaders")) {
       columnHeaders = [];
       json["columnHeaders"].forEach((item) {
@@ -1998,11 +2449,11 @@ class McfData {
   }
 
   /** Create JSON Object for McfData */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (columnHeaders != null) {
-      output["columnHeaders"] = new List();
+      output["columnHeaders"] = new core.List();
       columnHeaders.forEach((item) {
         output["columnHeaders"].add(item.toJson());
       });
@@ -2045,23 +2496,23 @@ class McfData {
   }
 
   /** Return String representation of McfData */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
 class McfDataColumnHeaders {
 
   /** Column Type. Either DIMENSION or METRIC. */
-  String columnType;
+  core.String columnType;
 
   /** Data type. Dimension and metric values data types such as INTEGER, DOUBLE, CURRENCY, MCF_SEQUENCE etc. */
-  String dataType;
+  core.String dataType;
 
   /** Column name. */
-  String name;
+  core.String name;
 
   /** Create new McfDataColumnHeaders from JSON data */
-  McfDataColumnHeaders.fromJson(Map json) {
+  McfDataColumnHeaders.fromJson(core.Map json) {
     if (json.containsKey("columnType")) {
       columnType = json["columnType"];
     }
@@ -2074,8 +2525,8 @@ class McfDataColumnHeaders {
   }
 
   /** Create JSON Object for McfDataColumnHeaders */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (columnType != null) {
       output["columnType"] = columnType;
@@ -2091,7 +2542,7 @@ class McfDataColumnHeaders {
   }
 
   /** Return String representation of McfDataColumnHeaders */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -2099,37 +2550,37 @@ class McfDataColumnHeaders {
 class McfDataQuery {
 
   /** List of analytics dimensions. */
-  String dimensions;
+  core.String dimensions;
 
   /** End date. */
-  String end_date;
+  core.String end_date;
 
   /** Comma-separated list of dimension or metric filters. */
-  String filters;
+  core.String filters;
 
   /** Unique table ID. */
-  String ids;
+  core.String ids;
 
   /** Maximum results per page. */
-  int max_results;
+  core.int max_results;
 
   /** List of analytics metrics. */
-  List<String> metrics;
+  core.List<core.String> metrics;
 
   /** Analytics advanced segment. */
-  String segment;
+  core.String segment;
 
   /** List of dimensions or metrics based on which Analytics data is sorted. */
-  List<String> sort;
+  core.List<core.String> sort;
 
   /** Start date. */
-  String start_date;
+  core.String start_date;
 
   /** Start index. */
-  int start_index;
+  core.int start_index;
 
   /** Create new McfDataQuery from JSON data */
-  McfDataQuery.fromJson(Map json) {
+  McfDataQuery.fromJson(core.Map json) {
     if (json.containsKey("dimensions")) {
       dimensions = json["dimensions"];
     }
@@ -2169,8 +2620,8 @@ class McfDataQuery {
   }
 
   /** Create JSON Object for McfDataQuery */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (dimensions != null) {
       output["dimensions"] = dimensions;
@@ -2188,7 +2639,7 @@ class McfDataQuery {
       output["max-results"] = max_results;
     }
     if (metrics != null) {
-      output["metrics"] = new List();
+      output["metrics"] = new core.List();
       metrics.forEach((item) {
         output["metrics"].add(item);
       });
@@ -2197,7 +2648,7 @@ class McfDataQuery {
       output["segment"] = segment;
     }
     if (sort != null) {
-      output["sort"] = new List();
+      output["sort"] = new core.List();
       sort.forEach((item) {
         output["sort"].add(item);
       });
@@ -2213,7 +2664,7 @@ class McfDataQuery {
   }
 
   /** Return String representation of McfDataQuery */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -2221,25 +2672,25 @@ class McfDataQuery {
 class McfDataProfileInfo {
 
   /** Account ID to which this profile belongs. */
-  String accountId;
+  core.String accountId;
 
   /** Internal ID for the web property to which this profile belongs. */
-  String internalWebPropertyId;
+  core.String internalWebPropertyId;
 
   /** Profile ID. */
-  String profileId;
+  core.String profileId;
 
   /** Profile name. */
-  String profileName;
+  core.String profileName;
 
   /** Table ID for profile. */
-  String tableId;
+  core.String tableId;
 
   /** Web Property ID to which this profile belongs. */
-  String webPropertyId;
+  core.String webPropertyId;
 
   /** Create new McfDataProfileInfo from JSON data */
-  McfDataProfileInfo.fromJson(Map json) {
+  McfDataProfileInfo.fromJson(core.Map json) {
     if (json.containsKey("accountId")) {
       accountId = json["accountId"];
     }
@@ -2261,8 +2712,8 @@ class McfDataProfileInfo {
   }
 
   /** Create JSON Object for McfDataProfileInfo */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (accountId != null) {
       output["accountId"] = accountId;
@@ -2287,7 +2738,7 @@ class McfDataProfileInfo {
   }
 
   /** Return String representation of McfDataProfileInfo */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -2295,19 +2746,19 @@ class McfDataProfileInfo {
 class McfDataTotalsForAllResults {
 
   /** Create new McfDataTotalsForAllResults from JSON data */
-  McfDataTotalsForAllResults.fromJson(Map json) {
+  McfDataTotalsForAllResults.fromJson(core.Map json) {
   }
 
   /** Create JSON Object for McfDataTotalsForAllResults */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
 
     return output;
   }
 
   /** Return String representation of McfDataTotalsForAllResults */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -2315,67 +2766,67 @@ class McfDataTotalsForAllResults {
 class Profile {
 
   /** Account ID to which this profile belongs. */
-  String accountId;
+  core.String accountId;
 
   /** Child link for this profile. Points to the list of goals for this profile. */
   ProfileChildLink childLink;
 
   /** Time this profile was created. */
-  String created;
+  core.String created;
 
   /** The currency type associated with this profile. */
-  String currency;
+  core.String currency;
 
   /** Default page for this profile. */
-  String defaultPage;
+  core.String defaultPage;
 
   /** E-commerce tracking parameter for this profile. */
-  bool eCommerceTracking;
+  core.bool eCommerceTracking;
 
   /** The query parameters that are excluded from this profile. */
-  String excludeQueryParameters;
+  core.String excludeQueryParameters;
 
   /** Profile ID. */
-  String id;
+  core.String id;
 
   /** Internal ID for the web property to which this profile belongs. */
-  String internalWebPropertyId;
+  core.String internalWebPropertyId;
 
   /** Resource type for Analytics profile. */
-  String kind;
+  core.String kind;
 
   /** Name of this profile. */
-  String name;
+  core.String name;
 
   /** Parent link for this profile. Points to the web property to which this profile belongs. */
   ProfileParentLink parentLink;
 
   /** Link for this profile. */
-  String selfLink;
+  core.String selfLink;
 
   /** Site search category parameters for this profile. */
-  String siteSearchCategoryParameters;
+  core.String siteSearchCategoryParameters;
 
   /** The site search query parameters for this profile. */
-  String siteSearchQueryParameters;
+  core.String siteSearchQueryParameters;
 
   /** Time zone for which this profile has been configured. */
-  String timezone;
+  core.String timezone;
 
   /** Profile type. Supported types: WEB or APP. */
-  String type;
+  core.String type;
 
   /** Time this profile was last modified. */
-  String updated;
+  core.String updated;
 
   /** Web property ID of the form UA-XXXXX-YY to which this profile belongs. */
-  String webPropertyId;
+  core.String webPropertyId;
 
   /** Website URL for this profile. */
-  String websiteUrl;
+  core.String websiteUrl;
 
   /** Create new Profile from JSON data */
-  Profile.fromJson(Map json) {
+  Profile.fromJson(core.Map json) {
     if (json.containsKey("accountId")) {
       accountId = json["accountId"];
     }
@@ -2439,8 +2890,8 @@ class Profile {
   }
 
   /** Create JSON Object for Profile */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (accountId != null) {
       output["accountId"] = accountId;
@@ -2507,7 +2958,7 @@ class Profile {
   }
 
   /** Return String representation of Profile */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -2515,13 +2966,13 @@ class Profile {
 class ProfileChildLink {
 
   /** Link to the list of goals for this profile. */
-  String href;
+  core.String href;
 
   /** Value is "analytics#goals". */
-  String type;
+  core.String type;
 
   /** Create new ProfileChildLink from JSON data */
-  ProfileChildLink.fromJson(Map json) {
+  ProfileChildLink.fromJson(core.Map json) {
     if (json.containsKey("href")) {
       href = json["href"];
     }
@@ -2531,8 +2982,8 @@ class ProfileChildLink {
   }
 
   /** Create JSON Object for ProfileChildLink */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (href != null) {
       output["href"] = href;
@@ -2545,7 +2996,7 @@ class ProfileChildLink {
   }
 
   /** Return String representation of ProfileChildLink */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -2553,13 +3004,13 @@ class ProfileChildLink {
 class ProfileParentLink {
 
   /** Link to the web property to which this profile belongs. */
-  String href;
+  core.String href;
 
   /** Value is "analytics#webproperty". */
-  String type;
+  core.String type;
 
   /** Create new ProfileParentLink from JSON data */
-  ProfileParentLink.fromJson(Map json) {
+  ProfileParentLink.fromJson(core.Map json) {
     if (json.containsKey("href")) {
       href = json["href"];
     }
@@ -2569,8 +3020,8 @@ class ProfileParentLink {
   }
 
   /** Create JSON Object for ProfileParentLink */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (href != null) {
       output["href"] = href;
@@ -2583,7 +3034,7 @@ class ProfileParentLink {
   }
 
   /** Return String representation of ProfileParentLink */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -2591,31 +3042,31 @@ class ProfileParentLink {
 class Profiles {
 
   /** A list of profiles. */
-  List<Profile> items;
+  core.List<Profile> items;
 
   /** The maximum number of resources the response can contain, regardless of the actual number of resources returned. Its value ranges from 1 to 1000 with a value of 1000 by default, or otherwise specified by the max-results query parameter. */
-  int itemsPerPage;
+  core.int itemsPerPage;
 
   /** Collection type. */
-  String kind;
+  core.String kind;
 
   /** Link to next page for this profile collection. */
-  String nextLink;
+  core.String nextLink;
 
   /** Link to previous page for this profile collection. */
-  String previousLink;
+  core.String previousLink;
 
   /** The starting index of the resources, which is 1 by default or otherwise specified by the start-index query parameter. */
-  int startIndex;
+  core.int startIndex;
 
   /** The total number of results for the query, regardless of the number of results in the response. */
-  int totalResults;
+  core.int totalResults;
 
   /** Email ID of the authenticated user */
-  String username;
+  core.String username;
 
   /** Create new Profiles from JSON data */
-  Profiles.fromJson(Map json) {
+  Profiles.fromJson(core.Map json) {
     if (json.containsKey("items")) {
       items = [];
       json["items"].forEach((item) {
@@ -2646,11 +3097,11 @@ class Profiles {
   }
 
   /** Create JSON Object for Profiles */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new List();
+      output["items"] = new core.List();
       items.forEach((item) {
         output["items"].add(item.toJson());
       });
@@ -2681,7 +3132,7 @@ class Profiles {
   }
 
   /** Return String representation of Profiles */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -2689,31 +3140,31 @@ class Profiles {
 class Segment {
 
   /** Time the advanced segment was created. */
-  String created;
+  core.String created;
 
   /** Advanced segment definition. */
-  String definition;
+  core.String definition;
 
   /** Advanced segment ID. */
-  String id;
+  core.String id;
 
   /** Resource type for Analytics advanced segment. */
-  String kind;
+  core.String kind;
 
   /** Advanced segment name. */
-  String name;
+  core.String name;
 
   /** Segment ID. Can be used with the 'segment' parameter in Data Feed. */
-  String segmentId;
+  core.String segmentId;
 
   /** Link for this advanced segment. */
-  String selfLink;
+  core.String selfLink;
 
   /** Time the advanced segment was last modified. */
-  String updated;
+  core.String updated;
 
   /** Create new Segment from JSON data */
-  Segment.fromJson(Map json) {
+  Segment.fromJson(core.Map json) {
     if (json.containsKey("created")) {
       created = json["created"];
     }
@@ -2741,8 +3192,8 @@ class Segment {
   }
 
   /** Create JSON Object for Segment */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (created != null) {
       output["created"] = created;
@@ -2773,7 +3224,7 @@ class Segment {
   }
 
   /** Return String representation of Segment */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -2781,31 +3232,31 @@ class Segment {
 class Segments {
 
   /** A list of advanced segments. */
-  List<Segment> items;
+  core.List<Segment> items;
 
   /** The maximum number of resources the response can contain, regardless of the actual number of resources returned. Its value ranges from 1 to 1000 with a value of 1000 by default, or otherwise specified by the max-results query parameter. */
-  int itemsPerPage;
+  core.int itemsPerPage;
 
   /** Collection type for advanced segments. */
-  String kind;
+  core.String kind;
 
   /** Link to next page for this advanced segment collection. */
-  String nextLink;
+  core.String nextLink;
 
   /** Link to previous page for this advanced segment collection. */
-  String previousLink;
+  core.String previousLink;
 
   /** The starting index of the resources, which is 1 by default or otherwise specified by the start-index query parameter. */
-  int startIndex;
+  core.int startIndex;
 
   /** The total number of results for the query, regardless of the number of results in the response. */
-  int totalResults;
+  core.int totalResults;
 
   /** Email ID of the authenticated user */
-  String username;
+  core.String username;
 
   /** Create new Segments from JSON data */
-  Segments.fromJson(Map json) {
+  Segments.fromJson(core.Map json) {
     if (json.containsKey("items")) {
       items = [];
       json["items"].forEach((item) {
@@ -2836,11 +3287,11 @@ class Segments {
   }
 
   /** Create JSON Object for Segments */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new List();
+      output["items"] = new core.List();
       items.forEach((item) {
         output["items"].add(item.toJson());
       });
@@ -2871,7 +3322,7 @@ class Segments {
   }
 
   /** Return String representation of Segments */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -2879,31 +3330,31 @@ class Segments {
 class Webproperties {
 
   /** A list of web properties. */
-  List<Webproperty> items;
+  core.List<Webproperty> items;
 
   /** The maximum number of resources the response can contain, regardless of the actual number of resources returned. Its value ranges from 1 to 1000 with a value of 1000 by default, or otherwise specified by the max-results query parameter. */
-  int itemsPerPage;
+  core.int itemsPerPage;
 
   /** Collection type. */
-  String kind;
+  core.String kind;
 
   /** Link to next page for this web property collection. */
-  String nextLink;
+  core.String nextLink;
 
   /** Link to previous page for this web property collection. */
-  String previousLink;
+  core.String previousLink;
 
   /** The starting index of the resources, which is 1 by default or otherwise specified by the start-index query parameter. */
-  int startIndex;
+  core.int startIndex;
 
   /** The total number of results for the query, regardless of the number of results in the response. */
-  int totalResults;
+  core.int totalResults;
 
   /** Email ID of the authenticated user */
-  String username;
+  core.String username;
 
   /** Create new Webproperties from JSON data */
-  Webproperties.fromJson(Map json) {
+  Webproperties.fromJson(core.Map json) {
     if (json.containsKey("items")) {
       items = [];
       json["items"].forEach((item) {
@@ -2934,11 +3385,11 @@ class Webproperties {
   }
 
   /** Create JSON Object for Webproperties */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new List();
+      output["items"] = new core.List();
       items.forEach((item) {
         output["items"].add(item.toJson());
       });
@@ -2969,7 +3420,7 @@ class Webproperties {
   }
 
   /** Return String representation of Webproperties */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -2977,40 +3428,40 @@ class Webproperties {
 class Webproperty {
 
   /** Account ID to which this web property belongs. */
-  String accountId;
+  core.String accountId;
 
   /** Child link for this web property. Points to the list of profiles for this web property. */
   WebpropertyChildLink childLink;
 
   /** Time this web property was created. */
-  String created;
+  core.String created;
 
   /** Web property ID of the form UA-XXXXX-YY. */
-  String id;
+  core.String id;
 
   /** Internal ID for this web property. */
-  String internalWebPropertyId;
+  core.String internalWebPropertyId;
 
   /** Resource type for Analytics WebProperty. */
-  String kind;
+  core.String kind;
 
   /** Name of this web property. */
-  String name;
+  core.String name;
 
   /** Parent link for this web property. Points to the account to which this web property belongs. */
   WebpropertyParentLink parentLink;
 
   /** Link for this web property. */
-  String selfLink;
+  core.String selfLink;
 
   /** Time this web property was last modified. */
-  String updated;
+  core.String updated;
 
   /** Website url for this web property. */
-  String websiteUrl;
+  core.String websiteUrl;
 
   /** Create new Webproperty from JSON data */
-  Webproperty.fromJson(Map json) {
+  Webproperty.fromJson(core.Map json) {
     if (json.containsKey("accountId")) {
       accountId = json["accountId"];
     }
@@ -3047,8 +3498,8 @@ class Webproperty {
   }
 
   /** Create JSON Object for Webproperty */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (accountId != null) {
       output["accountId"] = accountId;
@@ -3088,7 +3539,7 @@ class Webproperty {
   }
 
   /** Return String representation of Webproperty */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -3096,13 +3547,13 @@ class Webproperty {
 class WebpropertyParentLink {
 
   /** Link to the account for this web property. */
-  String href;
+  core.String href;
 
   /** Type of the parent link. Its value is "analytics#account". */
-  String type;
+  core.String type;
 
   /** Create new WebpropertyParentLink from JSON data */
-  WebpropertyParentLink.fromJson(Map json) {
+  WebpropertyParentLink.fromJson(core.Map json) {
     if (json.containsKey("href")) {
       href = json["href"];
     }
@@ -3112,8 +3563,8 @@ class WebpropertyParentLink {
   }
 
   /** Create JSON Object for WebpropertyParentLink */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (href != null) {
       output["href"] = href;
@@ -3126,7 +3577,7 @@ class WebpropertyParentLink {
   }
 
   /** Return String representation of WebpropertyParentLink */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
@@ -3134,13 +3585,13 @@ class WebpropertyParentLink {
 class WebpropertyChildLink {
 
   /** Link to the list of profiles for this web property. */
-  String href;
+  core.String href;
 
   /** Type of the parent link. Its value is "analytics#profiles". */
-  String type;
+  core.String type;
 
   /** Create new WebpropertyChildLink from JSON data */
-  WebpropertyChildLink.fromJson(Map json) {
+  WebpropertyChildLink.fromJson(core.Map json) {
     if (json.containsKey("href")) {
       href = json["href"];
     }
@@ -3150,8 +3601,8 @@ class WebpropertyChildLink {
   }
 
   /** Create JSON Object for WebpropertyChildLink */
-  Map toJson() {
-    var output = new Map();
+  core.Map toJson() {
+    var output = new core.Map();
 
     if (href != null) {
       output["href"] = href;
@@ -3164,7 +3615,7 @@ class WebpropertyChildLink {
   }
 
   /** Return String representation of WebpropertyChildLink */
-  String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.stringify(this.toJson());
 
 }
 
