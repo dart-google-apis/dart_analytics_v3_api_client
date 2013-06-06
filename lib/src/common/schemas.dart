@@ -245,6 +245,8 @@ class CustomDataSource {
 
   /** Parent link for this custom data source. Points to the web property to which this custom data source belongs. */
   CustomDataSourceParentLink parentLink;
+
+  /** IDs of profiles linked to the custom data source. */
   core.List<core.String> profilesLinked;
 
   /** Link for this Analytics custom data source. */
@@ -651,7 +653,11 @@ class DailyUpload {
 }
 
 class DailyUploadRecentChanges {
+
+  /** The type of change: APPEND, RESET, or DELETE. */
   core.String change;
+
+  /** The time when the change occurred. */
   core.String time;
 
   /** Create new DailyUploadRecentChanges from JSON data */
@@ -1936,7 +1942,7 @@ class GoalVisitNumPagesDetails {
   core.String comparisonType;
 
   /** Value used for this comparison. */
-  core.String comparisonValue;
+  core.int comparisonValue;
 
   /** Create new GoalVisitNumPagesDetails from JSON data */
   GoalVisitNumPagesDetails.fromJson(core.Map json) {
@@ -1974,7 +1980,7 @@ class GoalVisitTimeOnSiteDetails {
   core.String comparisonType;
 
   /** Value used for this comparison. */
-  core.String comparisonValue;
+  core.int comparisonValue;
 
   /** Create new GoalVisitTimeOnSiteDetails from JSON data */
   GoalVisitTimeOnSiteDetails.fromJson(core.Map json) {
@@ -2210,7 +2216,7 @@ class GoalEventDetailsEventConditions {
   core.String comparisonType;
 
   /** Value used for this comparison. */
-  core.String comparisonValue;
+  core.int comparisonValue;
 
   /** Expression used for this match. */
   core.String expression;
@@ -2780,7 +2786,7 @@ class Profile {
   /** Default page for this profile. */
   core.String defaultPage;
 
-  /** E-commerce tracking parameter for this profile. */
+  /** Indicates whether ecommerce tracking is enabled for this profile. */
   core.bool eCommerceTracking;
 
   /** The query parameters that are excluded from this profile. */
@@ -3439,17 +3445,26 @@ class Webproperty {
   /** Web property ID of the form UA-XXXXX-YY. */
   core.String id;
 
+  /** Industry vertical */
+  core.String industryVertical;
+
   /** Internal ID for this web property. */
   core.String internalWebPropertyId;
 
   /** Resource type for Analytics WebProperty. */
   core.String kind;
 
+  /** Level for this web property. Possible values are STANDARD or PREMIUM. */
+  core.String level;
+
   /** Name of this web property. */
   core.String name;
 
   /** Parent link for this web property. Points to the account to which this web property belongs. */
   WebpropertyParentLink parentLink;
+
+  /** Profile count for this web property. */
+  core.int profileCount;
 
   /** Link for this web property. */
   core.String selfLink;
@@ -3474,17 +3489,26 @@ class Webproperty {
     if (json.containsKey("id")) {
       id = json["id"];
     }
+    if (json.containsKey("industryVertical")) {
+      industryVertical = json["industryVertical"];
+    }
     if (json.containsKey("internalWebPropertyId")) {
       internalWebPropertyId = json["internalWebPropertyId"];
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
     }
+    if (json.containsKey("level")) {
+      level = json["level"];
+    }
     if (json.containsKey("name")) {
       name = json["name"];
     }
     if (json.containsKey("parentLink")) {
       parentLink = new WebpropertyParentLink.fromJson(json["parentLink"]);
+    }
+    if (json.containsKey("profileCount")) {
+      profileCount = json["profileCount"];
     }
     if (json.containsKey("selfLink")) {
       selfLink = json["selfLink"];
@@ -3513,17 +3537,26 @@ class Webproperty {
     if (id != null) {
       output["id"] = id;
     }
+    if (industryVertical != null) {
+      output["industryVertical"] = industryVertical;
+    }
     if (internalWebPropertyId != null) {
       output["internalWebPropertyId"] = internalWebPropertyId;
     }
     if (kind != null) {
       output["kind"] = kind;
     }
+    if (level != null) {
+      output["level"] = level;
+    }
     if (name != null) {
       output["name"] = name;
     }
     if (parentLink != null) {
       output["parentLink"] = parentLink.toJson();
+    }
+    if (profileCount != null) {
+      output["profileCount"] = profileCount;
     }
     if (selfLink != null) {
       output["selfLink"] = selfLink;
