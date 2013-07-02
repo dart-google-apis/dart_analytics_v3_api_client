@@ -1950,7 +1950,11 @@ class GoalVisitNumPagesDetails {
       comparisonType = json["comparisonType"];
     }
     if (json.containsKey("comparisonValue")) {
-      comparisonValue = json["comparisonValue"];
+      if(json["comparisonValue"] is core.String){
+        comparisonValue = core.int.parse(json["comparisonValue"]);
+      }else{
+        comparisonValue = json["comparisonValue"];
+      }
     }
   }
 
@@ -1988,7 +1992,11 @@ class GoalVisitTimeOnSiteDetails {
       comparisonType = json["comparisonType"];
     }
     if (json.containsKey("comparisonValue")) {
-      comparisonValue = json["comparisonValue"];
+      if(json["comparisonValue"] is core.String){
+        comparisonValue = core.int.parse(json["comparisonValue"]);
+      }else{
+        comparisonValue = json["comparisonValue"];
+      }
     }
   }
 
@@ -2233,7 +2241,11 @@ class GoalEventDetailsEventConditions {
       comparisonType = json["comparisonType"];
     }
     if (json.containsKey("comparisonValue")) {
-      comparisonValue = json["comparisonValue"];
+      if(json["comparisonValue"] is core.String){
+        comparisonValue = core.int.parse(json["comparisonValue"]);
+      }else{
+        comparisonValue = json["comparisonValue"];
+      }
     }
     if (json.containsKey("expression")) {
       expression = json["expression"];
@@ -3445,7 +3457,7 @@ class Webproperty {
   /** Web property ID of the form UA-XXXXX-YY. */
   core.String id;
 
-  /** Industry vertical */
+  /** The industry vertical/category selected for this web property. */
   core.String industryVertical;
 
   /** Internal ID for this web property. */
