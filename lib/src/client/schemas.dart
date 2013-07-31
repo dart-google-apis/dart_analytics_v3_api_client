@@ -1,4 +1,4 @@
-part of analytics_v3_api_client;
+part of analytics_v3_api;
 
 /** JSON template for Analytics account entry. */
 class Account {
@@ -151,10 +151,7 @@ class Accounts {
   /** Create new Accounts from JSON data */
   Accounts.fromJson(core.Map json) {
     if (json.containsKey("items")) {
-      items = [];
-      json["items"].forEach((item) {
-        items.add(new Account.fromJson(item));
-      });
+      items = json["items"].map((itemsItem) => new Account.fromJson(itemsItem)).toList();
     }
     if (json.containsKey("itemsPerPage")) {
       itemsPerPage = json["itemsPerPage"];
@@ -184,10 +181,7 @@ class Accounts {
     var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new core.List();
-      items.forEach((item) {
-        output["items"].add(item.toJson());
-      });
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
     }
     if (itemsPerPage != null) {
       output["itemsPerPage"] = itemsPerPage;
@@ -225,7 +219,6 @@ class CustomDataSource {
   /** Account ID to which this custom data source belongs. */
   core.String accountId;
 
-  /** Child link for this custom data source. Points to the list of daily uploads for this custom data source. */
   CustomDataSourceChildLink childLink;
 
   /** Time this custom data source was created. */
@@ -246,11 +239,14 @@ class CustomDataSource {
   /** Parent link for this custom data source. Points to the web property to which this custom data source belongs. */
   CustomDataSourceParentLink parentLink;
 
-  /** IDs of profiles linked to the custom data source. */
+  /** IDs of views (profiles) linked to the custom data source. */
   core.List<core.String> profilesLinked;
 
   /** Link for this Analytics custom data source. */
   core.String selfLink;
+
+  /** Type of the custom data source. */
+  core.String type;
 
   /** Time this custom data source was last modified. */
   core.String updated;
@@ -285,13 +281,13 @@ class CustomDataSource {
       parentLink = new CustomDataSourceParentLink.fromJson(json["parentLink"]);
     }
     if (json.containsKey("profilesLinked")) {
-      profilesLinked = [];
-      json["profilesLinked"].forEach((item) {
-        profilesLinked.add(item);
-      });
+      profilesLinked = json["profilesLinked"].toList();
     }
     if (json.containsKey("selfLink")) {
       selfLink = json["selfLink"];
+    }
+    if (json.containsKey("type")) {
+      type = json["type"];
     }
     if (json.containsKey("updated")) {
       updated = json["updated"];
@@ -330,13 +326,13 @@ class CustomDataSource {
       output["parentLink"] = parentLink.toJson();
     }
     if (profilesLinked != null) {
-      output["profilesLinked"] = new core.List();
-      profilesLinked.forEach((item) {
-        output["profilesLinked"].add(item);
-      });
+      output["profilesLinked"] = profilesLinked.toList();
     }
     if (selfLink != null) {
       output["selfLink"] = selfLink;
+    }
+    if (type != null) {
+      output["type"] = type;
     }
     if (updated != null) {
       output["updated"] = updated;
@@ -349,6 +345,43 @@ class CustomDataSource {
   }
 
   /** Return String representation of CustomDataSource */
+  core.String toString() => JSON.stringify(this.toJson());
+
+}
+
+class CustomDataSourceChildLink {
+
+  /** Link to the list of daily uploads for this custom data source. Link to the list of uploads for this custom data source. */
+  core.String href;
+
+  /** Value is "analytics#dailyUploads". Value is "analytics#uploads". */
+  core.String type;
+
+  /** Create new CustomDataSourceChildLink from JSON data */
+  CustomDataSourceChildLink.fromJson(core.Map json) {
+    if (json.containsKey("href")) {
+      href = json["href"];
+    }
+    if (json.containsKey("type")) {
+      type = json["type"];
+    }
+  }
+
+  /** Create JSON Object for CustomDataSourceChildLink */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (href != null) {
+      output["href"] = href;
+    }
+    if (type != null) {
+      output["type"] = type;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of CustomDataSourceChildLink */
   core.String toString() => JSON.stringify(this.toJson());
 
 }
@@ -391,44 +424,6 @@ class CustomDataSourceParentLink {
 
 }
 
-/** Child link for this custom data source. Points to the list of daily uploads for this custom data source. */
-class CustomDataSourceChildLink {
-
-  /** Link to the list of daily uploads for this custom data source. */
-  core.String href;
-
-  /** Value is "analytics#dailyUploads". */
-  core.String type;
-
-  /** Create new CustomDataSourceChildLink from JSON data */
-  CustomDataSourceChildLink.fromJson(core.Map json) {
-    if (json.containsKey("href")) {
-      href = json["href"];
-    }
-    if (json.containsKey("type")) {
-      type = json["type"];
-    }
-  }
-
-  /** Create JSON Object for CustomDataSourceChildLink */
-  core.Map toJson() {
-    var output = new core.Map();
-
-    if (href != null) {
-      output["href"] = href;
-    }
-    if (type != null) {
-      output["type"] = type;
-    }
-
-    return output;
-  }
-
-  /** Return String representation of CustomDataSourceChildLink */
-  core.String toString() => JSON.stringify(this.toJson());
-
-}
-
 /** Lists Analytics custom data sources to which the user has access. Each resource in the collection corresponds to a single Analytics custom data source. */
 class CustomDataSources {
 
@@ -459,10 +454,7 @@ class CustomDataSources {
   /** Create new CustomDataSources from JSON data */
   CustomDataSources.fromJson(core.Map json) {
     if (json.containsKey("items")) {
-      items = [];
-      json["items"].forEach((item) {
-        items.add(new CustomDataSource.fromJson(item));
-      });
+      items = json["items"].map((itemsItem) => new CustomDataSource.fromJson(itemsItem)).toList();
     }
     if (json.containsKey("itemsPerPage")) {
       itemsPerPage = json["itemsPerPage"];
@@ -492,10 +484,7 @@ class CustomDataSources {
     var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new core.List();
-      items.forEach((item) {
-        output["items"].add(item.toJson());
-      });
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
     }
     if (itemsPerPage != null) {
       output["itemsPerPage"] = itemsPerPage;
@@ -590,10 +579,7 @@ class DailyUpload {
       parentLink = new DailyUploadParentLink.fromJson(json["parentLink"]);
     }
     if (json.containsKey("recentChanges")) {
-      recentChanges = [];
-      json["recentChanges"].forEach((item) {
-        recentChanges.add(new DailyUploadRecentChanges.fromJson(item));
-      });
+      recentChanges = json["recentChanges"].map((recentChangesItem) => new DailyUploadRecentChanges.fromJson(recentChangesItem)).toList();
     }
     if (json.containsKey("selfLink")) {
       selfLink = json["selfLink"];
@@ -632,10 +618,7 @@ class DailyUpload {
       output["parentLink"] = parentLink.toJson();
     }
     if (recentChanges != null) {
-      output["recentChanges"] = new core.List();
-      recentChanges.forEach((item) {
-        output["recentChanges"].add(item.toJson());
-      });
+      output["recentChanges"] = recentChanges.map((recentChangesItem) => recentChangesItem.toJson()).toList();
     }
     if (selfLink != null) {
       output["selfLink"] = selfLink;
@@ -648,43 +631,6 @@ class DailyUpload {
   }
 
   /** Return String representation of DailyUpload */
-  core.String toString() => JSON.stringify(this.toJson());
-
-}
-
-class DailyUploadRecentChanges {
-
-  /** The type of change: APPEND, RESET, or DELETE. */
-  core.String change;
-
-  /** The time when the change occurred. */
-  core.String time;
-
-  /** Create new DailyUploadRecentChanges from JSON data */
-  DailyUploadRecentChanges.fromJson(core.Map json) {
-    if (json.containsKey("change")) {
-      change = json["change"];
-    }
-    if (json.containsKey("time")) {
-      time = json["time"];
-    }
-  }
-
-  /** Create JSON Object for DailyUploadRecentChanges */
-  core.Map toJson() {
-    var output = new core.Map();
-
-    if (change != null) {
-      output["change"] = change;
-    }
-    if (time != null) {
-      output["time"] = time;
-    }
-
-    return output;
-  }
-
-  /** Return String representation of DailyUploadRecentChanges */
   core.String toString() => JSON.stringify(this.toJson());
 
 }
@@ -727,6 +673,43 @@ class DailyUploadParentLink {
 
 }
 
+class DailyUploadRecentChanges {
+
+  /** The type of change: APPEND, RESET, or DELETE. */
+  core.String change;
+
+  /** The time when the change occurred. */
+  core.String time;
+
+  /** Create new DailyUploadRecentChanges from JSON data */
+  DailyUploadRecentChanges.fromJson(core.Map json) {
+    if (json.containsKey("change")) {
+      change = json["change"];
+    }
+    if (json.containsKey("time")) {
+      time = json["time"];
+    }
+  }
+
+  /** Create JSON Object for DailyUploadRecentChanges */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (change != null) {
+      output["change"] = change;
+    }
+    if (time != null) {
+      output["time"] = time;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of DailyUploadRecentChanges */
+  core.String toString() => JSON.stringify(this.toJson());
+
+}
+
 /** Metadata returned for a successful append operation. */
 class DailyUploadAppend {
 
@@ -744,6 +727,7 @@ class DailyUploadAppend {
 
   /** Resource type for Analytics daily upload append. */
   core.String kind;
+
   core.String nextAppendLink;
 
   /** Web property Id of the form UA-XXXXX-YY to which this daily upload append belongs. */
@@ -838,10 +822,7 @@ class DailyUploads {
   /** Create new DailyUploads from JSON data */
   DailyUploads.fromJson(core.Map json) {
     if (json.containsKey("items")) {
-      items = [];
-      json["items"].forEach((item) {
-        items.add(new DailyUpload.fromJson(item));
-      });
+      items = json["items"].map((itemsItem) => new DailyUpload.fromJson(itemsItem)).toList();
     }
     if (json.containsKey("itemsPerPage")) {
       itemsPerPage = json["itemsPerPage"];
@@ -871,10 +852,7 @@ class DailyUploads {
     var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new core.List();
-      items.forEach((item) {
-        output["items"].add(item.toJson());
-      });
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
     }
     if (itemsPerPage != null) {
       output["itemsPerPage"] = itemsPerPage;
@@ -918,6 +896,9 @@ class Experiment {
   /** Notes about this experiment. */
   core.String description;
 
+  /** If true, the end user will be able to edit the experiment via the Google Analytics user interface. */
+  core.Object editableInGaUi;
+
   /** The ending time of the experiment (the time the status changed from RUNNING to ENDED). This field is present only if the experiment has ended. This field is read-only. */
   core.String endTime;
 
@@ -942,10 +923,10 @@ class Experiment {
   /** Whether the objectiveMetric should be minimized or maximized. Possible values: "MAXIMUM", "MINIMUM". Optional--defaults to "MAXIMUM". Cannot be specified without objectiveMetric. Cannot be modified when status is "RUNNING" or "ENDED". */
   core.String optimizationType;
 
-  /** Parent link for an experiment. Points to the profile to which this experiment belongs. */
+  /** Parent link for an experiment. Points to the view (profile) to which this experiment belongs. */
   ExperimentParentLink parentLink;
 
-  /** Profile ID to which this experiment belongs. This field is read-only. */
+  /** View (Profile) ID to which this experiment belongs. This field is read-only. */
   core.String profileId;
 
   /** Why the experiment ended. Possible values: "STOPPED_BY_USER", "WINNER_FOUND", "EXPERIMENT_EXPIRED", "ENDED_WITH_NO_WINNER", "GOAL_OBJECTIVE_CHANGED". "ENDED_WITH_NO_WINNER" means that the experiment didn't expire but no winner was projected to be found. If the experiment status is changed via the API to ENDED this field is set to STOPPED_BY_USER. This field is read-only. */
@@ -956,6 +937,12 @@ class Experiment {
 
   /** Link for this experiment. This field is read-only. */
   core.String selfLink;
+
+  /** The framework used to serve the experiment variations and evaluate the results. One of:  
+- REDIRECT: Google Analytics redirects traffic to different variation pages, reports the chosen variation and evaluates the results.
+- API: Google Analytics chooses and reports the variation to serve and evaluates the results; the caller is responsible for serving the selected variation.
+- EXTERNAL: The variations will be served externally and the chosen variation reported to Google Analytics. The caller is responsible for serving the selected variation and evaluating the results. */
+  core.Object servingFramework;
 
   /** The snippet of code to include on the control page(s). This field is read-only. */
   core.String snippet;
@@ -994,6 +981,9 @@ class Experiment {
     }
     if (json.containsKey("description")) {
       description = json["description"];
+    }
+    if (json.containsKey("editableInGaUi")) {
+      editableInGaUi = json["editableInGaUi"];
     }
     if (json.containsKey("endTime")) {
       endTime = json["endTime"];
@@ -1034,6 +1024,9 @@ class Experiment {
     if (json.containsKey("selfLink")) {
       selfLink = json["selfLink"];
     }
+    if (json.containsKey("servingFramework")) {
+      servingFramework = json["servingFramework"];
+    }
     if (json.containsKey("snippet")) {
       snippet = json["snippet"];
     }
@@ -1050,10 +1043,7 @@ class Experiment {
       updated = json["updated"];
     }
     if (json.containsKey("variations")) {
-      variations = [];
-      json["variations"].forEach((item) {
-        variations.add(new ExperimentVariations.fromJson(item));
-      });
+      variations = json["variations"].map((variationsItem) => new ExperimentVariations.fromJson(variationsItem)).toList();
     }
     if (json.containsKey("webPropertyId")) {
       webPropertyId = json["webPropertyId"];
@@ -1078,6 +1068,9 @@ class Experiment {
     }
     if (description != null) {
       output["description"] = description;
+    }
+    if (editableInGaUi != null) {
+      output["editableInGaUi"] = editableInGaUi;
     }
     if (endTime != null) {
       output["endTime"] = endTime;
@@ -1118,6 +1111,9 @@ class Experiment {
     if (selfLink != null) {
       output["selfLink"] = selfLink;
     }
+    if (servingFramework != null) {
+      output["servingFramework"] = servingFramework;
+    }
     if (snippet != null) {
       output["snippet"] = snippet;
     }
@@ -1134,10 +1130,7 @@ class Experiment {
       output["updated"] = updated;
     }
     if (variations != null) {
-      output["variations"] = new core.List();
-      variations.forEach((item) {
-        output["variations"].add(item.toJson());
-      });
+      output["variations"] = variations.map((variationsItem) => variationsItem.toJson()).toList();
     }
     if (webPropertyId != null) {
       output["webPropertyId"] = webPropertyId;
@@ -1157,10 +1150,10 @@ class Experiment {
 
 }
 
-/** Parent link for an experiment. Points to the profile to which this experiment belongs. */
+/** Parent link for an experiment. Points to the view (profile) to which this experiment belongs. */
 class ExperimentParentLink {
 
-  /** Link to the profile to which this experiment belongs. This field is read-only. */
+  /** Link to the view (profile) to which this experiment belongs. This field is read-only. */
   core.String href;
 
   /** Value is "analytics#profile". This field is read-only. */
@@ -1259,7 +1252,7 @@ class ExperimentVariations {
 
 }
 
-/** An experiment collection lists Analytics experiments to which the user has access. Each profile can have a set of experiments. Each resource in the Experiment collection corresponds to a single Analytics experiment. */
+/** An experiment collection lists Analytics experiments to which the user has access. Each view (profile) can have a set of experiments. Each resource in the Experiment collection corresponds to a single Analytics experiment. */
 class Experiments {
 
   /** A list of experiments. */
@@ -1289,10 +1282,7 @@ class Experiments {
   /** Create new Experiments from JSON data */
   Experiments.fromJson(core.Map json) {
     if (json.containsKey("items")) {
-      items = [];
-      json["items"].forEach((item) {
-        items.add(new Experiment.fromJson(item));
-      });
+      items = json["items"].map((itemsItem) => new Experiment.fromJson(itemsItem)).toList();
     }
     if (json.containsKey("itemsPerPage")) {
       itemsPerPage = json["itemsPerPage"];
@@ -1322,10 +1312,7 @@ class Experiments {
     var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new core.List();
-      items.forEach((item) {
-        output["items"].add(item.toJson());
-      });
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
     }
     if (itemsPerPage != null) {
       output["itemsPerPage"] = itemsPerPage;
@@ -1357,7 +1344,7 @@ class Experiments {
 
 }
 
-/** Analytics data for a given profile. */
+/** Analytics data for a given view (profile). */
 class GaData {
 
   /** Column headers that list dimension names followed by the metric names. The order of dimensions and metrics is same as specified in the request. */
@@ -1381,11 +1368,14 @@ class GaData {
   /** Link to previous page for this Analytics data query. */
   core.String previousLink;
 
-  /** Information for the profile, for which the Analytics data was requested. */
+  /** Information for the view (profile), for which the Analytics data was requested. */
   GaDataProfileInfo profileInfo;
 
   /** Analytics data request query parameters. */
   GaDataQuery query;
+
+  /** Analytics data rows, where each row contains a list of dimension values followed by the metric values. The order of dimensions and metrics is same as specified in the request. */
+  core.List<core.List<core.String>> rows;
 
   /** Link to this page. */
   core.String selfLink;
@@ -1394,15 +1384,12 @@ class GaData {
   core.int totalResults;
 
   /** Total values for the requested metrics over all the results, not just the results returned in this response. The order of the metric totals is same as the metric order specified in the request. */
-  GaDataTotalsForAllResults totalsForAllResults;
+  core.Map<core.String, core.String> totalsForAllResults;
 
   /** Create new GaData from JSON data */
   GaData.fromJson(core.Map json) {
     if (json.containsKey("columnHeaders")) {
-      columnHeaders = [];
-      json["columnHeaders"].forEach((item) {
-        columnHeaders.add(new GaDataColumnHeaders.fromJson(item));
-      });
+      columnHeaders = json["columnHeaders"].map((columnHeadersItem) => new GaDataColumnHeaders.fromJson(columnHeadersItem)).toList();
     }
     if (json.containsKey("containsSampledData")) {
       containsSampledData = json["containsSampledData"];
@@ -1428,6 +1415,9 @@ class GaData {
     if (json.containsKey("query")) {
       query = new GaDataQuery.fromJson(json["query"]);
     }
+    if (json.containsKey("rows")) {
+      rows = json["rows"].map((rowsItem) => rowsItem.toList()).toList();
+    }
     if (json.containsKey("selfLink")) {
       selfLink = json["selfLink"];
     }
@@ -1435,7 +1425,7 @@ class GaData {
       totalResults = json["totalResults"];
     }
     if (json.containsKey("totalsForAllResults")) {
-      totalsForAllResults = new GaDataTotalsForAllResults.fromJson(json["totalsForAllResults"]);
+      totalsForAllResults = _mapMap(json["totalsForAllResults"]);
     }
   }
 
@@ -1444,10 +1434,7 @@ class GaData {
     var output = new core.Map();
 
     if (columnHeaders != null) {
-      output["columnHeaders"] = new core.List();
-      columnHeaders.forEach((item) {
-        output["columnHeaders"].add(item.toJson());
-      });
+      output["columnHeaders"] = columnHeaders.map((columnHeadersItem) => columnHeadersItem.toJson()).toList();
     }
     if (containsSampledData != null) {
       output["containsSampledData"] = containsSampledData;
@@ -1473,6 +1460,9 @@ class GaData {
     if (query != null) {
       output["query"] = query.toJson();
     }
+    if (rows != null) {
+      output["rows"] = rows.map((rowsItem) => rowsItem.toList()).toList();
+    }
     if (selfLink != null) {
       output["selfLink"] = selfLink;
     }
@@ -1480,7 +1470,7 @@ class GaData {
       output["totalResults"] = totalResults;
     }
     if (totalsForAllResults != null) {
-      output["totalsForAllResults"] = totalsForAllResults.toJson();
+      output["totalsForAllResults"] = _mapMap(totalsForAllResults);
     }
 
     return output;
@@ -1491,25 +1481,71 @@ class GaData {
 
 }
 
-/** Information for the profile, for which the Analytics data was requested. */
+class GaDataColumnHeaders {
+
+  /** Column Type. Either DIMENSION or METRIC. */
+  core.String columnType;
+
+  /** Data type. Dimension column headers have only STRING as the data type. Metric column headers have data types for metric values such as INTEGER, DOUBLE, CURRENCY etc. */
+  core.String dataType;
+
+  /** Column name. */
+  core.String name;
+
+  /** Create new GaDataColumnHeaders from JSON data */
+  GaDataColumnHeaders.fromJson(core.Map json) {
+    if (json.containsKey("columnType")) {
+      columnType = json["columnType"];
+    }
+    if (json.containsKey("dataType")) {
+      dataType = json["dataType"];
+    }
+    if (json.containsKey("name")) {
+      name = json["name"];
+    }
+  }
+
+  /** Create JSON Object for GaDataColumnHeaders */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (columnType != null) {
+      output["columnType"] = columnType;
+    }
+    if (dataType != null) {
+      output["dataType"] = dataType;
+    }
+    if (name != null) {
+      output["name"] = name;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of GaDataColumnHeaders */
+  core.String toString() => JSON.stringify(this.toJson());
+
+}
+
+/** Information for the view (profile), for which the Analytics data was requested. */
 class GaDataProfileInfo {
 
-  /** Account ID to which this profile belongs. */
+  /** Account ID to which this view (profile) belongs. */
   core.String accountId;
 
-  /** Internal ID for the web property to which this profile belongs. */
+  /** Internal ID for the web property to which this view (profile) belongs. */
   core.String internalWebPropertyId;
 
-  /** Profile ID. */
+  /** View (Profile) ID. */
   core.String profileId;
 
-  /** Profile name. */
+  /** View (Profile) name. */
   core.String profileName;
 
-  /** Table ID for profile. */
+  /** Table ID for view (profile). */
   core.String tableId;
 
-  /** Web Property ID to which this profile belongs. */
+  /** Web Property ID to which this view (profile) belongs. */
   core.String webPropertyId;
 
   /** Create new GaDataProfileInfo from JSON data */
@@ -1565,26 +1601,6 @@ class GaDataProfileInfo {
 
 }
 
-/** Total values for the requested metrics over all the results, not just the results returned in this response. The order of the metric totals is same as the metric order specified in the request. */
-class GaDataTotalsForAllResults {
-
-  /** Create new GaDataTotalsForAllResults from JSON data */
-  GaDataTotalsForAllResults.fromJson(core.Map json) {
-  }
-
-  /** Create JSON Object for GaDataTotalsForAllResults */
-  core.Map toJson() {
-    var output = new core.Map();
-
-
-    return output;
-  }
-
-  /** Return String representation of GaDataTotalsForAllResults */
-  core.String toString() => JSON.stringify(this.toJson());
-
-}
-
 /** Analytics data request query parameters. */
 class GaDataQuery {
 
@@ -1636,19 +1652,13 @@ class GaDataQuery {
       max_results = json["max-results"];
     }
     if (json.containsKey("metrics")) {
-      metrics = [];
-      json["metrics"].forEach((item) {
-        metrics.add(item);
-      });
+      metrics = json["metrics"].toList();
     }
     if (json.containsKey("segment")) {
       segment = json["segment"];
     }
     if (json.containsKey("sort")) {
-      sort = [];
-      json["sort"].forEach((item) {
-        sort.add(item);
-      });
+      sort = json["sort"].toList();
     }
     if (json.containsKey("start-date")) {
       start_date = json["start-date"];
@@ -1678,19 +1688,13 @@ class GaDataQuery {
       output["max-results"] = max_results;
     }
     if (metrics != null) {
-      output["metrics"] = new core.List();
-      metrics.forEach((item) {
-        output["metrics"].add(item);
-      });
+      output["metrics"] = metrics.toList();
     }
     if (segment != null) {
       output["segment"] = segment;
     }
     if (sort != null) {
-      output["sort"] = new core.List();
-      sort.forEach((item) {
-        output["sort"].add(item);
-      });
+      output["sort"] = sort.toList();
     }
     if (start_date != null) {
       output["start-date"] = start_date;
@@ -1703,52 +1707,6 @@ class GaDataQuery {
   }
 
   /** Return String representation of GaDataQuery */
-  core.String toString() => JSON.stringify(this.toJson());
-
-}
-
-class GaDataColumnHeaders {
-
-  /** Column Type. Either DIMENSION or METRIC. */
-  core.String columnType;
-
-  /** Data type. Dimension column headers have only STRING as the data type. Metric column headers have data types for metric values such as INTEGER, DOUBLE, CURRENCY etc. */
-  core.String dataType;
-
-  /** Column name. */
-  core.String name;
-
-  /** Create new GaDataColumnHeaders from JSON data */
-  GaDataColumnHeaders.fromJson(core.Map json) {
-    if (json.containsKey("columnType")) {
-      columnType = json["columnType"];
-    }
-    if (json.containsKey("dataType")) {
-      dataType = json["dataType"];
-    }
-    if (json.containsKey("name")) {
-      name = json["name"];
-    }
-  }
-
-  /** Create JSON Object for GaDataColumnHeaders */
-  core.Map toJson() {
-    var output = new core.Map();
-
-    if (columnType != null) {
-      output["columnType"] = columnType;
-    }
-    if (dataType != null) {
-      output["dataType"] = dataType;
-    }
-    if (name != null) {
-      output["name"] = name;
-    }
-
-    return output;
-  }
-
-  /** Return String representation of GaDataColumnHeaders */
   core.String toString() => JSON.stringify(this.toJson());
 
 }
@@ -1780,10 +1738,10 @@ class Goal {
   /** Goal name. */
   core.String name;
 
-  /** Parent link for a goal. Points to the profile to which this goal belongs. */
+  /** Parent link for a goal. Points to the view (profile) to which this goal belongs. */
   GoalParentLink parentLink;
 
-  /** Profile ID to which this goal belongs. */
+  /** View (Profile) ID to which this goal belongs. */
   core.String profileId;
 
   /** Link for this goal. */
@@ -1935,30 +1893,81 @@ class Goal {
 
 }
 
-/** Details for the goal of the type VISIT_NUM_PAGES. */
-class GoalVisitNumPagesDetails {
+/** Details for the goal of the type EVENT. */
+class GoalEventDetails {
 
-  /** Type of comparison. Possible values are LESS_THAN, GREATER_THAN, or EQUAL. */
+  /** List of event conditions. */
+  core.List<GoalEventDetailsEventConditions> eventConditions;
+
+  /** Determines if the event value should be used as the value for this goal. */
+  core.bool useEventValue;
+
+  /** Create new GoalEventDetails from JSON data */
+  GoalEventDetails.fromJson(core.Map json) {
+    if (json.containsKey("eventConditions")) {
+      eventConditions = json["eventConditions"].map((eventConditionsItem) => new GoalEventDetailsEventConditions.fromJson(eventConditionsItem)).toList();
+    }
+    if (json.containsKey("useEventValue")) {
+      useEventValue = json["useEventValue"];
+    }
+  }
+
+  /** Create JSON Object for GoalEventDetails */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (eventConditions != null) {
+      output["eventConditions"] = eventConditions.map((eventConditionsItem) => eventConditionsItem.toJson()).toList();
+    }
+    if (useEventValue != null) {
+      output["useEventValue"] = useEventValue;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of GoalEventDetails */
+  core.String toString() => JSON.stringify(this.toJson());
+
+}
+
+class GoalEventDetailsEventConditions {
+
+  /** Type of comparison. Possible values are LESS_THAN, GREATER_THAN or EQUAL. */
   core.String comparisonType;
 
   /** Value used for this comparison. */
   core.int comparisonValue;
 
-  /** Create new GoalVisitNumPagesDetails from JSON data */
-  GoalVisitNumPagesDetails.fromJson(core.Map json) {
+  /** Expression used for this match. */
+  core.String expression;
+
+  /** Type of the match to be performed. Possible values are REGEXP, BEGINS_WITH, or EXACT. */
+  core.String matchType;
+
+  /** Type of this event condition. Possible values are CATEGORY, ACTION, LABEL, or VALUE. */
+  core.String type;
+
+  /** Create new GoalEventDetailsEventConditions from JSON data */
+  GoalEventDetailsEventConditions.fromJson(core.Map json) {
     if (json.containsKey("comparisonType")) {
       comparisonType = json["comparisonType"];
     }
     if (json.containsKey("comparisonValue")) {
-      if(json["comparisonValue"] is core.String){
-        comparisonValue = core.int.parse(json["comparisonValue"]);
-      }else{
-        comparisonValue = json["comparisonValue"];
-      }
+      comparisonValue = (json["comparisonValue"] is core.String) ? core.int.parse(json["comparisonValue"]) : json["comparisonValue"];
+    }
+    if (json.containsKey("expression")) {
+      expression = json["expression"];
+    }
+    if (json.containsKey("matchType")) {
+      matchType = json["matchType"];
+    }
+    if (json.containsKey("type")) {
+      type = json["type"];
     }
   }
 
-  /** Create JSON Object for GoalVisitNumPagesDetails */
+  /** Create JSON Object for GoalEventDetailsEventConditions */
   core.Map toJson() {
     var output = new core.Map();
 
@@ -1968,61 +1977,28 @@ class GoalVisitNumPagesDetails {
     if (comparisonValue != null) {
       output["comparisonValue"] = comparisonValue;
     }
-
-    return output;
-  }
-
-  /** Return String representation of GoalVisitNumPagesDetails */
-  core.String toString() => JSON.stringify(this.toJson());
-
-}
-
-/** Details for the goal of the type VISIT_TIME_ON_SITE. */
-class GoalVisitTimeOnSiteDetails {
-
-  /** Type of comparison. Possible values are LESS_THAN or GREATER_THAN. */
-  core.String comparisonType;
-
-  /** Value used for this comparison. */
-  core.int comparisonValue;
-
-  /** Create new GoalVisitTimeOnSiteDetails from JSON data */
-  GoalVisitTimeOnSiteDetails.fromJson(core.Map json) {
-    if (json.containsKey("comparisonType")) {
-      comparisonType = json["comparisonType"];
+    if (expression != null) {
+      output["expression"] = expression;
     }
-    if (json.containsKey("comparisonValue")) {
-      if(json["comparisonValue"] is core.String){
-        comparisonValue = core.int.parse(json["comparisonValue"]);
-      }else{
-        comparisonValue = json["comparisonValue"];
-      }
+    if (matchType != null) {
+      output["matchType"] = matchType;
     }
-  }
-
-  /** Create JSON Object for GoalVisitTimeOnSiteDetails */
-  core.Map toJson() {
-    var output = new core.Map();
-
-    if (comparisonType != null) {
-      output["comparisonType"] = comparisonType;
-    }
-    if (comparisonValue != null) {
-      output["comparisonValue"] = comparisonValue;
+    if (type != null) {
+      output["type"] = type;
     }
 
     return output;
   }
 
-  /** Return String representation of GoalVisitTimeOnSiteDetails */
+  /** Return String representation of GoalEventDetailsEventConditions */
   core.String toString() => JSON.stringify(this.toJson());
 
 }
 
-/** Parent link for a goal. Points to the profile to which this goal belongs. */
+/** Parent link for a goal. Points to the view (profile) to which this goal belongs. */
 class GoalParentLink {
 
-  /** Link to the profile to which this goal belongs. */
+  /** Link to the view (profile) to which this goal belongs. */
   core.String href;
 
   /** Value is "analytics#profile". */
@@ -2087,10 +2063,7 @@ class GoalUrlDestinationDetails {
       matchType = json["matchType"];
     }
     if (json.containsKey("steps")) {
-      steps = [];
-      json["steps"].forEach((item) {
-        steps.add(new GoalUrlDestinationDetailsSteps.fromJson(item));
-      });
+      steps = json["steps"].map((stepsItem) => new GoalUrlDestinationDetailsSteps.fromJson(stepsItem)).toList();
     }
     if (json.containsKey("url")) {
       url = json["url"];
@@ -2111,10 +2084,7 @@ class GoalUrlDestinationDetails {
       output["matchType"] = matchType;
     }
     if (steps != null) {
-      output["steps"] = new core.List();
-      steps.forEach((item) {
-        output["steps"].add(item.toJson());
-      });
+      output["steps"] = steps.map((stepsItem) => stepsItem.toJson()).toList();
     }
     if (url != null) {
       output["url"] = url;
@@ -2174,91 +2144,26 @@ class GoalUrlDestinationDetailsSteps {
 
 }
 
-/** Details for the goal of the type EVENT. */
-class GoalEventDetails {
+/** Details for the goal of the type VISIT_NUM_PAGES. */
+class GoalVisitNumPagesDetails {
 
-  /** List of event conditions. */
-  core.List<GoalEventDetailsEventConditions> eventConditions;
-
-  /** Determines if the event value should be used as the value for this goal. */
-  core.bool useEventValue;
-
-  /** Create new GoalEventDetails from JSON data */
-  GoalEventDetails.fromJson(core.Map json) {
-    if (json.containsKey("eventConditions")) {
-      eventConditions = [];
-      json["eventConditions"].forEach((item) {
-        eventConditions.add(new GoalEventDetailsEventConditions.fromJson(item));
-      });
-    }
-    if (json.containsKey("useEventValue")) {
-      useEventValue = json["useEventValue"];
-    }
-  }
-
-  /** Create JSON Object for GoalEventDetails */
-  core.Map toJson() {
-    var output = new core.Map();
-
-    if (eventConditions != null) {
-      output["eventConditions"] = new core.List();
-      eventConditions.forEach((item) {
-        output["eventConditions"].add(item.toJson());
-      });
-    }
-    if (useEventValue != null) {
-      output["useEventValue"] = useEventValue;
-    }
-
-    return output;
-  }
-
-  /** Return String representation of GoalEventDetails */
-  core.String toString() => JSON.stringify(this.toJson());
-
-}
-
-class GoalEventDetailsEventConditions {
-
-  /** Type of comparison. Possible values are LESS_THAN, GREATER_THAN or EQUAL. */
+  /** Type of comparison. Possible values are LESS_THAN, GREATER_THAN, or EQUAL. */
   core.String comparisonType;
 
   /** Value used for this comparison. */
   core.int comparisonValue;
 
-  /** Expression used for this match. */
-  core.String expression;
-
-  /** Type of the match to be performed. Possible values are REGEXP, BEGINS_WITH, or EXACT. */
-  core.String matchType;
-
-  /** Type of this event condition. Possible values are CATEGORY, ACTION, LABEL, or VALUE. */
-  core.String type;
-
-  /** Create new GoalEventDetailsEventConditions from JSON data */
-  GoalEventDetailsEventConditions.fromJson(core.Map json) {
+  /** Create new GoalVisitNumPagesDetails from JSON data */
+  GoalVisitNumPagesDetails.fromJson(core.Map json) {
     if (json.containsKey("comparisonType")) {
       comparisonType = json["comparisonType"];
     }
     if (json.containsKey("comparisonValue")) {
-      if(json["comparisonValue"] is core.String){
-        comparisonValue = core.int.parse(json["comparisonValue"]);
-      }else{
-        comparisonValue = json["comparisonValue"];
-      }
-    }
-    if (json.containsKey("expression")) {
-      expression = json["expression"];
-    }
-    if (json.containsKey("matchType")) {
-      matchType = json["matchType"];
-    }
-    if (json.containsKey("type")) {
-      type = json["type"];
+      comparisonValue = (json["comparisonValue"] is core.String) ? core.int.parse(json["comparisonValue"]) : json["comparisonValue"];
     }
   }
 
-  /** Create JSON Object for GoalEventDetailsEventConditions */
+  /** Create JSON Object for GoalVisitNumPagesDetails */
   core.Map toJson() {
     var output = new core.Map();
 
@@ -2268,25 +2173,54 @@ class GoalEventDetailsEventConditions {
     if (comparisonValue != null) {
       output["comparisonValue"] = comparisonValue;
     }
-    if (expression != null) {
-      output["expression"] = expression;
+
+    return output;
+  }
+
+  /** Return String representation of GoalVisitNumPagesDetails */
+  core.String toString() => JSON.stringify(this.toJson());
+
+}
+
+/** Details for the goal of the type VISIT_TIME_ON_SITE. */
+class GoalVisitTimeOnSiteDetails {
+
+  /** Type of comparison. Possible values are LESS_THAN or GREATER_THAN. */
+  core.String comparisonType;
+
+  /** Value used for this comparison. */
+  core.int comparisonValue;
+
+  /** Create new GoalVisitTimeOnSiteDetails from JSON data */
+  GoalVisitTimeOnSiteDetails.fromJson(core.Map json) {
+    if (json.containsKey("comparisonType")) {
+      comparisonType = json["comparisonType"];
     }
-    if (matchType != null) {
-      output["matchType"] = matchType;
+    if (json.containsKey("comparisonValue")) {
+      comparisonValue = (json["comparisonValue"] is core.String) ? core.int.parse(json["comparisonValue"]) : json["comparisonValue"];
     }
-    if (type != null) {
-      output["type"] = type;
+  }
+
+  /** Create JSON Object for GoalVisitTimeOnSiteDetails */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (comparisonType != null) {
+      output["comparisonType"] = comparisonType;
+    }
+    if (comparisonValue != null) {
+      output["comparisonValue"] = comparisonValue;
     }
 
     return output;
   }
 
-  /** Return String representation of GoalEventDetailsEventConditions */
+  /** Return String representation of GoalVisitTimeOnSiteDetails */
   core.String toString() => JSON.stringify(this.toJson());
 
 }
 
-/** A goal collection lists Analytics goals to which the user has access. Each profile can have a set of goals. Each resource in the Goal collection corresponds to a single Analytics goal. */
+/** A goal collection lists Analytics goals to which the user has access. Each view (profile) can have a set of goals. Each resource in the Goal collection corresponds to a single Analytics goal. */
 class Goals {
 
   /** A list of goals. */
@@ -2316,10 +2250,7 @@ class Goals {
   /** Create new Goals from JSON data */
   Goals.fromJson(core.Map json) {
     if (json.containsKey("items")) {
-      items = [];
-      json["items"].forEach((item) {
-        items.add(new Goal.fromJson(item));
-      });
+      items = json["items"].map((itemsItem) => new Goal.fromJson(itemsItem)).toList();
     }
     if (json.containsKey("itemsPerPage")) {
       itemsPerPage = json["itemsPerPage"];
@@ -2349,10 +2280,7 @@ class Goals {
     var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new core.List();
-      items.forEach((item) {
-        output["items"].add(item.toJson());
-      });
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
     }
     if (itemsPerPage != null) {
       output["itemsPerPage"] = itemsPerPage;
@@ -2384,7 +2312,7 @@ class Goals {
 
 }
 
-/** Multi-Channel Funnels data for a given profile. */
+/** Multi-Channel Funnels data for a given view (profile). */
 class McfData {
 
   /** Column headers that list dimension names followed by the metric names. The order of dimensions and metrics is same as specified in the request. */
@@ -2408,11 +2336,14 @@ class McfData {
   /** Link to previous page for this Analytics data query. */
   core.String previousLink;
 
-  /** Information for the profile, for which the Analytics data was requested. */
+  /** Information for the view (profile), for which the Analytics data was requested. */
   McfDataProfileInfo profileInfo;
 
   /** Analytics data request query parameters. */
   McfDataQuery query;
+
+  /** Analytics data rows, where each row contains a list of dimension values followed by the metric values. The order of dimensions and metrics is same as specified in the request. */
+  core.List<core.List<McfDataRows>> rows;
 
   /** Link to this page. */
   core.String selfLink;
@@ -2421,15 +2352,12 @@ class McfData {
   core.int totalResults;
 
   /** Total values for the requested metrics over all the results, not just the results returned in this response. The order of the metric totals is same as the metric order specified in the request. */
-  McfDataTotalsForAllResults totalsForAllResults;
+  core.Map<core.String, core.String> totalsForAllResults;
 
   /** Create new McfData from JSON data */
   McfData.fromJson(core.Map json) {
     if (json.containsKey("columnHeaders")) {
-      columnHeaders = [];
-      json["columnHeaders"].forEach((item) {
-        columnHeaders.add(new McfDataColumnHeaders.fromJson(item));
-      });
+      columnHeaders = json["columnHeaders"].map((columnHeadersItem) => new McfDataColumnHeaders.fromJson(columnHeadersItem)).toList();
     }
     if (json.containsKey("containsSampledData")) {
       containsSampledData = json["containsSampledData"];
@@ -2455,6 +2383,9 @@ class McfData {
     if (json.containsKey("query")) {
       query = new McfDataQuery.fromJson(json["query"]);
     }
+    if (json.containsKey("rows")) {
+      rows = json["rows"].map((rowsItem) => rowsItem.map((rowsItem2) => new McfDataRows.fromJson(rowsItem2)).toList()).toList();
+    }
     if (json.containsKey("selfLink")) {
       selfLink = json["selfLink"];
     }
@@ -2462,7 +2393,7 @@ class McfData {
       totalResults = json["totalResults"];
     }
     if (json.containsKey("totalsForAllResults")) {
-      totalsForAllResults = new McfDataTotalsForAllResults.fromJson(json["totalsForAllResults"]);
+      totalsForAllResults = _mapMap(json["totalsForAllResults"]);
     }
   }
 
@@ -2471,10 +2402,7 @@ class McfData {
     var output = new core.Map();
 
     if (columnHeaders != null) {
-      output["columnHeaders"] = new core.List();
-      columnHeaders.forEach((item) {
-        output["columnHeaders"].add(item.toJson());
-      });
+      output["columnHeaders"] = columnHeaders.map((columnHeadersItem) => columnHeadersItem.toJson()).toList();
     }
     if (containsSampledData != null) {
       output["containsSampledData"] = containsSampledData;
@@ -2500,6 +2428,9 @@ class McfData {
     if (query != null) {
       output["query"] = query.toJson();
     }
+    if (rows != null) {
+      output["rows"] = rows.map((rowsItem) => rowsItem.map((rowsItem2) => rowsItem2.toJson()).toList()).toList();
+    }
     if (selfLink != null) {
       output["selfLink"] = selfLink;
     }
@@ -2507,7 +2438,7 @@ class McfData {
       output["totalResults"] = totalResults;
     }
     if (totalsForAllResults != null) {
-      output["totalsForAllResults"] = totalsForAllResults.toJson();
+      output["totalsForAllResults"] = _mapMap(totalsForAllResults);
     }
 
     return output;
@@ -2564,147 +2495,25 @@ class McfDataColumnHeaders {
 
 }
 
-/** Analytics data request query parameters. */
-class McfDataQuery {
-
-  /** List of analytics dimensions. */
-  core.String dimensions;
-
-  /** End date. */
-  core.String end_date;
-
-  /** Comma-separated list of dimension or metric filters. */
-  core.String filters;
-
-  /** Unique table ID. */
-  core.String ids;
-
-  /** Maximum results per page. */
-  core.int max_results;
-
-  /** List of analytics metrics. */
-  core.List<core.String> metrics;
-
-  /** Analytics advanced segment. */
-  core.String segment;
-
-  /** List of dimensions or metrics based on which Analytics data is sorted. */
-  core.List<core.String> sort;
-
-  /** Start date. */
-  core.String start_date;
-
-  /** Start index. */
-  core.int start_index;
-
-  /** Create new McfDataQuery from JSON data */
-  McfDataQuery.fromJson(core.Map json) {
-    if (json.containsKey("dimensions")) {
-      dimensions = json["dimensions"];
-    }
-    if (json.containsKey("end-date")) {
-      end_date = json["end-date"];
-    }
-    if (json.containsKey("filters")) {
-      filters = json["filters"];
-    }
-    if (json.containsKey("ids")) {
-      ids = json["ids"];
-    }
-    if (json.containsKey("max-results")) {
-      max_results = json["max-results"];
-    }
-    if (json.containsKey("metrics")) {
-      metrics = [];
-      json["metrics"].forEach((item) {
-        metrics.add(item);
-      });
-    }
-    if (json.containsKey("segment")) {
-      segment = json["segment"];
-    }
-    if (json.containsKey("sort")) {
-      sort = [];
-      json["sort"].forEach((item) {
-        sort.add(item);
-      });
-    }
-    if (json.containsKey("start-date")) {
-      start_date = json["start-date"];
-    }
-    if (json.containsKey("start-index")) {
-      start_index = json["start-index"];
-    }
-  }
-
-  /** Create JSON Object for McfDataQuery */
-  core.Map toJson() {
-    var output = new core.Map();
-
-    if (dimensions != null) {
-      output["dimensions"] = dimensions;
-    }
-    if (end_date != null) {
-      output["end-date"] = end_date;
-    }
-    if (filters != null) {
-      output["filters"] = filters;
-    }
-    if (ids != null) {
-      output["ids"] = ids;
-    }
-    if (max_results != null) {
-      output["max-results"] = max_results;
-    }
-    if (metrics != null) {
-      output["metrics"] = new core.List();
-      metrics.forEach((item) {
-        output["metrics"].add(item);
-      });
-    }
-    if (segment != null) {
-      output["segment"] = segment;
-    }
-    if (sort != null) {
-      output["sort"] = new core.List();
-      sort.forEach((item) {
-        output["sort"].add(item);
-      });
-    }
-    if (start_date != null) {
-      output["start-date"] = start_date;
-    }
-    if (start_index != null) {
-      output["start-index"] = start_index;
-    }
-
-    return output;
-  }
-
-  /** Return String representation of McfDataQuery */
-  core.String toString() => JSON.stringify(this.toJson());
-
-}
-
-/** Information for the profile, for which the Analytics data was requested. */
+/** Information for the view (profile), for which the Analytics data was requested. */
 class McfDataProfileInfo {
 
-  /** Account ID to which this profile belongs. */
+  /** Account ID to which this view (profile) belongs. */
   core.String accountId;
 
-  /** Internal ID for the web property to which this profile belongs. */
+  /** Internal ID for the web property to which this view (profile) belongs. */
   core.String internalWebPropertyId;
 
-  /** Profile ID. */
+  /** View (Profile) ID. */
   core.String profileId;
 
-  /** Profile name. */
+  /** View (Profile) name. */
   core.String profileName;
 
-  /** Table ID for profile. */
+  /** Table ID for view (profile). */
   core.String tableId;
 
-  /** Web Property ID to which this profile belongs. */
+  /** Web Property ID to which this view (profile) belongs. */
   core.String webPropertyId;
 
   /** Create new McfDataProfileInfo from JSON data */
@@ -2760,87 +2569,252 @@ class McfDataProfileInfo {
 
 }
 
-/** Total values for the requested metrics over all the results, not just the results returned in this response. The order of the metric totals is same as the metric order specified in the request. */
-class McfDataTotalsForAllResults {
+/** Analytics data request query parameters. */
+class McfDataQuery {
 
-  /** Create new McfDataTotalsForAllResults from JSON data */
-  McfDataTotalsForAllResults.fromJson(core.Map json) {
+  /** List of analytics dimensions. */
+  core.String dimensions;
+
+  /** End date. */
+  core.String end_date;
+
+  /** Comma-separated list of dimension or metric filters. */
+  core.String filters;
+
+  /** Unique table ID. */
+  core.String ids;
+
+  /** Maximum results per page. */
+  core.int max_results;
+
+  /** List of analytics metrics. */
+  core.List<core.String> metrics;
+
+  /** Analytics advanced segment. */
+  core.String segment;
+
+  /** List of dimensions or metrics based on which Analytics data is sorted. */
+  core.List<core.String> sort;
+
+  /** Start date. */
+  core.String start_date;
+
+  /** Start index. */
+  core.int start_index;
+
+  /** Create new McfDataQuery from JSON data */
+  McfDataQuery.fromJson(core.Map json) {
+    if (json.containsKey("dimensions")) {
+      dimensions = json["dimensions"];
+    }
+    if (json.containsKey("end-date")) {
+      end_date = json["end-date"];
+    }
+    if (json.containsKey("filters")) {
+      filters = json["filters"];
+    }
+    if (json.containsKey("ids")) {
+      ids = json["ids"];
+    }
+    if (json.containsKey("max-results")) {
+      max_results = json["max-results"];
+    }
+    if (json.containsKey("metrics")) {
+      metrics = json["metrics"].toList();
+    }
+    if (json.containsKey("segment")) {
+      segment = json["segment"];
+    }
+    if (json.containsKey("sort")) {
+      sort = json["sort"].toList();
+    }
+    if (json.containsKey("start-date")) {
+      start_date = json["start-date"];
+    }
+    if (json.containsKey("start-index")) {
+      start_index = json["start-index"];
+    }
   }
 
-  /** Create JSON Object for McfDataTotalsForAllResults */
+  /** Create JSON Object for McfDataQuery */
   core.Map toJson() {
     var output = new core.Map();
 
+    if (dimensions != null) {
+      output["dimensions"] = dimensions;
+    }
+    if (end_date != null) {
+      output["end-date"] = end_date;
+    }
+    if (filters != null) {
+      output["filters"] = filters;
+    }
+    if (ids != null) {
+      output["ids"] = ids;
+    }
+    if (max_results != null) {
+      output["max-results"] = max_results;
+    }
+    if (metrics != null) {
+      output["metrics"] = metrics.toList();
+    }
+    if (segment != null) {
+      output["segment"] = segment;
+    }
+    if (sort != null) {
+      output["sort"] = sort.toList();
+    }
+    if (start_date != null) {
+      output["start-date"] = start_date;
+    }
+    if (start_index != null) {
+      output["start-index"] = start_index;
+    }
 
     return output;
   }
 
-  /** Return String representation of McfDataTotalsForAllResults */
+  /** Return String representation of McfDataQuery */
   core.String toString() => JSON.stringify(this.toJson());
 
 }
 
-/** JSON template for an Analytics profile. */
+/** A union object representing a dimension or metric value. Only one of "primitiveValue" or "conversionPathValue" attribute will be populated. */
+class McfDataRows {
+
+  /** A conversion path dimension value, containing a list of interactions with their attributes. */
+  core.List<McfDataRowsConversionPathValue> conversionPathValue;
+
+  /** A primitive dimension value. A primitive metric value. */
+  core.String primitiveValue;
+
+  /** Create new McfDataRows from JSON data */
+  McfDataRows.fromJson(core.Map json) {
+    if (json.containsKey("conversionPathValue")) {
+      conversionPathValue = json["conversionPathValue"].map((conversionPathValueItem) => new McfDataRowsConversionPathValue.fromJson(conversionPathValueItem)).toList();
+    }
+    if (json.containsKey("primitiveValue")) {
+      primitiveValue = json["primitiveValue"];
+    }
+  }
+
+  /** Create JSON Object for McfDataRows */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (conversionPathValue != null) {
+      output["conversionPathValue"] = conversionPathValue.map((conversionPathValueItem) => conversionPathValueItem.toJson()).toList();
+    }
+    if (primitiveValue != null) {
+      output["primitiveValue"] = primitiveValue;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of McfDataRows */
+  core.String toString() => JSON.stringify(this.toJson());
+
+}
+
+class McfDataRowsConversionPathValue {
+
+  /** Type of an interaction on conversion path. Such as CLICK, IMPRESSION etc. */
+  core.String interactionType;
+
+  /** Node value of an interaction on conversion path. Such as source, medium etc. */
+  core.String nodeValue;
+
+  /** Create new McfDataRowsConversionPathValue from JSON data */
+  McfDataRowsConversionPathValue.fromJson(core.Map json) {
+    if (json.containsKey("interactionType")) {
+      interactionType = json["interactionType"];
+    }
+    if (json.containsKey("nodeValue")) {
+      nodeValue = json["nodeValue"];
+    }
+  }
+
+  /** Create JSON Object for McfDataRowsConversionPathValue */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (interactionType != null) {
+      output["interactionType"] = interactionType;
+    }
+    if (nodeValue != null) {
+      output["nodeValue"] = nodeValue;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of McfDataRowsConversionPathValue */
+  core.String toString() => JSON.stringify(this.toJson());
+
+}
+
+/** JSON template for an Analytics view (profile). */
 class Profile {
 
-  /** Account ID to which this profile belongs. */
+  /** Account ID to which this view (profile) belongs. */
   core.String accountId;
 
-  /** Child link for this profile. Points to the list of goals for this profile. */
+  /** Child link for this view (profile). Points to the list of goals for this view (profile). */
   ProfileChildLink childLink;
 
-  /** Time this profile was created. */
+  /** Time this view (profile) was created. */
   core.String created;
 
-  /** The currency type associated with this profile. */
+  /** The currency type associated with this view (profile). */
   core.String currency;
 
-  /** Default page for this profile. */
+  /** Default page for this view (profile). */
   core.String defaultPage;
 
-  /** Indicates whether ecommerce tracking is enabled for this profile. */
+  /** Indicates whether ecommerce tracking is enabled for this view (profile). */
   core.bool eCommerceTracking;
 
-  /** The query parameters that are excluded from this profile. */
+  /** The query parameters that are excluded from this view (profile). */
   core.String excludeQueryParameters;
 
-  /** Profile ID. */
+  /** View (Profile) ID. */
   core.String id;
 
-  /** Internal ID for the web property to which this profile belongs. */
+  /** Internal ID for the web property to which this view (profile) belongs. */
   core.String internalWebPropertyId;
 
   /** Resource type for Analytics profile. */
   core.String kind;
 
-  /** Name of this profile. */
+  /** Name of this view (profile). */
   core.String name;
 
-  /** Parent link for this profile. Points to the web property to which this profile belongs. */
+  /** Parent link for this view (profile). Points to the web property to which this view (profile) belongs. */
   ProfileParentLink parentLink;
 
-  /** Link for this profile. */
+  /** Link for this view (profile). */
   core.String selfLink;
 
-  /** Site search category parameters for this profile. */
+  /** Site search category parameters for this view (profile). */
   core.String siteSearchCategoryParameters;
 
-  /** The site search query parameters for this profile. */
+  /** The site search query parameters for this view (profile). */
   core.String siteSearchQueryParameters;
 
   /** Time zone for which this profile has been configured. */
   core.String timezone;
 
-  /** Profile type. Supported types: WEB or APP. */
+  /** View (Profile) type. Supported types: WEB or APP. */
   core.String type;
 
-  /** Time this profile was last modified. */
+  /** Time this view (profile) was last modified. */
   core.String updated;
 
-  /** Web property ID of the form UA-XXXXX-YY to which this profile belongs. */
+  /** Web property ID of the form UA-XXXXX-YY to which this view (profile) belongs. */
   core.String webPropertyId;
 
-  /** Website URL for this profile. */
+  /** Website URL for this view (profile). */
   core.String websiteUrl;
 
   /** Create new Profile from JSON data */
@@ -2980,10 +2954,10 @@ class Profile {
 
 }
 
-/** Child link for this profile. Points to the list of goals for this profile. */
+/** Child link for this view (profile). Points to the list of goals for this view (profile). */
 class ProfileChildLink {
 
-  /** Link to the list of goals for this profile. */
+  /** Link to the list of goals for this view (profile). */
   core.String href;
 
   /** Value is "analytics#goals". */
@@ -3018,10 +2992,10 @@ class ProfileChildLink {
 
 }
 
-/** Parent link for this profile. Points to the web property to which this profile belongs. */
+/** Parent link for this view (profile). Points to the web property to which this view (profile) belongs. */
 class ProfileParentLink {
 
-  /** Link to the web property to which this profile belongs. */
+  /** Link to the web property to which this view (profile) belongs. */
   core.String href;
 
   /** Value is "analytics#webproperty". */
@@ -3056,10 +3030,10 @@ class ProfileParentLink {
 
 }
 
-/** A profile collection lists Analytics profiles to which the user has access. Each resource in the collection corresponds to a single Analytics profile. */
+/** A view (profile) collection lists Analytics views (profiles) to which the user has access. Each resource in the collection corresponds to a single Analytics view (profile). */
 class Profiles {
 
-  /** A list of profiles. */
+  /** A list of views (profiles). */
   core.List<Profile> items;
 
   /** The maximum number of resources the response can contain, regardless of the actual number of resources returned. Its value ranges from 1 to 1000 with a value of 1000 by default, or otherwise specified by the max-results query parameter. */
@@ -3068,10 +3042,10 @@ class Profiles {
   /** Collection type. */
   core.String kind;
 
-  /** Link to next page for this profile collection. */
+  /** Link to next page for this view (profile) collection. */
   core.String nextLink;
 
-  /** Link to previous page for this profile collection. */
+  /** Link to previous page for this view (profile) collection. */
   core.String previousLink;
 
   /** The starting index of the resources, which is 1 by default or otherwise specified by the start-index query parameter. */
@@ -3086,10 +3060,7 @@ class Profiles {
   /** Create new Profiles from JSON data */
   Profiles.fromJson(core.Map json) {
     if (json.containsKey("items")) {
-      items = [];
-      json["items"].forEach((item) {
-        items.add(new Profile.fromJson(item));
-      });
+      items = json["items"].map((itemsItem) => new Profile.fromJson(itemsItem)).toList();
     }
     if (json.containsKey("itemsPerPage")) {
       itemsPerPage = json["itemsPerPage"];
@@ -3119,10 +3090,7 @@ class Profiles {
     var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new core.List();
-      items.forEach((item) {
-        output["items"].add(item.toJson());
-      });
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
     }
     if (itemsPerPage != null) {
       output["itemsPerPage"] = itemsPerPage;
@@ -3276,10 +3244,7 @@ class Segments {
   /** Create new Segments from JSON data */
   Segments.fromJson(core.Map json) {
     if (json.containsKey("items")) {
-      items = [];
-      json["items"].forEach((item) {
-        items.add(new Segment.fromJson(item));
-      });
+      items = json["items"].map((itemsItem) => new Segment.fromJson(itemsItem)).toList();
     }
     if (json.containsKey("itemsPerPage")) {
       itemsPerPage = json["itemsPerPage"];
@@ -3309,10 +3274,7 @@ class Segments {
     var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new core.List();
-      items.forEach((item) {
-        output["items"].add(item.toJson());
-      });
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
     }
     if (itemsPerPage != null) {
       output["itemsPerPage"] = itemsPerPage;
@@ -3374,10 +3336,7 @@ class Webproperties {
   /** Create new Webproperties from JSON data */
   Webproperties.fromJson(core.Map json) {
     if (json.containsKey("items")) {
-      items = [];
-      json["items"].forEach((item) {
-        items.add(new Webproperty.fromJson(item));
-      });
+      items = json["items"].map((itemsItem) => new Webproperty.fromJson(itemsItem)).toList();
     }
     if (json.containsKey("itemsPerPage")) {
       itemsPerPage = json["itemsPerPage"];
@@ -3407,10 +3366,7 @@ class Webproperties {
     var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new core.List();
-      items.forEach((item) {
-        output["items"].add(item.toJson());
-      });
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
     }
     if (itemsPerPage != null) {
       output["itemsPerPage"] = itemsPerPage;
@@ -3448,7 +3404,7 @@ class Webproperty {
   /** Account ID to which this web property belongs. */
   core.String accountId;
 
-  /** Child link for this web property. Points to the list of profiles for this web property. */
+  /** Child link for this web property. Points to the list of views (profiles) for this web property. */
   WebpropertyChildLink childLink;
 
   /** Time this web property was created. */
@@ -3475,7 +3431,7 @@ class Webproperty {
   /** Parent link for this web property. Points to the account to which this web property belongs. */
   WebpropertyParentLink parentLink;
 
-  /** Profile count for this web property. */
+  /** View (Profile) count for this web property. */
   core.int profileCount;
 
   /** Link for this web property. */
@@ -3588,6 +3544,44 @@ class Webproperty {
 
 }
 
+/** Child link for this web property. Points to the list of views (profiles) for this web property. */
+class WebpropertyChildLink {
+
+  /** Link to the list of views (profiles) for this web property. */
+  core.String href;
+
+  /** Type of the parent link. Its value is "analytics#profiles". */
+  core.String type;
+
+  /** Create new WebpropertyChildLink from JSON data */
+  WebpropertyChildLink.fromJson(core.Map json) {
+    if (json.containsKey("href")) {
+      href = json["href"];
+    }
+    if (json.containsKey("type")) {
+      type = json["type"];
+    }
+  }
+
+  /** Create JSON Object for WebpropertyChildLink */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (href != null) {
+      output["href"] = href;
+    }
+    if (type != null) {
+      output["type"] = type;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of WebpropertyChildLink */
+  core.String toString() => JSON.stringify(this.toJson());
+
+}
+
 /** Parent link for this web property. Points to the account to which this web property belongs. */
 class WebpropertyParentLink {
 
@@ -3626,41 +3620,16 @@ class WebpropertyParentLink {
 
 }
 
-/** Child link for this web property. Points to the list of profiles for this web property. */
-class WebpropertyChildLink {
-
-  /** Link to the list of profiles for this web property. */
-  core.String href;
-
-  /** Type of the parent link. Its value is "analytics#profiles". */
-  core.String type;
-
-  /** Create new WebpropertyChildLink from JSON data */
-  WebpropertyChildLink.fromJson(core.Map json) {
-    if (json.containsKey("href")) {
-      href = json["href"];
+core.Map _mapMap(core.Map source, [core.Object convert(core.Object source) = null]) {
+  assert(source != null);
+  var result = new dart_collection.LinkedHashMap();
+  source.forEach((core.String key, value) {
+    assert(key != null);
+    if(convert == null) {
+      result[key] = value;
+    } else {
+      result[key] = convert(value);
     }
-    if (json.containsKey("type")) {
-      type = json["type"];
-    }
-  }
-
-  /** Create JSON Object for WebpropertyChildLink */
-  core.Map toJson() {
-    var output = new core.Map();
-
-    if (href != null) {
-      output["href"] = href;
-    }
-    if (type != null) {
-      output["type"] = type;
-    }
-
-    return output;
-  }
-
-  /** Return String representation of WebpropertyChildLink */
-  core.String toString() => JSON.stringify(this.toJson());
-
+  });
+  return result;
 }
-

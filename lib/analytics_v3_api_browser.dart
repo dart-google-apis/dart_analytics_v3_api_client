@@ -1,14 +1,20 @@
-library analytics_v3_api_browser;
+library analytics_v3_api.browser;
 
-import "analytics_v3_api_client.dart";
-export "analytics_v3_api_client.dart";
-
-import "dart:core" as core;
-import "dart:html" as html;
-import "dart:async" as async;
-import "dart:json" as JSON;
-import "package:js/js.dart" as js;
 import "package:google_oauth2_client/google_oauth2_browser.dart" as oauth;
 
-part "src/browser/browser_client.dart";
-part "src/browser/analytics.dart";
+import 'package:google_analytics_v3_api/src/cloud_api_browser.dart';
+import "package:google_analytics_v3_api/analytics_v3_api_client.dart";
+
+/** View and manage your Google Analytics data */
+class Analytics extends Client with BrowserClient {
+
+  /** OAuth Scope2: View and manage your Google Analytics data */
+  static const String ANALYTICS_SCOPE = "https://www.googleapis.com/auth/analytics";
+
+  /** OAuth Scope2: View your Google Analytics data */
+  static const String ANALYTICS_READONLY_SCOPE = "https://www.googleapis.com/auth/analytics.readonly";
+
+  final oauth.OAuth2 auth;
+
+  Analytics([oauth.OAuth2 this.auth]);
+}
