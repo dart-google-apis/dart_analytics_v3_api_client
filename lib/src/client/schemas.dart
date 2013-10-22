@@ -18,6 +18,9 @@ class Account {
   /** Account name. */
   core.String name;
 
+  /** Permissions the user has for this account. */
+  AccountPermissions permissions;
+
   /** Link for this account. */
   core.String selfLink;
 
@@ -40,6 +43,9 @@ class Account {
     }
     if (json.containsKey("name")) {
       name = json["name"];
+    }
+    if (json.containsKey("permissions")) {
+      permissions = new AccountPermissions.fromJson(json["permissions"]);
     }
     if (json.containsKey("selfLink")) {
       selfLink = json["selfLink"];
@@ -68,6 +74,9 @@ class Account {
     if (name != null) {
       output["name"] = name;
     }
+    if (permissions != null) {
+      output["permissions"] = permissions.toJson();
+    }
     if (selfLink != null) {
       output["selfLink"] = selfLink;
     }
@@ -79,7 +88,7 @@ class Account {
   }
 
   /** Return String representation of Account */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -117,7 +126,92 @@ class AccountChildLink {
   }
 
   /** Return String representation of AccountChildLink */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** Permissions the user has for this account. */
+class AccountPermissions {
+
+  /** All the permissions that the user has for this account. These include any implied permissions (e.g., EDIT implies VIEW). */
+  core.List<core.String> effective;
+
+  /** Create new AccountPermissions from JSON data */
+  AccountPermissions.fromJson(core.Map json) {
+    if (json.containsKey("effective")) {
+      effective = json["effective"].toList();
+    }
+  }
+
+  /** Create JSON Object for AccountPermissions */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (effective != null) {
+      output["effective"] = effective.toList();
+    }
+
+    return output;
+  }
+
+  /** Return String representation of AccountPermissions */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** JSON template for a linked account. */
+class AccountRef {
+
+  /** Link for this account. */
+  core.String href;
+
+  /** Account ID. */
+  core.String id;
+
+  /** Analytics account reference. */
+  core.String kind;
+
+  /** Account name. */
+  core.String name;
+
+  /** Create new AccountRef from JSON data */
+  AccountRef.fromJson(core.Map json) {
+    if (json.containsKey("href")) {
+      href = json["href"];
+    }
+    if (json.containsKey("id")) {
+      id = json["id"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("name")) {
+      name = json["name"];
+    }
+  }
+
+  /** Create JSON Object for AccountRef */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (href != null) {
+      output["href"] = href;
+    }
+    if (id != null) {
+      output["id"] = id;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (name != null) {
+      output["name"] = name;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of AccountRef */
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -209,7 +303,148 @@ class Accounts {
   }
 
   /** Return String representation of Accounts */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** Request template for the delete upload data request. */
+class AnalyticsDataimportDeleteUploadDataRequest {
+
+  /** A list of upload UIDs. */
+  core.List<core.String> customDataImportUids;
+
+  /** Create new AnalyticsDataimportDeleteUploadDataRequest from JSON data */
+  AnalyticsDataimportDeleteUploadDataRequest.fromJson(core.Map json) {
+    if (json.containsKey("customDataImportUids")) {
+      customDataImportUids = json["customDataImportUids"].toList();
+    }
+  }
+
+  /** Create JSON Object for AnalyticsDataimportDeleteUploadDataRequest */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (customDataImportUids != null) {
+      output["customDataImportUids"] = customDataImportUids.toList();
+    }
+
+    return output;
+  }
+
+  /** Return String representation of AnalyticsDataimportDeleteUploadDataRequest */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** JSON template for a metadata column. */
+class Column {
+
+  /** Map of attribute name and value for this column. */
+  core.Map<core.String, core.String> attributes;
+
+  /** Column id. */
+  core.String id;
+
+  /** Resource type for Analytics column. */
+  core.String kind;
+
+  /** Create new Column from JSON data */
+  Column.fromJson(core.Map json) {
+    if (json.containsKey("attributes")) {
+      attributes = _mapMap(json["attributes"]);
+    }
+    if (json.containsKey("id")) {
+      id = json["id"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+  }
+
+  /** Create JSON Object for Column */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (attributes != null) {
+      output["attributes"] = _mapMap(attributes);
+    }
+    if (id != null) {
+      output["id"] = id;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of Column */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** Lists columns (dimensions and metrics) for a particular report type. */
+class Columns {
+
+  /** List of attributes names returned by columns. */
+  core.List<core.String> attributeNames;
+
+  /** Etag of collection. This etag can be compared with the last response etag to check if response has changed. */
+  core.String etag;
+
+  /** List of columns for a report type. */
+  core.List<Column> items;
+
+  /** Collection type. */
+  core.String kind;
+
+  /** Total number of columns returned in the response. */
+  core.int totalResults;
+
+  /** Create new Columns from JSON data */
+  Columns.fromJson(core.Map json) {
+    if (json.containsKey("attributeNames")) {
+      attributeNames = json["attributeNames"].toList();
+    }
+    if (json.containsKey("etag")) {
+      etag = json["etag"];
+    }
+    if (json.containsKey("items")) {
+      items = json["items"].map((itemsItem) => new Column.fromJson(itemsItem)).toList();
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("totalResults")) {
+      totalResults = json["totalResults"];
+    }
+  }
+
+  /** Create JSON Object for Columns */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (attributeNames != null) {
+      output["attributeNames"] = attributeNames.toList();
+    }
+    if (etag != null) {
+      output["etag"] = etag;
+    }
+    if (items != null) {
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (totalResults != null) {
+      output["totalResults"] = totalResults;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of Columns */
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -345,7 +580,7 @@ class CustomDataSource {
   }
 
   /** Return String representation of CustomDataSource */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -382,7 +617,7 @@ class CustomDataSourceChildLink {
   }
 
   /** Return String representation of CustomDataSourceChildLink */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -420,7 +655,7 @@ class CustomDataSourceParentLink {
   }
 
   /** Return String representation of CustomDataSourceParentLink */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -512,7 +747,7 @@ class CustomDataSources {
   }
 
   /** Return String representation of CustomDataSources */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -631,7 +866,7 @@ class DailyUpload {
   }
 
   /** Return String representation of DailyUpload */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -669,7 +904,7 @@ class DailyUploadParentLink {
   }
 
   /** Return String representation of DailyUploadParentLink */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -706,7 +941,7 @@ class DailyUploadRecentChanges {
   }
 
   /** Return String representation of DailyUploadRecentChanges */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -788,7 +1023,7 @@ class DailyUploadAppend {
   }
 
   /** Return String representation of DailyUploadAppend */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -880,7 +1115,249 @@ class DailyUploads {
   }
 
   /** Return String representation of DailyUploads */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** JSON template for an Analytics Entity-User Link. Returns permissions that a user has for an entity. */
+class EntityUserLink {
+
+  /** Entity for this link. It can be an account, a web property, or a view (profile). */
+  EntityUserLinkEntity entity;
+
+  /** Entity user link ID */
+  core.String id;
+
+  /** Resource type for entity user link. */
+  core.String kind;
+
+  /** Permissions the user has for this entity. */
+  EntityUserLinkPermissions permissions;
+
+  /** Self link for this resource. */
+  core.String selfLink;
+
+  /** User reference. */
+  UserRef userRef;
+
+  /** Create new EntityUserLink from JSON data */
+  EntityUserLink.fromJson(core.Map json) {
+    if (json.containsKey("entity")) {
+      entity = new EntityUserLinkEntity.fromJson(json["entity"]);
+    }
+    if (json.containsKey("id")) {
+      id = json["id"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("permissions")) {
+      permissions = new EntityUserLinkPermissions.fromJson(json["permissions"]);
+    }
+    if (json.containsKey("selfLink")) {
+      selfLink = json["selfLink"];
+    }
+    if (json.containsKey("userRef")) {
+      userRef = new UserRef.fromJson(json["userRef"]);
+    }
+  }
+
+  /** Create JSON Object for EntityUserLink */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (entity != null) {
+      output["entity"] = entity.toJson();
+    }
+    if (id != null) {
+      output["id"] = id;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (permissions != null) {
+      output["permissions"] = permissions.toJson();
+    }
+    if (selfLink != null) {
+      output["selfLink"] = selfLink;
+    }
+    if (userRef != null) {
+      output["userRef"] = userRef.toJson();
+    }
+
+    return output;
+  }
+
+  /** Return String representation of EntityUserLink */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** Entity for this link. It can be an account, a web property, or a view (profile). */
+class EntityUserLinkEntity {
+
+  /** Account for this link. */
+  AccountRef accountRef;
+
+  /** View (Profile) for this link. */
+  ProfileRef profileRef;
+
+  /** Web property for this link. */
+  WebPropertyRef webPropertyRef;
+
+  /** Create new EntityUserLinkEntity from JSON data */
+  EntityUserLinkEntity.fromJson(core.Map json) {
+    if (json.containsKey("accountRef")) {
+      accountRef = new AccountRef.fromJson(json["accountRef"]);
+    }
+    if (json.containsKey("profileRef")) {
+      profileRef = new ProfileRef.fromJson(json["profileRef"]);
+    }
+    if (json.containsKey("webPropertyRef")) {
+      webPropertyRef = new WebPropertyRef.fromJson(json["webPropertyRef"]);
+    }
+  }
+
+  /** Create JSON Object for EntityUserLinkEntity */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (accountRef != null) {
+      output["accountRef"] = accountRef.toJson();
+    }
+    if (profileRef != null) {
+      output["profileRef"] = profileRef.toJson();
+    }
+    if (webPropertyRef != null) {
+      output["webPropertyRef"] = webPropertyRef.toJson();
+    }
+
+    return output;
+  }
+
+  /** Return String representation of EntityUserLinkEntity */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** Permissions the user has for this entity. */
+class EntityUserLinkPermissions {
+
+  /** Effective permissions represent all the permissions that a user has for this entity. These include any implied permissions (e.g., EDIT implies VIEW) or inherited permissions from the parent entity. Effective permissions are read-only. */
+  core.List<core.String> effective;
+
+  /** Permissions that a user has been assigned at this very level. Does not include any implied or inherited permissions. Local permissions are modifiable. */
+  core.List<core.String> local;
+
+  /** Create new EntityUserLinkPermissions from JSON data */
+  EntityUserLinkPermissions.fromJson(core.Map json) {
+    if (json.containsKey("effective")) {
+      effective = json["effective"].toList();
+    }
+    if (json.containsKey("local")) {
+      local = json["local"].toList();
+    }
+  }
+
+  /** Create JSON Object for EntityUserLinkPermissions */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (effective != null) {
+      output["effective"] = effective.toList();
+    }
+    if (local != null) {
+      output["local"] = local.toList();
+    }
+
+    return output;
+  }
+
+  /** Return String representation of EntityUserLinkPermissions */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** An entity user link collection provides a list of Analytics ACL links Each resource in this collection corresponds to a single link. */
+class EntityUserLinks {
+
+  /** A list of entity user links. */
+  core.List<EntityUserLink> items;
+
+  /** The maximum number of entries the response can contain, regardless of the actual number of entries returned. Its value ranges from 1 to 1000 with a value of 1000 by default, or otherwise specified by the max-results query parameter. */
+  core.int itemsPerPage;
+
+  /** Collection type. */
+  core.String kind;
+
+  /** Next link for this account collection. */
+  core.String nextLink;
+
+  /** Previous link for this account collection. */
+  core.String previousLink;
+
+  /** The starting index of the entries, which is 1 by default or otherwise specified by the start-index query parameter. */
+  core.int startIndex;
+
+  /** The total number of results for the query, regardless of the number of results in the response. */
+  core.int totalResults;
+
+  /** Create new EntityUserLinks from JSON data */
+  EntityUserLinks.fromJson(core.Map json) {
+    if (json.containsKey("items")) {
+      items = json["items"].map((itemsItem) => new EntityUserLink.fromJson(itemsItem)).toList();
+    }
+    if (json.containsKey("itemsPerPage")) {
+      itemsPerPage = json["itemsPerPage"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("nextLink")) {
+      nextLink = json["nextLink"];
+    }
+    if (json.containsKey("previousLink")) {
+      previousLink = json["previousLink"];
+    }
+    if (json.containsKey("startIndex")) {
+      startIndex = json["startIndex"];
+    }
+    if (json.containsKey("totalResults")) {
+      totalResults = json["totalResults"];
+    }
+  }
+
+  /** Create JSON Object for EntityUserLinks */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (items != null) {
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
+    }
+    if (itemsPerPage != null) {
+      output["itemsPerPage"] = itemsPerPage;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (nextLink != null) {
+      output["nextLink"] = nextLink;
+    }
+    if (previousLink != null) {
+      output["previousLink"] = previousLink;
+    }
+    if (startIndex != null) {
+      output["startIndex"] = startIndex;
+    }
+    if (totalResults != null) {
+      output["totalResults"] = totalResults;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of EntityUserLinks */
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -901,6 +1378,9 @@ class Experiment {
 
   /** The ending time of the experiment (the time the status changed from RUNNING to ENDED). This field is present only if the experiment has ended. This field is read-only. */
   core.String endTime;
+
+  /** Boolean specifying whether to distribute traffic evenly across all variations. If the value is False, content experiments follows the default behavior of adjusting traffic dynamically based on variation performance. Optional -- defaults to False. This field may not be changed for an experiment whose status is ENDED. */
+  core.bool equalWeighting;
 
   /** Experiment ID. Required for patch and update. Disallowed for create. */
   core.String id;
@@ -987,6 +1467,9 @@ class Experiment {
     }
     if (json.containsKey("endTime")) {
       endTime = json["endTime"];
+    }
+    if (json.containsKey("equalWeighting")) {
+      equalWeighting = json["equalWeighting"];
     }
     if (json.containsKey("id")) {
       id = json["id"];
@@ -1075,6 +1558,9 @@ class Experiment {
     if (endTime != null) {
       output["endTime"] = endTime;
     }
+    if (equalWeighting != null) {
+      output["equalWeighting"] = equalWeighting;
+    }
     if (id != null) {
       output["id"] = id;
     }
@@ -1146,7 +1632,7 @@ class Experiment {
   }
 
   /** Return String representation of Experiment */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1184,7 +1670,7 @@ class ExperimentParentLink {
   }
 
   /** Return String representation of ExperimentParentLink */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1248,7 +1734,7 @@ class ExperimentVariations {
   }
 
   /** Return String representation of ExperimentVariations */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1340,7 +1826,7 @@ class Experiments {
   }
 
   /** Return String representation of Experiments */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1376,6 +1862,12 @@ class GaData {
 
   /** Analytics data rows, where each row contains a list of dimension values followed by the metric values. The order of dimensions and metrics is same as specified in the request. */
   core.List<core.List<core.String>> rows;
+
+  /** The number of samples used to calculate the result. */
+  core.int sampleSize;
+
+  /** Total size of the sample space from which the samples were selected. */
+  core.int sampleSpace;
 
   /** Link to this page. */
   core.String selfLink;
@@ -1417,6 +1909,12 @@ class GaData {
     }
     if (json.containsKey("rows")) {
       rows = json["rows"].map((rowsItem) => rowsItem.toList()).toList();
+    }
+    if (json.containsKey("sampleSize")) {
+      sampleSize = (json["sampleSize"] is core.String) ? core.int.parse(json["sampleSize"]) : json["sampleSize"];
+    }
+    if (json.containsKey("sampleSpace")) {
+      sampleSpace = (json["sampleSpace"] is core.String) ? core.int.parse(json["sampleSpace"]) : json["sampleSpace"];
     }
     if (json.containsKey("selfLink")) {
       selfLink = json["selfLink"];
@@ -1463,6 +1961,12 @@ class GaData {
     if (rows != null) {
       output["rows"] = rows.map((rowsItem) => rowsItem.toList()).toList();
     }
+    if (sampleSize != null) {
+      output["sampleSize"] = sampleSize;
+    }
+    if (sampleSpace != null) {
+      output["sampleSpace"] = sampleSpace;
+    }
     if (selfLink != null) {
       output["selfLink"] = selfLink;
     }
@@ -1477,7 +1981,7 @@ class GaData {
   }
 
   /** Return String representation of GaData */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1523,7 +2027,7 @@ class GaDataColumnHeaders {
   }
 
   /** Return String representation of GaDataColumnHeaders */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1597,7 +2101,7 @@ class GaDataProfileInfo {
   }
 
   /** Return String representation of GaDataProfileInfo */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1621,6 +2125,9 @@ class GaDataQuery {
 
   /** List of analytics metrics. */
   core.List<core.String> metrics;
+
+  /** Desired sampling level */
+  core.String samplingLevel;
 
   /** Analytics advanced segment. */
   core.String segment;
@@ -1653,6 +2160,9 @@ class GaDataQuery {
     }
     if (json.containsKey("metrics")) {
       metrics = json["metrics"].toList();
+    }
+    if (json.containsKey("samplingLevel")) {
+      samplingLevel = json["samplingLevel"];
     }
     if (json.containsKey("segment")) {
       segment = json["segment"];
@@ -1690,6 +2200,9 @@ class GaDataQuery {
     if (metrics != null) {
       output["metrics"] = metrics.toList();
     }
+    if (samplingLevel != null) {
+      output["samplingLevel"] = samplingLevel;
+    }
     if (segment != null) {
       output["segment"] = segment;
     }
@@ -1707,7 +2220,7 @@ class GaDataQuery {
   }
 
   /** Return String representation of GaDataQuery */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1889,7 +2402,7 @@ class Goal {
   }
 
   /** Return String representation of Goal */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1927,7 +2440,7 @@ class GoalEventDetails {
   }
 
   /** Return String representation of GoalEventDetails */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -1991,7 +2504,7 @@ class GoalEventDetailsEventConditions {
   }
 
   /** Return String representation of GoalEventDetailsEventConditions */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -2029,7 +2542,7 @@ class GoalParentLink {
   }
 
   /** Return String representation of GoalParentLink */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -2094,7 +2607,7 @@ class GoalUrlDestinationDetails {
   }
 
   /** Return String representation of GoalUrlDestinationDetails */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -2140,7 +2653,7 @@ class GoalUrlDestinationDetailsSteps {
   }
 
   /** Return String representation of GoalUrlDestinationDetailsSteps */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -2178,7 +2691,7 @@ class GoalVisitNumPagesDetails {
   }
 
   /** Return String representation of GoalVisitNumPagesDetails */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -2216,7 +2729,7 @@ class GoalVisitTimeOnSiteDetails {
   }
 
   /** Return String representation of GoalVisitTimeOnSiteDetails */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -2308,7 +2821,7 @@ class Goals {
   }
 
   /** Return String representation of Goals */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -2344,6 +2857,12 @@ class McfData {
 
   /** Analytics data rows, where each row contains a list of dimension values followed by the metric values. The order of dimensions and metrics is same as specified in the request. */
   core.List<core.List<McfDataRows>> rows;
+
+  /** The number of samples used to calculate the result. */
+  core.int sampleSize;
+
+  /** Total size of the sample space from which the samples were selected. */
+  core.int sampleSpace;
 
   /** Link to this page. */
   core.String selfLink;
@@ -2385,6 +2904,12 @@ class McfData {
     }
     if (json.containsKey("rows")) {
       rows = json["rows"].map((rowsItem) => rowsItem.map((rowsItem2) => new McfDataRows.fromJson(rowsItem2)).toList()).toList();
+    }
+    if (json.containsKey("sampleSize")) {
+      sampleSize = (json["sampleSize"] is core.String) ? core.int.parse(json["sampleSize"]) : json["sampleSize"];
+    }
+    if (json.containsKey("sampleSpace")) {
+      sampleSpace = (json["sampleSpace"] is core.String) ? core.int.parse(json["sampleSpace"]) : json["sampleSpace"];
     }
     if (json.containsKey("selfLink")) {
       selfLink = json["selfLink"];
@@ -2431,6 +2956,12 @@ class McfData {
     if (rows != null) {
       output["rows"] = rows.map((rowsItem) => rowsItem.map((rowsItem2) => rowsItem2.toJson()).toList()).toList();
     }
+    if (sampleSize != null) {
+      output["sampleSize"] = sampleSize;
+    }
+    if (sampleSpace != null) {
+      output["sampleSpace"] = sampleSpace;
+    }
     if (selfLink != null) {
       output["selfLink"] = selfLink;
     }
@@ -2445,7 +2976,7 @@ class McfData {
   }
 
   /** Return String representation of McfData */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -2491,7 +3022,7 @@ class McfDataColumnHeaders {
   }
 
   /** Return String representation of McfDataColumnHeaders */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -2565,7 +3096,7 @@ class McfDataProfileInfo {
   }
 
   /** Return String representation of McfDataProfileInfo */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -2589,6 +3120,9 @@ class McfDataQuery {
 
   /** List of analytics metrics. */
   core.List<core.String> metrics;
+
+  /** Desired sampling level */
+  core.String samplingLevel;
 
   /** Analytics advanced segment. */
   core.String segment;
@@ -2621,6 +3155,9 @@ class McfDataQuery {
     }
     if (json.containsKey("metrics")) {
       metrics = json["metrics"].toList();
+    }
+    if (json.containsKey("samplingLevel")) {
+      samplingLevel = json["samplingLevel"];
     }
     if (json.containsKey("segment")) {
       segment = json["segment"];
@@ -2658,6 +3195,9 @@ class McfDataQuery {
     if (metrics != null) {
       output["metrics"] = metrics.toList();
     }
+    if (samplingLevel != null) {
+      output["samplingLevel"] = samplingLevel;
+    }
     if (segment != null) {
       output["segment"] = segment;
     }
@@ -2675,7 +3215,7 @@ class McfDataQuery {
   }
 
   /** Return String representation of McfDataQuery */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -2713,7 +3253,7 @@ class McfDataRows {
   }
 
   /** Return String representation of McfDataRows */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -2750,7 +3290,7 @@ class McfDataRowsConversionPathValue {
   }
 
   /** Return String representation of McfDataRowsConversionPathValue */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -2766,7 +3306,8 @@ class Profile {
   /** Time this view (profile) was created. */
   core.String created;
 
-  /** The currency type associated with this view (profile). */
+  /** The currency type associated with this view (profile). The supported values are:
+ARS, AUD, BGN, BRL, CAD, CHF, CNY, CZK, DKK, EUR, GBP, HKD, HUF, IDR, INR, JPY, KRW, LTL, MXN, NOK, NZD, PHP, PLN, RUB, SEK, THB, TRY, TWD, USD, VND, ZAR */
   core.String currency;
 
   /** Default page for this view (profile). */
@@ -2784,7 +3325,7 @@ class Profile {
   /** Internal ID for the web property to which this view (profile) belongs. */
   core.String internalWebPropertyId;
 
-  /** Resource type for Analytics profile. */
+  /** Resource type for Analytics view (profile). */
   core.String kind;
 
   /** Name of this view (profile). */
@@ -2792,6 +3333,9 @@ class Profile {
 
   /** Parent link for this view (profile). Points to the web property to which this view (profile) belongs. */
   ProfileParentLink parentLink;
+
+  /** Permissions the user has for this view (profile). */
+  ProfilePermissions permissions;
 
   /** Link for this view (profile). */
   core.String selfLink;
@@ -2802,7 +3346,7 @@ class Profile {
   /** The site search query parameters for this view (profile). */
   core.String siteSearchQueryParameters;
 
-  /** Time zone for which this profile has been configured. */
+  /** Time zone for which this view (profile) has been configured. Time zones are identified by strings from the TZ database. */
   core.String timezone;
 
   /** View (Profile) type. Supported types: WEB or APP. */
@@ -2854,6 +3398,9 @@ class Profile {
     }
     if (json.containsKey("parentLink")) {
       parentLink = new ProfileParentLink.fromJson(json["parentLink"]);
+    }
+    if (json.containsKey("permissions")) {
+      permissions = new ProfilePermissions.fromJson(json["permissions"]);
     }
     if (json.containsKey("selfLink")) {
       selfLink = json["selfLink"];
@@ -2921,6 +3468,9 @@ class Profile {
     if (parentLink != null) {
       output["parentLink"] = parentLink.toJson();
     }
+    if (permissions != null) {
+      output["permissions"] = permissions.toJson();
+    }
     if (selfLink != null) {
       output["selfLink"] = selfLink;
     }
@@ -2950,7 +3500,7 @@ class Profile {
   }
 
   /** Return String representation of Profile */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -2988,7 +3538,7 @@ class ProfileChildLink {
   }
 
   /** Return String representation of ProfileChildLink */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -3026,7 +3576,119 @@ class ProfileParentLink {
   }
 
   /** Return String representation of ProfileParentLink */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** Permissions the user has for this view (profile). */
+class ProfilePermissions {
+
+  /** All the permissions that the user has for this view (profile). These include any implied permissions (e.g., EDIT implies VIEW) or inherited permissions from the parent web property. */
+  core.List<core.String> effective;
+
+  /** Create new ProfilePermissions from JSON data */
+  ProfilePermissions.fromJson(core.Map json) {
+    if (json.containsKey("effective")) {
+      effective = json["effective"].toList();
+    }
+  }
+
+  /** Create JSON Object for ProfilePermissions */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (effective != null) {
+      output["effective"] = effective.toList();
+    }
+
+    return output;
+  }
+
+  /** Return String representation of ProfilePermissions */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** JSON template for a linked view (profile). */
+class ProfileRef {
+
+  /** Account ID to which this view (profile) belongs. */
+  core.String accountId;
+
+  /** Link for this view (profile). */
+  core.String href;
+
+  /** View (Profile) ID. */
+  core.String id;
+
+  /** Internal ID for the web property to which this view (profile) belongs. */
+  core.String internalWebPropertyId;
+
+  /** Analytics view (profile) reference. */
+  core.String kind;
+
+  /** Name of this view (profile). */
+  core.String name;
+
+  /** Web property ID of the form UA-XXXXX-YY to which this view (profile) belongs. */
+  core.String webPropertyId;
+
+  /** Create new ProfileRef from JSON data */
+  ProfileRef.fromJson(core.Map json) {
+    if (json.containsKey("accountId")) {
+      accountId = json["accountId"];
+    }
+    if (json.containsKey("href")) {
+      href = json["href"];
+    }
+    if (json.containsKey("id")) {
+      id = json["id"];
+    }
+    if (json.containsKey("internalWebPropertyId")) {
+      internalWebPropertyId = json["internalWebPropertyId"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("name")) {
+      name = json["name"];
+    }
+    if (json.containsKey("webPropertyId")) {
+      webPropertyId = json["webPropertyId"];
+    }
+  }
+
+  /** Create JSON Object for ProfileRef */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (accountId != null) {
+      output["accountId"] = accountId;
+    }
+    if (href != null) {
+      output["href"] = href;
+    }
+    if (id != null) {
+      output["id"] = id;
+    }
+    if (internalWebPropertyId != null) {
+      output["internalWebPropertyId"] = internalWebPropertyId;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (name != null) {
+      output["name"] = name;
+    }
+    if (webPropertyId != null) {
+      output["webPropertyId"] = webPropertyId;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of ProfileRef */
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -3118,7 +3780,302 @@ class Profiles {
   }
 
   /** Return String representation of Profiles */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** Real time data for a given view (profile). */
+class RealtimeData {
+
+  /** Column headers that list dimension names followed by the metric names. The order of dimensions and metrics is same as specified in the request. */
+  core.List<RealtimeDataColumnHeaders> columnHeaders;
+
+  /** Unique ID for this data response. */
+  core.String id;
+
+  /** Resource type. */
+  core.String kind;
+
+  /** Information for the view (profile), for which the real time data was requested. */
+  RealtimeDataProfileInfo profileInfo;
+
+  /** Real time data request query parameters. */
+  RealtimeDataQuery query;
+
+  /** Real time data rows, where each row contains a list of dimension values followed by the metric values. The order of dimensions and metrics is same as specified in the request. */
+  core.List<core.List<core.String>> rows;
+
+  /** Link to this page. */
+  core.String selfLink;
+
+  /** The total number of rows for the query, regardless of the number of rows in the response. */
+  core.int totalResults;
+
+  /** Total values for the requested metrics over all the results, not just the results returned in this response. The order of the metric totals is same as the metric order specified in the request. */
+  core.Map<core.String, core.String> totalsForAllResults;
+
+  /** Create new RealtimeData from JSON data */
+  RealtimeData.fromJson(core.Map json) {
+    if (json.containsKey("columnHeaders")) {
+      columnHeaders = json["columnHeaders"].map((columnHeadersItem) => new RealtimeDataColumnHeaders.fromJson(columnHeadersItem)).toList();
+    }
+    if (json.containsKey("id")) {
+      id = json["id"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("profileInfo")) {
+      profileInfo = new RealtimeDataProfileInfo.fromJson(json["profileInfo"]);
+    }
+    if (json.containsKey("query")) {
+      query = new RealtimeDataQuery.fromJson(json["query"]);
+    }
+    if (json.containsKey("rows")) {
+      rows = json["rows"].map((rowsItem) => rowsItem.toList()).toList();
+    }
+    if (json.containsKey("selfLink")) {
+      selfLink = json["selfLink"];
+    }
+    if (json.containsKey("totalResults")) {
+      totalResults = json["totalResults"];
+    }
+    if (json.containsKey("totalsForAllResults")) {
+      totalsForAllResults = _mapMap(json["totalsForAllResults"]);
+    }
+  }
+
+  /** Create JSON Object for RealtimeData */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (columnHeaders != null) {
+      output["columnHeaders"] = columnHeaders.map((columnHeadersItem) => columnHeadersItem.toJson()).toList();
+    }
+    if (id != null) {
+      output["id"] = id;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (profileInfo != null) {
+      output["profileInfo"] = profileInfo.toJson();
+    }
+    if (query != null) {
+      output["query"] = query.toJson();
+    }
+    if (rows != null) {
+      output["rows"] = rows.map((rowsItem) => rowsItem.toList()).toList();
+    }
+    if (selfLink != null) {
+      output["selfLink"] = selfLink;
+    }
+    if (totalResults != null) {
+      output["totalResults"] = totalResults;
+    }
+    if (totalsForAllResults != null) {
+      output["totalsForAllResults"] = _mapMap(totalsForAllResults);
+    }
+
+    return output;
+  }
+
+  /** Return String representation of RealtimeData */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+class RealtimeDataColumnHeaders {
+
+  /** Column Type. Either DIMENSION or METRIC. */
+  core.String columnType;
+
+  /** Data type. Dimension column headers have only STRING as the data type. Metric column headers have data types for metric values such as INTEGER, DOUBLE, CURRENCY etc. */
+  core.String dataType;
+
+  /** Column name. */
+  core.String name;
+
+  /** Create new RealtimeDataColumnHeaders from JSON data */
+  RealtimeDataColumnHeaders.fromJson(core.Map json) {
+    if (json.containsKey("columnType")) {
+      columnType = json["columnType"];
+    }
+    if (json.containsKey("dataType")) {
+      dataType = json["dataType"];
+    }
+    if (json.containsKey("name")) {
+      name = json["name"];
+    }
+  }
+
+  /** Create JSON Object for RealtimeDataColumnHeaders */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (columnType != null) {
+      output["columnType"] = columnType;
+    }
+    if (dataType != null) {
+      output["dataType"] = dataType;
+    }
+    if (name != null) {
+      output["name"] = name;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of RealtimeDataColumnHeaders */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** Information for the view (profile), for which the real time data was requested. */
+class RealtimeDataProfileInfo {
+
+  /** Account ID to which this view (profile) belongs. */
+  core.String accountId;
+
+  /** Internal ID for the web property to which this view (profile) belongs. */
+  core.String internalWebPropertyId;
+
+  /** View (Profile) ID. */
+  core.String profileId;
+
+  /** View (Profile) name. */
+  core.String profileName;
+
+  /** Table ID for view (profile). */
+  core.String tableId;
+
+  /** Web Property ID to which this view (profile) belongs. */
+  core.String webPropertyId;
+
+  /** Create new RealtimeDataProfileInfo from JSON data */
+  RealtimeDataProfileInfo.fromJson(core.Map json) {
+    if (json.containsKey("accountId")) {
+      accountId = json["accountId"];
+    }
+    if (json.containsKey("internalWebPropertyId")) {
+      internalWebPropertyId = json["internalWebPropertyId"];
+    }
+    if (json.containsKey("profileId")) {
+      profileId = json["profileId"];
+    }
+    if (json.containsKey("profileName")) {
+      profileName = json["profileName"];
+    }
+    if (json.containsKey("tableId")) {
+      tableId = json["tableId"];
+    }
+    if (json.containsKey("webPropertyId")) {
+      webPropertyId = json["webPropertyId"];
+    }
+  }
+
+  /** Create JSON Object for RealtimeDataProfileInfo */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (accountId != null) {
+      output["accountId"] = accountId;
+    }
+    if (internalWebPropertyId != null) {
+      output["internalWebPropertyId"] = internalWebPropertyId;
+    }
+    if (profileId != null) {
+      output["profileId"] = profileId;
+    }
+    if (profileName != null) {
+      output["profileName"] = profileName;
+    }
+    if (tableId != null) {
+      output["tableId"] = tableId;
+    }
+    if (webPropertyId != null) {
+      output["webPropertyId"] = webPropertyId;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of RealtimeDataProfileInfo */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** Real time data request query parameters. */
+class RealtimeDataQuery {
+
+  /** List of real time dimensions. */
+  core.String dimensions;
+
+  /** Comma-separated list of dimension or metric filters. */
+  core.String filters;
+
+  /** Unique table ID. */
+  core.String ids;
+
+  /** Maximum results per page. */
+  core.int max_results;
+
+  /** List of real time metrics. */
+  core.List<core.String> metrics;
+
+  /** List of dimensions or metrics based on which real time data is sorted. */
+  core.List<core.String> sort;
+
+  /** Create new RealtimeDataQuery from JSON data */
+  RealtimeDataQuery.fromJson(core.Map json) {
+    if (json.containsKey("dimensions")) {
+      dimensions = json["dimensions"];
+    }
+    if (json.containsKey("filters")) {
+      filters = json["filters"];
+    }
+    if (json.containsKey("ids")) {
+      ids = json["ids"];
+    }
+    if (json.containsKey("max-results")) {
+      max_results = json["max-results"];
+    }
+    if (json.containsKey("metrics")) {
+      metrics = json["metrics"].toList();
+    }
+    if (json.containsKey("sort")) {
+      sort = json["sort"].toList();
+    }
+  }
+
+  /** Create JSON Object for RealtimeDataQuery */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (dimensions != null) {
+      output["dimensions"] = dimensions;
+    }
+    if (filters != null) {
+      output["filters"] = filters;
+    }
+    if (ids != null) {
+      output["ids"] = ids;
+    }
+    if (max_results != null) {
+      output["max-results"] = max_results;
+    }
+    if (metrics != null) {
+      output["metrics"] = metrics.toList();
+    }
+    if (sort != null) {
+      output["sort"] = sort.toList();
+    }
+
+    return output;
+  }
+
+  /** Return String representation of RealtimeDataQuery */
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -3210,7 +4167,7 @@ class Segment {
   }
 
   /** Return String representation of Segment */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -3302,7 +4259,284 @@ class Segments {
   }
 
   /** Return String representation of Segments */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** Metadata returned for an upload operation. */
+class Upload {
+
+  /** Account Id to which this upload belongs. */
+  core.int accountId;
+
+  /** Custom data source Id to which this data import belongs. */
+  core.String customDataSourceId;
+
+  /** Data import errors collection. */
+  core.List<core.String> errors;
+
+  /** A unique ID for this upload. */
+  core.String id;
+
+  /** Resource type for Analytics upload. */
+  core.String kind;
+
+  /** Upload status. Possible values: PENDING, COMPLETED, FAILED, DELETING, DELETED. */
+  core.String status;
+
+  /** Create new Upload from JSON data */
+  Upload.fromJson(core.Map json) {
+    if (json.containsKey("accountId")) {
+      accountId = (json["accountId"] is core.String) ? core.int.parse(json["accountId"]) : json["accountId"];
+    }
+    if (json.containsKey("customDataSourceId")) {
+      customDataSourceId = json["customDataSourceId"];
+    }
+    if (json.containsKey("errors")) {
+      errors = json["errors"].toList();
+    }
+    if (json.containsKey("id")) {
+      id = json["id"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("status")) {
+      status = json["status"];
+    }
+  }
+
+  /** Create JSON Object for Upload */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (accountId != null) {
+      output["accountId"] = accountId;
+    }
+    if (customDataSourceId != null) {
+      output["customDataSourceId"] = customDataSourceId;
+    }
+    if (errors != null) {
+      output["errors"] = errors.toList();
+    }
+    if (id != null) {
+      output["id"] = id;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (status != null) {
+      output["status"] = status;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of Upload */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** Upload collection lists Analytics uploads to which the user has access. Each custom data source can have a set of uploads. Each resource in the upload collection corresponds to a single Analytics data upload. */
+class Uploads {
+
+  /** A list of uploads. */
+  core.List<Upload> items;
+
+  /** The maximum number of resources the response can contain, regardless of the actual number of resources returned. Its value ranges from 1 to 1000 with a value of 1000 by default, or otherwise specified by the max-results query parameter. */
+  core.int itemsPerPage;
+
+  /** Collection type. */
+  core.String kind;
+
+  /** Link to next page for this upload collection. */
+  core.String nextLink;
+
+  /** Link to previous page for this upload collection. */
+  core.String previousLink;
+
+  /** The starting index of the resources, which is 1 by default or otherwise specified by the start-index query parameter. */
+  core.int startIndex;
+
+  /** The total number of results for the query, regardless of the number of resources in the result. */
+  core.int totalResults;
+
+  /** Create new Uploads from JSON data */
+  Uploads.fromJson(core.Map json) {
+    if (json.containsKey("items")) {
+      items = json["items"].map((itemsItem) => new Upload.fromJson(itemsItem)).toList();
+    }
+    if (json.containsKey("itemsPerPage")) {
+      itemsPerPage = json["itemsPerPage"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("nextLink")) {
+      nextLink = json["nextLink"];
+    }
+    if (json.containsKey("previousLink")) {
+      previousLink = json["previousLink"];
+    }
+    if (json.containsKey("startIndex")) {
+      startIndex = json["startIndex"];
+    }
+    if (json.containsKey("totalResults")) {
+      totalResults = json["totalResults"];
+    }
+  }
+
+  /** Create JSON Object for Uploads */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (items != null) {
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
+    }
+    if (itemsPerPage != null) {
+      output["itemsPerPage"] = itemsPerPage;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (nextLink != null) {
+      output["nextLink"] = nextLink;
+    }
+    if (previousLink != null) {
+      output["previousLink"] = previousLink;
+    }
+    if (startIndex != null) {
+      output["startIndex"] = startIndex;
+    }
+    if (totalResults != null) {
+      output["totalResults"] = totalResults;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of Uploads */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** JSON template for a user reference. */
+class UserRef {
+
+  /** Email ID of this user. */
+  core.String email;
+
+  /** User ID. */
+  core.String id;
+
+  core.String kind;
+
+  /** Create new UserRef from JSON data */
+  UserRef.fromJson(core.Map json) {
+    if (json.containsKey("email")) {
+      email = json["email"];
+    }
+    if (json.containsKey("id")) {
+      id = json["id"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+  }
+
+  /** Create JSON Object for UserRef */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (email != null) {
+      output["email"] = email;
+    }
+    if (id != null) {
+      output["id"] = id;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of UserRef */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** JSON template for a web property reference. */
+class WebPropertyRef {
+
+  /** Account ID to which this web property belongs. */
+  core.String accountId;
+
+  /** Link for this web property. */
+  core.String href;
+
+  /** Web property ID of the form UA-XXXXX-YY. */
+  core.String id;
+
+  /** Internal ID for this web property. */
+  core.String internalWebPropertyId;
+
+  /** Analytics web property reference. */
+  core.String kind;
+
+  /** Name of this web property. */
+  core.String name;
+
+  /** Create new WebPropertyRef from JSON data */
+  WebPropertyRef.fromJson(core.Map json) {
+    if (json.containsKey("accountId")) {
+      accountId = json["accountId"];
+    }
+    if (json.containsKey("href")) {
+      href = json["href"];
+    }
+    if (json.containsKey("id")) {
+      id = json["id"];
+    }
+    if (json.containsKey("internalWebPropertyId")) {
+      internalWebPropertyId = json["internalWebPropertyId"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("name")) {
+      name = json["name"];
+    }
+  }
+
+  /** Create JSON Object for WebPropertyRef */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (accountId != null) {
+      output["accountId"] = accountId;
+    }
+    if (href != null) {
+      output["href"] = href;
+    }
+    if (id != null) {
+      output["id"] = id;
+    }
+    if (internalWebPropertyId != null) {
+      output["internalWebPropertyId"] = internalWebPropertyId;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (name != null) {
+      output["name"] = name;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of WebPropertyRef */
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -3394,7 +4628,7 @@ class Webproperties {
   }
 
   /** Return String representation of Webproperties */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -3410,10 +4644,40 @@ class Webproperty {
   /** Time this web property was created. */
   core.String created;
 
+  /** Default view (profile) ID. */
+  core.int defaultProfileId;
+
   /** Web property ID of the form UA-XXXXX-YY. */
   core.String id;
 
-  /** The industry vertical/category selected for this web property. */
+  /** The industry vertical/category selected for this web property. If this field is set, the correct values are:  
+- UNSPECIFIED  
+- ARTS_AND_ENTERTAINMENT  
+- AUTOMOTIVE  
+- BEAUTY_AND_FITNESS  
+- BOOKS_AND_LITERATURE  
+- BUSINESS_AND_INDUSTRIAL_MARKETS  
+- COMPUTERS_AND_ELECTRONICS  
+- FINANCE  
+- FOOD_AND_DRINK  
+- GAMES  
+- HEALTHCARE  
+- HOBBIES_AND_LEISURE  
+- HOME_AND_GARDEN  
+- INTERNET_AND_TELECOM  
+- JOBS_AND_EDUCATION  
+- LAW_AND_GOVERNMENT  
+- NEWS  
+- ONLINE_COMMUNITIES  
+- OTHER  
+- PEOPLE_AND_SOCIETY  
+- PETS_AND_ANIMALS  
+- REAL_ESTATE  
+- REFERENCE  
+- SCIENCE  
+- SHOPPING  
+- SPORTS  
+- TRAVEL */
   core.String industryVertical;
 
   /** Internal ID for this web property. */
@@ -3430,6 +4694,9 @@ class Webproperty {
 
   /** Parent link for this web property. Points to the account to which this web property belongs. */
   WebpropertyParentLink parentLink;
+
+  /** Permissions the user has for this web property. */
+  WebpropertyPermissions permissions;
 
   /** View (Profile) count for this web property. */
   core.int profileCount;
@@ -3454,6 +4721,9 @@ class Webproperty {
     if (json.containsKey("created")) {
       created = json["created"];
     }
+    if (json.containsKey("defaultProfileId")) {
+      defaultProfileId = (json["defaultProfileId"] is core.String) ? core.int.parse(json["defaultProfileId"]) : json["defaultProfileId"];
+    }
     if (json.containsKey("id")) {
       id = json["id"];
     }
@@ -3474,6 +4744,9 @@ class Webproperty {
     }
     if (json.containsKey("parentLink")) {
       parentLink = new WebpropertyParentLink.fromJson(json["parentLink"]);
+    }
+    if (json.containsKey("permissions")) {
+      permissions = new WebpropertyPermissions.fromJson(json["permissions"]);
     }
     if (json.containsKey("profileCount")) {
       profileCount = json["profileCount"];
@@ -3502,6 +4775,9 @@ class Webproperty {
     if (created != null) {
       output["created"] = created;
     }
+    if (defaultProfileId != null) {
+      output["defaultProfileId"] = defaultProfileId;
+    }
     if (id != null) {
       output["id"] = id;
     }
@@ -3523,6 +4799,9 @@ class Webproperty {
     if (parentLink != null) {
       output["parentLink"] = parentLink.toJson();
     }
+    if (permissions != null) {
+      output["permissions"] = permissions.toJson();
+    }
     if (profileCount != null) {
       output["profileCount"] = profileCount;
     }
@@ -3540,7 +4819,7 @@ class Webproperty {
   }
 
   /** Return String representation of Webproperty */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -3578,7 +4857,7 @@ class WebpropertyChildLink {
   }
 
   /** Return String representation of WebpropertyChildLink */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 
@@ -3616,7 +4895,36 @@ class WebpropertyParentLink {
   }
 
   /** Return String representation of WebpropertyParentLink */
-  core.String toString() => JSON.stringify(this.toJson());
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** Permissions the user has for this web property. */
+class WebpropertyPermissions {
+
+  /** All the permissions that the user has for this web property. These include any implied permissions (e.g., EDIT implies VIEW) or inherited permissions from the parent account. */
+  core.List<core.String> effective;
+
+  /** Create new WebpropertyPermissions from JSON data */
+  WebpropertyPermissions.fromJson(core.Map json) {
+    if (json.containsKey("effective")) {
+      effective = json["effective"].toList();
+    }
+  }
+
+  /** Create JSON Object for WebpropertyPermissions */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (effective != null) {
+      output["effective"] = effective.toList();
+    }
+
+    return output;
+  }
+
+  /** Return String representation of WebpropertyPermissions */
+  core.String toString() => JSON.encode(this.toJson());
 
 }
 

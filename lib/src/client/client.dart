@@ -10,6 +10,7 @@ abstract class Client extends ClientBase {
 
   DataResource_ get data => new DataResource_(this);
   ManagementResource_ get management => new ManagementResource_(this);
+  MetadataResource_ get metadata => new MetadataResource_(this);
 
   //
   // Parameters
