@@ -11,7 +11,7 @@ class Analytics extends Client with BrowserClient {
   /** OAuth Scope2: View and manage your Google Analytics data */
   static const String ANALYTICS_SCOPE = "https://www.googleapis.com/auth/analytics";
 
-  /** OAuth Scope2: New service: https://www.googleapis.com/auth/analytics.edit */
+  /** OAuth Scope2: Edit Google Analytics management entities */
   static const String ANALYTICS_EDIT_SCOPE = "https://www.googleapis.com/auth/analytics.edit";
 
   /** OAuth Scope2: Manage Google Analytics Account users by email address */

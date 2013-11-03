@@ -1868,7 +1868,7 @@ class ManagementUploadsResource_ {
   }
 
   /**
-   * Upload/Overwrite data for a custom data source.
+   * Upload data for a custom data source.
    *
    * [accountId] - Account Id associated with the upload.
    *
@@ -1963,7 +1963,7 @@ class ManagementWebpropertiesResource_ {
   }
 
   /**
-   * Create a new property if the account has fewer than 20 properties.
+   * Create a new property if the account has fewer than 20 properties. Web properties are visible in the Google Analytics interface only if they have at least one profile.
    *
    * [request] - Webproperty to send in this request
    *
