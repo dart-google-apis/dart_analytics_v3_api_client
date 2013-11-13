@@ -1839,6 +1839,8 @@ class GaData {
   /** Determines if Analytics data contains samples. */
   core.bool containsSampledData;
 
+  GaDataDataTable dataTable;
+
   /** Unique ID for this data response. */
   core.String id;
 
@@ -1885,6 +1887,9 @@ class GaData {
     }
     if (json.containsKey("containsSampledData")) {
       containsSampledData = json["containsSampledData"];
+    }
+    if (json.containsKey("dataTable")) {
+      dataTable = new GaDataDataTable.fromJson(json["dataTable"]);
     }
     if (json.containsKey("id")) {
       id = json["id"];
@@ -1936,6 +1941,9 @@ class GaData {
     }
     if (containsSampledData != null) {
       output["containsSampledData"] = containsSampledData;
+    }
+    if (dataTable != null) {
+      output["dataTable"] = dataTable.toJson();
     }
     if (id != null) {
       output["id"] = id;
@@ -2027,6 +2035,138 @@ class GaDataColumnHeaders {
   }
 
   /** Return String representation of GaDataColumnHeaders */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+class GaDataDataTable {
+
+  core.List<GaDataDataTableCols> cols;
+
+  core.List<GaDataDataTableRows> rows;
+
+  /** Create new GaDataDataTable from JSON data */
+  GaDataDataTable.fromJson(core.Map json) {
+    if (json.containsKey("cols")) {
+      cols = json["cols"].map((colsItem) => new GaDataDataTableCols.fromJson(colsItem)).toList();
+    }
+    if (json.containsKey("rows")) {
+      rows = json["rows"].map((rowsItem) => new GaDataDataTableRows.fromJson(rowsItem)).toList();
+    }
+  }
+
+  /** Create JSON Object for GaDataDataTable */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (cols != null) {
+      output["cols"] = cols.map((colsItem) => colsItem.toJson()).toList();
+    }
+    if (rows != null) {
+      output["rows"] = rows.map((rowsItem) => rowsItem.toJson()).toList();
+    }
+
+    return output;
+  }
+
+  /** Return String representation of GaDataDataTable */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+class GaDataDataTableCols {
+
+  core.String id;
+
+  core.String label;
+
+  core.String type;
+
+  /** Create new GaDataDataTableCols from JSON data */
+  GaDataDataTableCols.fromJson(core.Map json) {
+    if (json.containsKey("id")) {
+      id = json["id"];
+    }
+    if (json.containsKey("label")) {
+      label = json["label"];
+    }
+    if (json.containsKey("type")) {
+      type = json["type"];
+    }
+  }
+
+  /** Create JSON Object for GaDataDataTableCols */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (id != null) {
+      output["id"] = id;
+    }
+    if (label != null) {
+      output["label"] = label;
+    }
+    if (type != null) {
+      output["type"] = type;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of GaDataDataTableCols */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+class GaDataDataTableRows {
+
+  core.List<GaDataDataTableRowsC> c;
+
+  /** Create new GaDataDataTableRows from JSON data */
+  GaDataDataTableRows.fromJson(core.Map json) {
+    if (json.containsKey("c")) {
+      c = json["c"].map((cItem) => new GaDataDataTableRowsC.fromJson(cItem)).toList();
+    }
+  }
+
+  /** Create JSON Object for GaDataDataTableRows */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (c != null) {
+      output["c"] = c.map((cItem) => cItem.toJson()).toList();
+    }
+
+    return output;
+  }
+
+  /** Return String representation of GaDataDataTableRows */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+class GaDataDataTableRowsC {
+
+  core.String v;
+
+  /** Create new GaDataDataTableRowsC from JSON data */
+  GaDataDataTableRowsC.fromJson(core.Map json) {
+    if (json.containsKey("v")) {
+      v = json["v"];
+    }
+  }
+
+  /** Create JSON Object for GaDataDataTableRowsC */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (v != null) {
+      output["v"] = v;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of GaDataDataTableRowsC */
   core.String toString() => JSON.encode(this.toJson());
 
 }
@@ -4650,34 +4790,7 @@ class Webproperty {
   /** Web property ID of the form UA-XXXXX-YY. */
   core.String id;
 
-  /** The industry vertical/category selected for this web property. If this field is set, the correct values are:  
-- UNSPECIFIED  
-- ARTS_AND_ENTERTAINMENT  
-- AUTOMOTIVE  
-- BEAUTY_AND_FITNESS  
-- BOOKS_AND_LITERATURE  
-- BUSINESS_AND_INDUSTRIAL_MARKETS  
-- COMPUTERS_AND_ELECTRONICS  
-- FINANCE  
-- FOOD_AND_DRINK  
-- GAMES  
-- HEALTHCARE  
-- HOBBIES_AND_LEISURE  
-- HOME_AND_GARDEN  
-- INTERNET_AND_TELECOM  
-- JOBS_AND_EDUCATION  
-- LAW_AND_GOVERNMENT  
-- NEWS  
-- ONLINE_COMMUNITIES  
-- OTHER  
-- PEOPLE_AND_SOCIETY  
-- PETS_AND_ANIMALS  
-- REAL_ESTATE  
-- REFERENCE  
-- SCIENCE  
-- SHOPPING  
-- SPORTS  
-- TRAVEL */
+  /** The industry vertical/category selected for this web property. */
   core.String industryVertical;
 
   /** Internal ID for this web property. */

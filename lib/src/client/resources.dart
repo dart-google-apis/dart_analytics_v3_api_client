@@ -39,6 +39,11 @@ class DataGaResource_ {
    *
    * [max_results] - The maximum number of entries to include in this feed.
    *
+   * [output] - The selected format for the response. Default format is JSON.
+   *   Allowed values:
+   *     dataTable - Returns the response in Google Charts Data Table format. This is useful in creating visualization using Google Charts.
+   *     json - Returns the response in standard JSON format.
+   *
    * [samplingLevel] - The desired sampling level.
    *   Allowed values:
    *     DEFAULT - Returns response with a sample size that balances speed and accuracy.
@@ -54,7 +59,7 @@ class DataGaResource_ {
    *
    * [optParams] - Additional query parameters
    */
-  async.Future<GaData> get(core.String ids, core.String start_date, core.String end_date, core.String metrics, {core.String dimensions, core.String filters, core.int max_results, core.String samplingLevel, core.String segment, core.String sort, core.int start_index, core.Map optParams}) {
+  async.Future<GaData> get(core.String ids, core.String start_date, core.String end_date, core.String metrics, {core.String dimensions, core.String filters, core.int max_results, core.String output, core.String samplingLevel, core.String segment, core.String sort, core.int start_index, core.Map optParams}) {
     var url = "data/ga";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -69,6 +74,10 @@ class DataGaResource_ {
     if (max_results != null) queryParams["max-results"] = max_results;
     if (metrics == null) paramErrors.add("metrics is required");
     if (metrics != null) queryParams["metrics"] = metrics;
+    if (output != null && !["dataTable", "json"].contains(output)) {
+      paramErrors.add("Allowed values for output: dataTable, json");
+    }
+    if (output != null) queryParams["output"] = output;
     if (samplingLevel != null && !["DEFAULT", "FASTER", "HIGHER_PRECISION"].contains(samplingLevel)) {
       paramErrors.add("Allowed values for samplingLevel: DEFAULT, FASTER, HIGHER_PRECISION");
     }
