@@ -197,9 +197,9 @@ class DataRealtimeResource_ {
    *
    * [ids] - Unique table ID for retrieving real time data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.
    *
-   * [metrics] - A comma-separated list of real time metrics. E.g., 'ga:activeVisitors'. At least one metric must be specified.
+   * [metrics] - A comma-separated list of real time metrics. E.g., 'rt:activeVisitors'. At least one metric must be specified.
    *
-   * [dimensions] - A comma-separated list of real time dimensions. E.g., 'ga:medium,ga:city'.
+   * [dimensions] - A comma-separated list of real time dimensions. E.g., 'rt:medium,rt:city'.
    *
    * [filters] - A comma-separated list of dimension or metric filters to be applied to real time data.
    *

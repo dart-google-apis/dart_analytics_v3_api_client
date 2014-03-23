@@ -1374,7 +1374,7 @@ class Experiment {
   core.String description;
 
   /** If true, the end user will be able to edit the experiment via the Google Analytics user interface. */
-  core.Object editableInGaUi;
+  core.bool editableInGaUi;
 
   /** The ending time of the experiment (the time the status changed from RUNNING to ENDED). This field is present only if the experiment has ended. This field is read-only. */
   core.String endTime;
@@ -1422,7 +1422,7 @@ class Experiment {
 - REDIRECT: Google Analytics redirects traffic to different variation pages, reports the chosen variation and evaluates the results.
 - API: Google Analytics chooses and reports the variation to serve and evaluates the results; the caller is responsible for serving the selected variation.
 - EXTERNAL: The variations will be served externally and the chosen variation reported to Google Analytics. The caller is responsible for serving the selected variation and evaluating the results. */
-  core.Object servingFramework;
+  core.String servingFramework;
 
   /** The snippet of code to include on the control page(s). This field is read-only. */
   core.String snippet;
@@ -3486,6 +3486,12 @@ ARS, AUD, BGN, BRL, CAD, CHF, CNY, CZK, DKK, EUR, GBP, HKD, HUF, IDR, INR, JPY, 
   /** The site search query parameters for this view (profile). */
   core.String siteSearchQueryParameters;
 
+  /** Whether or not Analytics will strip search category parameters from the URLs in your reports. */
+  core.bool stripSiteSearchCategoryParameters;
+
+  /** Whether or not Analytics will strip search query parameters from the URLs in your reports. */
+  core.bool stripSiteSearchQueryParameters;
+
   /** Time zone for which this view (profile) has been configured. Time zones are identified by strings from the TZ database. */
   core.String timezone;
 
@@ -3550,6 +3556,12 @@ ARS, AUD, BGN, BRL, CAD, CHF, CNY, CZK, DKK, EUR, GBP, HKD, HUF, IDR, INR, JPY, 
     }
     if (json.containsKey("siteSearchQueryParameters")) {
       siteSearchQueryParameters = json["siteSearchQueryParameters"];
+    }
+    if (json.containsKey("stripSiteSearchCategoryParameters")) {
+      stripSiteSearchCategoryParameters = json["stripSiteSearchCategoryParameters"];
+    }
+    if (json.containsKey("stripSiteSearchQueryParameters")) {
+      stripSiteSearchQueryParameters = json["stripSiteSearchQueryParameters"];
     }
     if (json.containsKey("timezone")) {
       timezone = json["timezone"];
@@ -3619,6 +3631,12 @@ ARS, AUD, BGN, BRL, CAD, CHF, CNY, CZK, DKK, EUR, GBP, HKD, HUF, IDR, INR, JPY, 
     }
     if (siteSearchQueryParameters != null) {
       output["siteSearchQueryParameters"] = siteSearchQueryParameters;
+    }
+    if (stripSiteSearchCategoryParameters != null) {
+      output["stripSiteSearchCategoryParameters"] = stripSiteSearchCategoryParameters;
+    }
+    if (stripSiteSearchQueryParameters != null) {
+      output["stripSiteSearchQueryParameters"] = stripSiteSearchQueryParameters;
     }
     if (timezone != null) {
       output["timezone"] = timezone;
