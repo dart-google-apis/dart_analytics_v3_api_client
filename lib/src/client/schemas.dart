@@ -215,6 +215,154 @@ class AccountRef {
 
 }
 
+/** An AccountSummary collection lists a summary of accounts, properties and views (profiles) to which the user has access. Each resource in the collection corresponds to a single AccountSummary. */
+class AccountSummaries {
+
+  /** A list of AccountSummaries. */
+  core.List<AccountSummary> items;
+
+  /** The maximum number of resources the response can contain, regardless of the actual number of resources returned. Its value ranges from 1 to 1000 with a value of 1000 by default, or otherwise specified by the max-results query parameter. */
+  core.int itemsPerPage;
+
+  /** Collection type. */
+  core.String kind;
+
+  /** Link to next page for this AccountSummary collection. */
+  core.String nextLink;
+
+  /** Link to previous page for this AccountSummary collection. */
+  core.String previousLink;
+
+  /** The starting index of the resources, which is 1 by default or otherwise specified by the start-index query parameter. */
+  core.int startIndex;
+
+  /** The total number of results for the query, regardless of the number of results in the response. */
+  core.int totalResults;
+
+  /** Email ID of the authenticated user */
+  core.String username;
+
+  /** Create new AccountSummaries from JSON data */
+  AccountSummaries.fromJson(core.Map json) {
+    if (json.containsKey("items")) {
+      items = json["items"].map((itemsItem) => new AccountSummary.fromJson(itemsItem)).toList();
+    }
+    if (json.containsKey("itemsPerPage")) {
+      itemsPerPage = json["itemsPerPage"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("nextLink")) {
+      nextLink = json["nextLink"];
+    }
+    if (json.containsKey("previousLink")) {
+      previousLink = json["previousLink"];
+    }
+    if (json.containsKey("startIndex")) {
+      startIndex = json["startIndex"];
+    }
+    if (json.containsKey("totalResults")) {
+      totalResults = json["totalResults"];
+    }
+    if (json.containsKey("username")) {
+      username = json["username"];
+    }
+  }
+
+  /** Create JSON Object for AccountSummaries */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (items != null) {
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
+    }
+    if (itemsPerPage != null) {
+      output["itemsPerPage"] = itemsPerPage;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (nextLink != null) {
+      output["nextLink"] = nextLink;
+    }
+    if (previousLink != null) {
+      output["previousLink"] = previousLink;
+    }
+    if (startIndex != null) {
+      output["startIndex"] = startIndex;
+    }
+    if (totalResults != null) {
+      output["totalResults"] = totalResults;
+    }
+    if (username != null) {
+      output["username"] = username;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of AccountSummaries */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** JSON template for an Analytics AccountSummary. An AccountSummary is a lightweight tree comprised of properties/profiles. */
+class AccountSummary {
+
+  /** Account ID. */
+  core.String id;
+
+  /** Resource type for Analytics AccountSummary. */
+  core.String kind;
+
+  /** Account name. */
+  core.String name;
+
+  /** List of web properties under this account. */
+  core.List<WebPropertySummary> webProperties;
+
+  /** Create new AccountSummary from JSON data */
+  AccountSummary.fromJson(core.Map json) {
+    if (json.containsKey("id")) {
+      id = json["id"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("name")) {
+      name = json["name"];
+    }
+    if (json.containsKey("webProperties")) {
+      webProperties = json["webProperties"].map((webPropertiesItem) => new WebPropertySummary.fromJson(webPropertiesItem)).toList();
+    }
+  }
+
+  /** Create JSON Object for AccountSummary */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (id != null) {
+      output["id"] = id;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (name != null) {
+      output["name"] = name;
+    }
+    if (webProperties != null) {
+      output["webProperties"] = webProperties.map((webPropertiesItem) => webPropertiesItem.toJson()).toList();
+    }
+
+    return output;
+  }
+
+  /** Return String representation of AccountSummary */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
 /** An account collection provides a list of Analytics accounts to which a user has access. The account collection is the entry point to all management information. Each resource in the collection corresponds to a single Analytics account. */
 class Accounts {
 
@@ -1397,7 +1545,7 @@ class Experiment {
   /** Experiment name. This field may not be changed for an experiment whose status is ENDED. This field is required when creating an experiment. */
   core.String name;
 
-  /** The metric that the experiment is optimizing. Valid values: "ga:goal(n)Completions", "ga:bounces", "ga:pageviews", "ga:timeOnSite", "ga:transactions", "ga:transactionRevenue". This field is required if status is "RUNNING" and servingFramework is one of "REDIRECT" or "API". */
+  /** The metric that the experiment is optimizing. Valid values: "ga:goal(n)Completions", "ga:adsenseAdsClicks", "ga:adsenseAdsViewed", "ga:adsenseRevenue", "ga:bounces", "ga:pageviews", "ga:sessionDuration", "ga:transactions", "ga:transactionRevenue". This field is required if status is "RUNNING" and servingFramework is one of "REDIRECT" or "API". */
   core.String objectiveMetric;
 
   /** Whether the objectiveMetric should be minimized or maximized. Possible values: "MAXIMUM", "MINIMUM". Optional--defaults to "MAXIMUM". Cannot be specified without objectiveMetric. Cannot be modified when status is "RUNNING" or "ENDED". */
@@ -3850,6 +3998,62 @@ class ProfileRef {
 
 }
 
+/** JSON template for an Analytics ProfileSummary. ProfileSummary returns basic information (i.e., summary) for a profile. */
+class ProfileSummary {
+
+  /** View (profile) ID. */
+  core.String id;
+
+  /** Resource type for Analytics ProfileSummary. */
+  core.String kind;
+
+  /** View (profile) name. */
+  core.String name;
+
+  /** View (Profile) type. Supported types: WEB or APP. */
+  core.String type;
+
+  /** Create new ProfileSummary from JSON data */
+  ProfileSummary.fromJson(core.Map json) {
+    if (json.containsKey("id")) {
+      id = json["id"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("name")) {
+      name = json["name"];
+    }
+    if (json.containsKey("type")) {
+      type = json["type"];
+    }
+  }
+
+  /** Create JSON Object for ProfileSummary */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (id != null) {
+      output["id"] = id;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (name != null) {
+      output["name"] = name;
+    }
+    if (type != null) {
+      output["type"] = type;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of ProfileSummary */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
 /** A view (profile) collection lists Analytics views (profiles) to which the user has access. Each resource in the collection corresponds to a single Analytics view (profile). */
 class Profiles {
 
@@ -4237,31 +4441,34 @@ class RealtimeDataQuery {
 
 }
 
-/** JSON template for an Analytics advanced segment. */
+/** JSON template for an Analytics segment. */
 class Segment {
 
-  /** Time the advanced segment was created. */
+  /** Time the segment was created. */
   core.String created;
 
-  /** Advanced segment definition. */
+  /** Segment definition. */
   core.String definition;
 
-  /** Advanced segment ID. */
+  /** Segment ID. */
   core.String id;
 
-  /** Resource type for Analytics advanced segment. */
+  /** Resource type for Analytics segment. */
   core.String kind;
 
-  /** Advanced segment name. */
+  /** Segment name. */
   core.String name;
 
-  /** Segment ID. Can be used with the 'segment' parameter in Data Feed. */
+  /** Segment ID. Can be used with the 'segment' parameter in Core Reporting API. */
   core.String segmentId;
 
-  /** Link for this advanced segment. */
+  /** Link for this segment. */
   core.String selfLink;
 
-  /** Time the advanced segment was last modified. */
+  /** Type for a segment. Possible values are "BUILT_IN" or "CUSTOM". */
+  core.String type;
+
+  /** Time the segment was last modified. */
   core.String updated;
 
   /** Create new Segment from JSON data */
@@ -4286,6 +4493,9 @@ class Segment {
     }
     if (json.containsKey("selfLink")) {
       selfLink = json["selfLink"];
+    }
+    if (json.containsKey("type")) {
+      type = json["type"];
     }
     if (json.containsKey("updated")) {
       updated = json["updated"];
@@ -4317,6 +4527,9 @@ class Segment {
     if (selfLink != null) {
       output["selfLink"] = selfLink;
     }
+    if (type != null) {
+      output["type"] = type;
+    }
     if (updated != null) {
       output["updated"] = updated;
     }
@@ -4329,22 +4542,22 @@ class Segment {
 
 }
 
-/** An advanced segment collection lists Analytics advanced segments that the user has access to. Each resource in the collection corresponds to a single Analytics advanced segment. */
+/** An segment collection lists Analytics segments that the user has access to. Each resource in the collection corresponds to a single Analytics segment. */
 class Segments {
 
-  /** A list of advanced segments. */
+  /** A list of segments. */
   core.List<Segment> items;
 
   /** The maximum number of resources the response can contain, regardless of the actual number of resources returned. Its value ranges from 1 to 1000 with a value of 1000 by default, or otherwise specified by the max-results query parameter. */
   core.int itemsPerPage;
 
-  /** Collection type for advanced segments. */
+  /** Collection type for segments. */
   core.String kind;
 
-  /** Link to next page for this advanced segment collection. */
+  /** Link to next page for this segment collection. */
   core.String nextLink;
 
-  /** Link to previous page for this advanced segment collection. */
+  /** Link to previous page for this segment collection. */
   core.String previousLink;
 
   /** The starting index of the resources, which is 1 by default or otherwise specified by the start-index query parameter. */
@@ -4694,6 +4907,89 @@ class WebPropertyRef {
   }
 
   /** Return String representation of WebPropertyRef */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** JSON template for an Analytics WebPropertySummary. WebPropertySummary returns basic information (i.e., summary) for a web property. */
+class WebPropertySummary {
+
+  /** Web property ID of the form UA-XXXXX-YY. */
+  core.String id;
+
+  /** Internal ID for this web property. */
+  core.String internalWebPropertyId;
+
+  /** Resource type for Analytics WebPropertySummary. */
+  core.String kind;
+
+  /** Level for this web property. Possible values are STANDARD or PREMIUM. */
+  core.String level;
+
+  /** Web property name. */
+  core.String name;
+
+  /** List of profiles under this web property. */
+  core.List<ProfileSummary> profiles;
+
+  /** Website url for this web property. */
+  core.String websiteUrl;
+
+  /** Create new WebPropertySummary from JSON data */
+  WebPropertySummary.fromJson(core.Map json) {
+    if (json.containsKey("id")) {
+      id = json["id"];
+    }
+    if (json.containsKey("internalWebPropertyId")) {
+      internalWebPropertyId = json["internalWebPropertyId"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("level")) {
+      level = json["level"];
+    }
+    if (json.containsKey("name")) {
+      name = json["name"];
+    }
+    if (json.containsKey("profiles")) {
+      profiles = json["profiles"].map((profilesItem) => new ProfileSummary.fromJson(profilesItem)).toList();
+    }
+    if (json.containsKey("websiteUrl")) {
+      websiteUrl = json["websiteUrl"];
+    }
+  }
+
+  /** Create JSON Object for WebPropertySummary */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (id != null) {
+      output["id"] = id;
+    }
+    if (internalWebPropertyId != null) {
+      output["internalWebPropertyId"] = internalWebPropertyId;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (level != null) {
+      output["level"] = level;
+    }
+    if (name != null) {
+      output["name"] = name;
+    }
+    if (profiles != null) {
+      output["profiles"] = profiles.map((profilesItem) => profilesItem.toJson()).toList();
+    }
+    if (websiteUrl != null) {
+      output["websiteUrl"] = websiteUrl;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of WebPropertySummary */
   core.String toString() => JSON.encode(this.toJson());
 
 }

@@ -31,7 +31,7 @@ class DataGaResource_ {
    *
    * [end_date] - End date for fetching Analytics data. Request can should specify an end date formatted as YYYY-MM-DD, or as a relative date (e.g., today, yesterday, or 7daysAgo). The default value is yesterday.
    *
-   * [metrics] - A comma-separated list of Analytics metrics. E.g., 'ga:visits,ga:pageviews'. At least one metric must be specified.
+   * [metrics] - A comma-separated list of Analytics metrics. E.g., 'ga:sessions,ga:pageviews'. At least one metric must be specified.
    *
    * [dimensions] - A comma-separated list of Analytics dimensions. E.g., 'ga:browser,ga:city'.
    *
@@ -50,7 +50,7 @@ class DataGaResource_ {
    *     FASTER - Returns a fast response with a smaller sample size.
    *     HIGHER_PRECISION - Returns a more accurate response using a large sample size, but this may result in the response being slower.
    *
-   * [segment] - An Analytics advanced segment to be applied to data.
+   * [segment] - An Analytics segment to be applied to data.
    *
    * [sort] - A comma-separated list of dimensions or metrics that determine the sort order for Analytics data.
    *
@@ -197,7 +197,7 @@ class DataRealtimeResource_ {
    *
    * [ids] - Unique table ID for retrieving real time data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.
    *
-   * [metrics] - A comma-separated list of real time metrics. E.g., 'rt:activeVisitors'. At least one metric must be specified.
+   * [metrics] - A comma-separated list of real time metrics. E.g., 'rt:activeUsers'. At least one metric must be specified.
    *
    * [dimensions] - A comma-separated list of real time dimensions. E.g., 'rt:medium,rt:city'.
    *
@@ -246,6 +246,7 @@ class ManagementResource_ {
 
   final Client _client;
 
+  final ManagementAccountSummariesResource_ accountSummaries;
   final ManagementAccountUserLinksResource_ accountUserLinks;
   final ManagementAccountsResource_ accounts;
   final ManagementCustomDataSourcesResource_ customDataSources;
@@ -261,6 +262,7 @@ class ManagementResource_ {
 
   ManagementResource_(Client client) :
       _client = client,
+      accountSummaries = new ManagementAccountSummariesResource_(client),
       accountUserLinks = new ManagementAccountUserLinksResource_(client),
       accounts = new ManagementAccountsResource_(client),
       customDataSources = new ManagementCustomDataSourcesResource_(client),
@@ -273,6 +275,50 @@ class ManagementResource_ {
       uploads = new ManagementUploadsResource_(client),
       webproperties = new ManagementWebpropertiesResource_(client),
       webpropertyUserLinks = new ManagementWebpropertyUserLinksResource_(client);
+}
+
+class ManagementAccountSummariesResource_ {
+
+  final Client _client;
+
+  ManagementAccountSummariesResource_(Client client) :
+      _client = client;
+
+  /**
+   * Lists account summaries (lightweight tree comprised of accounts/properties/profiles) to which the user has access.
+   *
+   * [max_results] - The maximum number of filters to include in this response.
+   *
+   * [start_index] - An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+   *   Minimum: 1
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<AccountSummaries> list({core.int max_results, core.int start_index, core.Map optParams}) {
+    var url = "management/accountSummaries";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (max_results != null) queryParams["max-results"] = max_results;
+    if (start_index != null) queryParams["start-index"] = start_index;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new AccountSummaries.fromJson(data));
+  }
 }
 
 class ManagementAccountUserLinksResource_ {
@@ -1697,11 +1743,11 @@ class ManagementSegmentsResource_ {
       _client = client;
 
   /**
-   * Lists advanced segments to which the user has access.
+   * Lists segments to which the user has access.
    *
-   * [max_results] - The maximum number of advanced segments to include in this response.
+   * [max_results] - The maximum number of segments to include in this response.
    *
-   * [start_index] - An index of the first advanced segment to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+   * [start_index] - An index of the first segment to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
    *   Minimum: 1
    *
    * [optParams] - Additional query parameters
