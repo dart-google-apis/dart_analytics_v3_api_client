@@ -252,11 +252,15 @@ class ManagementResource_ {
   final ManagementCustomDataSourcesResource_ customDataSources;
   final ManagementDailyUploadsResource_ dailyUploads;
   final ManagementExperimentsResource_ experiments;
+  final ManagementFiltersResource_ filters;
   final ManagementGoalsResource_ goals;
+  final ManagementProfileFilterLinksResource_ profileFilterLinks;
   final ManagementProfileUserLinksResource_ profileUserLinks;
   final ManagementProfilesResource_ profiles;
   final ManagementSegmentsResource_ segments;
+  final ManagementUnsampledReportsResource_ unsampledReports;
   final ManagementUploadsResource_ uploads;
+  final ManagementWebPropertyAdWordsLinksResource_ webPropertyAdWordsLinks;
   final ManagementWebpropertiesResource_ webproperties;
   final ManagementWebpropertyUserLinksResource_ webpropertyUserLinks;
 
@@ -268,11 +272,15 @@ class ManagementResource_ {
       customDataSources = new ManagementCustomDataSourcesResource_(client),
       dailyUploads = new ManagementDailyUploadsResource_(client),
       experiments = new ManagementExperimentsResource_(client),
+      filters = new ManagementFiltersResource_(client),
       goals = new ManagementGoalsResource_(client),
+      profileFilterLinks = new ManagementProfileFilterLinksResource_(client),
       profileUserLinks = new ManagementProfileUserLinksResource_(client),
       profiles = new ManagementProfilesResource_(client),
       segments = new ManagementSegmentsResource_(client),
+      unsampledReports = new ManagementUnsampledReportsResource_(client),
       uploads = new ManagementUploadsResource_(client),
+      webPropertyAdWordsLinks = new ManagementWebPropertyAdWordsLinksResource_(client),
       webproperties = new ManagementWebpropertiesResource_(client),
       webpropertyUserLinks = new ManagementWebpropertyUserLinksResource_(client);
 }
@@ -1049,6 +1057,241 @@ class ManagementExperimentsResource_ {
   }
 }
 
+class ManagementFiltersResource_ {
+
+  final Client _client;
+
+  ManagementFiltersResource_(Client client) :
+      _client = client;
+
+  /**
+   * Delete a filter.
+   *
+   * [accountId] - Account ID to delete the filter for.
+   *
+   * [filterId] - ID of the filter to be deleted.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<Filter> delete(core.String accountId, core.String filterId, {core.Map optParams}) {
+    var url = "management/accounts/{accountId}/filters/{filterId}";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (filterId == null) paramErrors.add("filterId is required");
+    if (filterId != null) urlParams["filterId"] = filterId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "DELETE", urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new Filter.fromJson(data));
+  }
+
+  /**
+   * Returns a filters to which the user has access.
+   *
+   * [accountId] - Account ID to retrieve filters for.
+   *
+   * [filterId] - Filter ID to retrieve filters for.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<Filter> get(core.String accountId, core.String filterId, {core.Map optParams}) {
+    var url = "management/accounts/{accountId}/filters/{filterId}";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (filterId == null) paramErrors.add("filterId is required");
+    if (filterId != null) urlParams["filterId"] = filterId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new Filter.fromJson(data));
+  }
+
+  /**
+   * Create a new filter.
+   *
+   * [request] - Filter to send in this request
+   *
+   * [accountId] - Account ID to create filter for.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<Filter> insert(Filter request, core.String accountId, {core.Map optParams}) {
+    var url = "management/accounts/{accountId}/filters";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new Filter.fromJson(data));
+  }
+
+  /**
+   * Lists all filters for an account
+   *
+   * [accountId] - Account ID to retrieve filters for.
+   *
+   * [max_results] - The maximum number of filters to include in this response.
+   *
+   * [start_index] - An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+   *   Minimum: 1
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<Filters> list(core.String accountId, {core.int max_results, core.int start_index, core.Map optParams}) {
+    var url = "management/accounts/{accountId}/filters";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (max_results != null) queryParams["max-results"] = max_results;
+    if (start_index != null) queryParams["start-index"] = start_index;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new Filters.fromJson(data));
+  }
+
+  /**
+   * Updates an existing filter. This method supports patch semantics.
+   *
+   * [request] - Filter to send in this request
+   *
+   * [accountId] - Account ID to which the filter belongs.
+   *
+   * [filterId] - ID of the filter to be updated.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<Filter> patch(Filter request, core.String accountId, core.String filterId, {core.Map optParams}) {
+    var url = "management/accounts/{accountId}/filters/{filterId}";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (filterId == null) paramErrors.add("filterId is required");
+    if (filterId != null) urlParams["filterId"] = filterId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "PATCH", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new Filter.fromJson(data));
+  }
+
+  /**
+   * Updates an existing filter.
+   *
+   * [request] - Filter to send in this request
+   *
+   * [accountId] - Account ID to which the filter belongs.
+   *
+   * [filterId] - ID of the filter to be updated.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<Filter> update(Filter request, core.String accountId, core.String filterId, {core.Map optParams}) {
+    var url = "management/accounts/{accountId}/filters/{filterId}";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (filterId == null) paramErrors.add("filterId is required");
+    if (filterId != null) urlParams["filterId"] = filterId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "PUT", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new Filter.fromJson(data));
+  }
+}
+
 class ManagementGoalsResource_ {
 
   final Client _client;
@@ -1287,6 +1530,288 @@ class ManagementGoalsResource_ {
   }
 }
 
+class ManagementProfileFilterLinksResource_ {
+
+  final Client _client;
+
+  ManagementProfileFilterLinksResource_(Client client) :
+      _client = client;
+
+  /**
+   * Delete a profile filter link.
+   *
+   * [accountId] - Account ID to which the profile filter link belongs.
+   *
+   * [webPropertyId] - Web property Id to which the profile filter link belongs.
+   *
+   * [profileId] - Profile ID to which the filter link belongs.
+   *
+   * [linkId] - ID of the profile filter link to delete.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<core.Map> delete(core.String accountId, core.String webPropertyId, core.String profileId, core.String linkId, {core.Map optParams}) {
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/profileFilterLinks/{linkId}";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (linkId == null) paramErrors.add("linkId is required");
+    if (linkId != null) urlParams["linkId"] = linkId;
+    if (profileId == null) paramErrors.add("profileId is required");
+    if (profileId != null) urlParams["profileId"] = profileId;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "DELETE", urlParams: urlParams, queryParams: queryParams);
+    return response;
+  }
+
+  /**
+   * Returns a single profile filter link.
+   *
+   * [accountId] - Account ID to retrieve profile filter link for.
+   *
+   * [webPropertyId] - Web property Id to retrieve profile filter link for.
+   *
+   * [profileId] - Profile ID to retrieve filter link for.
+   *
+   * [linkId] - ID of the profile filter link.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<ProfileFilterLink> get(core.String accountId, core.String webPropertyId, core.String profileId, core.String linkId, {core.Map optParams}) {
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/profileFilterLinks/{linkId}";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (linkId == null) paramErrors.add("linkId is required");
+    if (linkId != null) urlParams["linkId"] = linkId;
+    if (profileId == null) paramErrors.add("profileId is required");
+    if (profileId != null) urlParams["profileId"] = profileId;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new ProfileFilterLink.fromJson(data));
+  }
+
+  /**
+   * Create a new profile filter link.
+   *
+   * [request] - ProfileFilterLink to send in this request
+   *
+   * [accountId] - Account ID to create profile filter link for.
+   *
+   * [webPropertyId] - Web property Id to create profile filter link for.
+   *
+   * [profileId] - Profile ID to create filter link for.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<ProfileFilterLink> insert(ProfileFilterLink request, core.String accountId, core.String webPropertyId, core.String profileId, {core.Map optParams}) {
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/profileFilterLinks";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (profileId == null) paramErrors.add("profileId is required");
+    if (profileId != null) urlParams["profileId"] = profileId;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new ProfileFilterLink.fromJson(data));
+  }
+
+  /**
+   * Lists all profile filter links for a profile.
+   *
+   * [accountId] - Account ID to retrieve profile filter links for.
+   *
+   * [webPropertyId] - Web property Id for profile filter links for. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to.
+   *
+   * [profileId] - Profile ID to retrieve filter links for. Can either be a specific profile ID or '~all', which refers to all the profiles that user has access to.
+   *
+   * [max_results] - The maximum number of profile filter links to include in this response.
+   *
+   * [start_index] - An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+   *   Minimum: 1
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<ProfileFilterLinks> list(core.String accountId, core.String webPropertyId, core.String profileId, {core.int max_results, core.int start_index, core.Map optParams}) {
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/profileFilterLinks";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (max_results != null) queryParams["max-results"] = max_results;
+    if (profileId == null) paramErrors.add("profileId is required");
+    if (profileId != null) urlParams["profileId"] = profileId;
+    if (start_index != null) queryParams["start-index"] = start_index;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new ProfileFilterLinks.fromJson(data));
+  }
+
+  /**
+   * Update an existing profile filter link. This method supports patch semantics.
+   *
+   * [request] - ProfileFilterLink to send in this request
+   *
+   * [accountId] - Account ID to which profile filter link belongs.
+   *
+   * [webPropertyId] - Web property Id to which profile filter link belongs
+   *
+   * [profileId] - Profile ID to which filter link belongs
+   *
+   * [linkId] - ID of the profile filter link to be updated.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<ProfileFilterLink> patch(ProfileFilterLink request, core.String accountId, core.String webPropertyId, core.String profileId, core.String linkId, {core.Map optParams}) {
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/profileFilterLinks/{linkId}";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (linkId == null) paramErrors.add("linkId is required");
+    if (linkId != null) urlParams["linkId"] = linkId;
+    if (profileId == null) paramErrors.add("profileId is required");
+    if (profileId != null) urlParams["profileId"] = profileId;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "PATCH", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new ProfileFilterLink.fromJson(data));
+  }
+
+  /**
+   * Update an existing profile filter link.
+   *
+   * [request] - ProfileFilterLink to send in this request
+   *
+   * [accountId] - Account ID to which profile filter link belongs.
+   *
+   * [webPropertyId] - Web property Id to which profile filter link belongs
+   *
+   * [profileId] - Profile ID to which filter link belongs
+   *
+   * [linkId] - ID of the profile filter link to be updated.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<ProfileFilterLink> update(ProfileFilterLink request, core.String accountId, core.String webPropertyId, core.String profileId, core.String linkId, {core.Map optParams}) {
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/profileFilterLinks/{linkId}";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (linkId == null) paramErrors.add("linkId is required");
+    if (linkId != null) urlParams["linkId"] = linkId;
+    if (profileId == null) paramErrors.add("profileId is required");
+    if (profileId != null) urlParams["profileId"] = profileId;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "PUT", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new ProfileFilterLink.fromJson(data));
+  }
+}
+
 class ManagementProfileUserLinksResource_ {
 
   final Client _client;
@@ -1386,9 +1911,9 @@ class ManagementProfileUserLinksResource_ {
    *
    * [accountId] - Account ID which the given view (profile) belongs to.
    *
-   * [webPropertyId] - Web Property ID which the given view (profile) belongs to.
+   * [webPropertyId] - Web Property ID which the given view (profile) belongs to. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to.
    *
-   * [profileId] - View (Profile) ID to retrieve the profile-user links for
+   * [profileId] - View (Profile) ID to retrieve the profile-user links for. Can either be a specific profile ID or '~all', which refers to all the profiles that user has access to.
    *
    * [max_results] - The maximum number of profile-user links to include in this response.
    *
@@ -1779,6 +2304,150 @@ class ManagementSegmentsResource_ {
   }
 }
 
+class ManagementUnsampledReportsResource_ {
+
+  final Client _client;
+
+  ManagementUnsampledReportsResource_(Client client) :
+      _client = client;
+
+  /**
+   * Returns a single unsampled report.
+   *
+   * [accountId] - Account ID to retrieve unsampled report for.
+   *
+   * [webPropertyId] - Web property ID to retrieve unsampled reports for.
+   *
+   * [profileId] - View (Profile) ID to retrieve unsampled report for.
+   *
+   * [unsampledReportId] - ID of the unsampled report to retrieve.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<UnsampledReport> get(core.String accountId, core.String webPropertyId, core.String profileId, core.String unsampledReportId, {core.Map optParams}) {
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/unsampledReports/{unsampledReportId}";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (profileId == null) paramErrors.add("profileId is required");
+    if (profileId != null) urlParams["profileId"] = profileId;
+    if (unsampledReportId == null) paramErrors.add("unsampledReportId is required");
+    if (unsampledReportId != null) urlParams["unsampledReportId"] = unsampledReportId;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new UnsampledReport.fromJson(data));
+  }
+
+  /**
+   * Create a new unsampled report.
+   *
+   * [request] - UnsampledReport to send in this request
+   *
+   * [accountId] - Account ID to create the unsampled report for.
+   *
+   * [webPropertyId] - Web property ID to create the unsampled report for.
+   *
+   * [profileId] - View (Profile) ID to create the unsampled report for.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<UnsampledReport> insert(UnsampledReport request, core.String accountId, core.String webPropertyId, core.String profileId, {core.Map optParams}) {
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/unsampledReports";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (profileId == null) paramErrors.add("profileId is required");
+    if (profileId != null) urlParams["profileId"] = profileId;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new UnsampledReport.fromJson(data));
+  }
+
+  /**
+   * Lists unsampled reports to which the user has access.
+   *
+   * [accountId] - Account ID to retrieve unsampled reports for. Must be a specific account ID, ~all is not supported.
+   *
+   * [webPropertyId] - Web property ID to retrieve unsampled reports for. Must be a specific web property ID, ~all is not supported.
+   *
+   * [profileId] - View (Profile) ID to retrieve unsampled reports for. Must be a specific view (profile) ID, ~all is not supported.
+   *
+   * [max_results] - The maximum number of unsampled reports to include in this response.
+   *
+   * [start_index] - An index of the first unsampled report to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+   *   Minimum: 1
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<UnsampledReports> list(core.String accountId, core.String webPropertyId, core.String profileId, {core.int max_results, core.int start_index, core.Map optParams}) {
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/unsampledReports";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (max_results != null) queryParams["max-results"] = max_results;
+    if (profileId == null) paramErrors.add("profileId is required");
+    if (profileId != null) urlParams["profileId"] = profileId;
+    if (start_index != null) queryParams["start-index"] = start_index;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new UnsampledReports.fromJson(data));
+  }
+}
+
 class ManagementUploadsResource_ {
 
   final Client _client;
@@ -1923,6 +2592,46 @@ class ManagementUploadsResource_ {
   }
 
   /**
+   * Migrate custom data source and data imports to latest version.
+   *
+   * [accountId] - Account Id for migration.
+   *
+   * [webPropertyId] - Web property Id for migration.
+   *
+   * [customDataSourceId] - Custom data source Id for migration.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<core.Map> migrateDataImport(core.String accountId, core.String webPropertyId, core.String customDataSourceId, {core.Map optParams}) {
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/migrateDataImport";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (customDataSourceId == null) paramErrors.add("customDataSourceId is required");
+    if (customDataSourceId != null) urlParams["customDataSourceId"] = customDataSourceId;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "POST", urlParams: urlParams, queryParams: queryParams);
+    return response;
+  }
+
+  /**
    * Upload data for a custom data source.
    *
    * [accountId] - Account Id associated with the upload.
@@ -1970,6 +2679,264 @@ class ManagementUploadsResource_ {
     }
     return response
       .then((data) => new Upload.fromJson(data));
+  }
+}
+
+class ManagementWebPropertyAdWordsLinksResource_ {
+
+  final Client _client;
+
+  ManagementWebPropertyAdWordsLinksResource_(Client client) :
+      _client = client;
+
+  /**
+   * Deletes a web property-AdWords link.
+   *
+   * [accountId] - ID of the account which the given web property belongs to.
+   *
+   * [webPropertyId] - Web property ID to delete the AdWords link for.
+   *
+   * [webPropertyAdWordsLinkId] - Web property AdWords link ID.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<core.Map> delete(core.String accountId, core.String webPropertyId, core.String webPropertyAdWordsLinkId, {core.Map optParams}) {
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/entityAdWordsLinks/{webPropertyAdWordsLinkId}";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (webPropertyAdWordsLinkId == null) paramErrors.add("webPropertyAdWordsLinkId is required");
+    if (webPropertyAdWordsLinkId != null) urlParams["webPropertyAdWordsLinkId"] = webPropertyAdWordsLinkId;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "DELETE", urlParams: urlParams, queryParams: queryParams);
+    return response;
+  }
+
+  /**
+   * Returns a web property-AdWords link to which the user has access.
+   *
+   * [accountId] - ID of the account which the given web property belongs to.
+   *
+   * [webPropertyId] - Web property ID to retrieve the AdWords link for.
+   *
+   * [webPropertyAdWordsLinkId] - Web property-AdWords link ID.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<EntityAdWordsLink> get(core.String accountId, core.String webPropertyId, core.String webPropertyAdWordsLinkId, {core.Map optParams}) {
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/entityAdWordsLinks/{webPropertyAdWordsLinkId}";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (webPropertyAdWordsLinkId == null) paramErrors.add("webPropertyAdWordsLinkId is required");
+    if (webPropertyAdWordsLinkId != null) urlParams["webPropertyAdWordsLinkId"] = webPropertyAdWordsLinkId;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new EntityAdWordsLink.fromJson(data));
+  }
+
+  /**
+   * Creates a webProperty-AdWords link.
+   *
+   * [request] - EntityAdWordsLink to send in this request
+   *
+   * [accountId] - ID of the Google Analytics account to create the link for.
+   *
+   * [webPropertyId] - Web property ID to create the link for.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<EntityAdWordsLink> insert(EntityAdWordsLink request, core.String accountId, core.String webPropertyId, {core.Map optParams}) {
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/entityAdWordsLinks";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new EntityAdWordsLink.fromJson(data));
+  }
+
+  /**
+   * Lists webProperty-AdWords links for a given web property.
+   *
+   * [accountId] - ID of the account which the given web property belongs to.
+   *
+   * [webPropertyId] - Web property ID to retrieve the AdWords links for.
+   *
+   * [max_results] - The maximum number of webProperty-AdWords links to include in this response.
+   *
+   * [start_index] - An index of the first webProperty-AdWords link to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+   *   Minimum: 1
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<EntityAdWordsLinks> list(core.String accountId, core.String webPropertyId, {core.int max_results, core.int start_index, core.Map optParams}) {
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/entityAdWordsLinks";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (max_results != null) queryParams["max-results"] = max_results;
+    if (start_index != null) queryParams["start-index"] = start_index;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new EntityAdWordsLinks.fromJson(data));
+  }
+
+  /**
+   * Updates an existing webProperty-AdWords link. This method supports patch semantics.
+   *
+   * [request] - EntityAdWordsLink to send in this request
+   *
+   * [accountId] - ID of the account which the given web property belongs to.
+   *
+   * [webPropertyId] - Web property ID to retrieve the AdWords link for.
+   *
+   * [webPropertyAdWordsLinkId] - Web property-AdWords link ID.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<EntityAdWordsLink> patch(EntityAdWordsLink request, core.String accountId, core.String webPropertyId, core.String webPropertyAdWordsLinkId, {core.Map optParams}) {
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/entityAdWordsLinks/{webPropertyAdWordsLinkId}";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (webPropertyAdWordsLinkId == null) paramErrors.add("webPropertyAdWordsLinkId is required");
+    if (webPropertyAdWordsLinkId != null) urlParams["webPropertyAdWordsLinkId"] = webPropertyAdWordsLinkId;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "PATCH", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new EntityAdWordsLink.fromJson(data));
+  }
+
+  /**
+   * Updates an existing webProperty-AdWords link.
+   *
+   * [request] - EntityAdWordsLink to send in this request
+   *
+   * [accountId] - ID of the account which the given web property belongs to.
+   *
+   * [webPropertyId] - Web property ID to retrieve the AdWords link for.
+   *
+   * [webPropertyAdWordsLinkId] - Web property-AdWords link ID.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<EntityAdWordsLink> update(EntityAdWordsLink request, core.String accountId, core.String webPropertyId, core.String webPropertyAdWordsLinkId, {core.Map optParams}) {
+    var url = "management/accounts/{accountId}/webproperties/{webPropertyId}/entityAdWordsLinks/{webPropertyAdWordsLinkId}";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) urlParams["accountId"] = accountId;
+    if (webPropertyAdWordsLinkId == null) paramErrors.add("webPropertyAdWordsLinkId is required");
+    if (webPropertyAdWordsLinkId != null) urlParams["webPropertyAdWordsLinkId"] = webPropertyAdWordsLinkId;
+    if (webPropertyId == null) paramErrors.add("webPropertyId is required");
+    if (webPropertyId != null) urlParams["webPropertyId"] = webPropertyId;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "PUT", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new EntityAdWordsLink.fromJson(data));
   }
 }
 
@@ -2262,7 +3229,7 @@ class ManagementWebpropertyUserLinksResource_ {
    *
    * [accountId] - Account ID which the given web property belongs to.
    *
-   * [webPropertyId] - Web Property ID for the webProperty-user links to retrieve.
+   * [webPropertyId] - Web Property ID for the webProperty-user links to retrieve. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to.
    *
    * [max_results] - The maximum number of webProperty-user Links to include in this response.
    *
@@ -2394,6 +3361,45 @@ class MetadataColumnsResource_ {
     response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
     return response
       .then((data) => new Columns.fromJson(data));
+  }
+}
+
+class ProvisioningResource_ {
+
+  final Client _client;
+
+  ProvisioningResource_(Client client) :
+      _client = client;
+
+  /**
+   * Creates an account ticket.
+   *
+   * [request] - AccountTicket to send in this request
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<AccountTicket> createAccountTicket(AccountTicket request, {core.Map optParams}) {
+    var url = "provisioning/createAccountTicket";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "POST", body: request.toString(), urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new AccountTicket.fromJson(data));
   }
 }
 

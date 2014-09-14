@@ -363,6 +363,80 @@ class AccountSummary {
 
 }
 
+/** JSON template for an Analytics account ticket. The account ticket consists of the ticket ID and the basic information for the account, property and profile. */
+class AccountTicket {
+
+  /** Account for this ticket. */
+  Account account;
+
+  /** Account ticket ID used to access the account ticket. */
+  core.String id;
+
+  /** Resource type for account ticket. */
+  core.String kind;
+
+  /** View (Profile) for the account. */
+  Profile profile;
+
+  /** Redirect URI where the user will be sent after accepting Terms of Service. Must be configured in APIs console as a callback URL. */
+  core.String redirectUri;
+
+  /** Web property for the account. */
+  Webproperty webproperty;
+
+  /** Create new AccountTicket from JSON data */
+  AccountTicket.fromJson(core.Map json) {
+    if (json.containsKey("account")) {
+      account = new Account.fromJson(json["account"]);
+    }
+    if (json.containsKey("id")) {
+      id = json["id"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("profile")) {
+      profile = new Profile.fromJson(json["profile"]);
+    }
+    if (json.containsKey("redirectUri")) {
+      redirectUri = json["redirectUri"];
+    }
+    if (json.containsKey("webproperty")) {
+      webproperty = new Webproperty.fromJson(json["webproperty"]);
+    }
+  }
+
+  /** Create JSON Object for AccountTicket */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (account != null) {
+      output["account"] = account.toJson();
+    }
+    if (id != null) {
+      output["id"] = id;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (profile != null) {
+      output["profile"] = profile.toJson();
+    }
+    if (redirectUri != null) {
+      output["redirectUri"] = redirectUri;
+    }
+    if (webproperty != null) {
+      output["webproperty"] = webproperty.toJson();
+    }
+
+    return output;
+  }
+
+  /** Return String representation of AccountTicket */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
 /** An account collection provides a list of Analytics accounts to which a user has access. The account collection is the entry point to all management information. Each resource in the collection corresponds to a single Analytics account. */
 class Accounts {
 
@@ -451,6 +525,53 @@ class Accounts {
   }
 
   /** Return String representation of Accounts */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** JSON template for an AdWords account. */
+class AdWordsAccount {
+
+  /** True if auto-tagging is enabled on the AdWords account. Read-only after the insert operation. */
+  core.bool autoTaggingEnabled;
+
+  /** Customer ID. This field is required when creating an AdWords link. */
+  core.String customerId;
+
+  /** Resource type for AdWords account. */
+  core.String kind;
+
+  /** Create new AdWordsAccount from JSON data */
+  AdWordsAccount.fromJson(core.Map json) {
+    if (json.containsKey("autoTaggingEnabled")) {
+      autoTaggingEnabled = json["autoTaggingEnabled"];
+    }
+    if (json.containsKey("customerId")) {
+      customerId = json["customerId"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+  }
+
+  /** Create JSON Object for AdWordsAccount */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (autoTaggingEnabled != null) {
+      output["autoTaggingEnabled"] = autoTaggingEnabled;
+    }
+    if (customerId != null) {
+      output["customerId"] = customerId;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of AdWordsAccount */
   core.String toString() => JSON.encode(this.toJson());
 
 }
@@ -613,6 +734,8 @@ class CustomDataSource {
   /** Custom data source ID. */
   core.String id;
 
+  core.String importBehavior;
+
   /** Resource type for Analytics custom data source. */
   core.String kind;
 
@@ -634,6 +757,8 @@ class CustomDataSource {
   /** Time this custom data source was last modified. */
   core.String updated;
 
+  core.String uploadType;
+
   /** Web property ID of the form UA-XXXXX-YY to which this custom data source belongs. */
   core.String webPropertyId;
 
@@ -653,6 +778,9 @@ class CustomDataSource {
     }
     if (json.containsKey("id")) {
       id = json["id"];
+    }
+    if (json.containsKey("importBehavior")) {
+      importBehavior = json["importBehavior"];
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
@@ -674,6 +802,9 @@ class CustomDataSource {
     }
     if (json.containsKey("updated")) {
       updated = json["updated"];
+    }
+    if (json.containsKey("uploadType")) {
+      uploadType = json["uploadType"];
     }
     if (json.containsKey("webPropertyId")) {
       webPropertyId = json["webPropertyId"];
@@ -699,6 +830,9 @@ class CustomDataSource {
     if (id != null) {
       output["id"] = id;
     }
+    if (importBehavior != null) {
+      output["importBehavior"] = importBehavior;
+    }
     if (kind != null) {
       output["kind"] = kind;
     }
@@ -719,6 +853,9 @@ class CustomDataSource {
     }
     if (updated != null) {
       output["updated"] = updated;
+    }
+    if (uploadType != null) {
+      output["uploadType"] = uploadType;
     }
     if (webPropertyId != null) {
       output["webPropertyId"] = webPropertyId;
@@ -1267,6 +1404,200 @@ class DailyUploads {
 
 }
 
+/** JSON template for Analytics Entity AdWords Link. */
+class EntityAdWordsLink {
+
+  /** A list of AdWords client accounts. These cannot be MCC accounts. This field is required when creating an AdWords link. It cannot be empty. */
+  core.List<AdWordsAccount> adWordsAccounts;
+
+  /** Web property being linked. */
+  EntityAdWordsLinkEntity entity;
+
+  /** Entity AdWords link ID */
+  core.String id;
+
+  /** Resource type for entity AdWords link. */
+  core.String kind;
+
+  /** Name of the link. This field is required when creating an AdWords link. */
+  core.String name;
+
+  /** IDs of linked Views (Profiles) represented as strings. */
+  core.List<core.String> profileIds;
+
+  /** URL link for this Google Analytics - Google AdWords link. */
+  core.String selfLink;
+
+  /** Create new EntityAdWordsLink from JSON data */
+  EntityAdWordsLink.fromJson(core.Map json) {
+    if (json.containsKey("adWordsAccounts")) {
+      adWordsAccounts = json["adWordsAccounts"].map((adWordsAccountsItem) => new AdWordsAccount.fromJson(adWordsAccountsItem)).toList();
+    }
+    if (json.containsKey("entity")) {
+      entity = new EntityAdWordsLinkEntity.fromJson(json["entity"]);
+    }
+    if (json.containsKey("id")) {
+      id = json["id"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("name")) {
+      name = json["name"];
+    }
+    if (json.containsKey("profileIds")) {
+      profileIds = json["profileIds"].toList();
+    }
+    if (json.containsKey("selfLink")) {
+      selfLink = json["selfLink"];
+    }
+  }
+
+  /** Create JSON Object for EntityAdWordsLink */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (adWordsAccounts != null) {
+      output["adWordsAccounts"] = adWordsAccounts.map((adWordsAccountsItem) => adWordsAccountsItem.toJson()).toList();
+    }
+    if (entity != null) {
+      output["entity"] = entity.toJson();
+    }
+    if (id != null) {
+      output["id"] = id;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (name != null) {
+      output["name"] = name;
+    }
+    if (profileIds != null) {
+      output["profileIds"] = profileIds.toList();
+    }
+    if (selfLink != null) {
+      output["selfLink"] = selfLink;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of EntityAdWordsLink */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** Web property being linked. */
+class EntityAdWordsLinkEntity {
+
+  WebPropertyRef webPropertyRef;
+
+  /** Create new EntityAdWordsLinkEntity from JSON data */
+  EntityAdWordsLinkEntity.fromJson(core.Map json) {
+    if (json.containsKey("webPropertyRef")) {
+      webPropertyRef = new WebPropertyRef.fromJson(json["webPropertyRef"]);
+    }
+  }
+
+  /** Create JSON Object for EntityAdWordsLinkEntity */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (webPropertyRef != null) {
+      output["webPropertyRef"] = webPropertyRef.toJson();
+    }
+
+    return output;
+  }
+
+  /** Return String representation of EntityAdWordsLinkEntity */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** An entity AdWords link collection provides a list of GA-AdWords links Each resource in this collection corresponds to a single link. */
+class EntityAdWordsLinks {
+
+  /** A list of entity AdWords links. */
+  core.List<EntityAdWordsLink> items;
+
+  /** The maximum number of entries the response can contain, regardless of the actual number of entries returned. Its value ranges from 1 to 1000 with a value of 1000 by default, or otherwise specified by the max-results query parameter. */
+  core.int itemsPerPage;
+
+  /** Collection type. */
+  core.String kind;
+
+  /** Next link for this AdWords link collection. */
+  core.String nextLink;
+
+  /** Previous link for this AdWords link collection. */
+  core.String previousLink;
+
+  /** The starting index of the entries, which is 1 by default or otherwise specified by the start-index query parameter. */
+  core.int startIndex;
+
+  /** The total number of results for the query, regardless of the number of results in the response. */
+  core.int totalResults;
+
+  /** Create new EntityAdWordsLinks from JSON data */
+  EntityAdWordsLinks.fromJson(core.Map json) {
+    if (json.containsKey("items")) {
+      items = json["items"].map((itemsItem) => new EntityAdWordsLink.fromJson(itemsItem)).toList();
+    }
+    if (json.containsKey("itemsPerPage")) {
+      itemsPerPage = json["itemsPerPage"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("nextLink")) {
+      nextLink = json["nextLink"];
+    }
+    if (json.containsKey("previousLink")) {
+      previousLink = json["previousLink"];
+    }
+    if (json.containsKey("startIndex")) {
+      startIndex = json["startIndex"];
+    }
+    if (json.containsKey("totalResults")) {
+      totalResults = json["totalResults"];
+    }
+  }
+
+  /** Create JSON Object for EntityAdWordsLinks */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (items != null) {
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
+    }
+    if (itemsPerPage != null) {
+      output["itemsPerPage"] = itemsPerPage;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (nextLink != null) {
+      output["nextLink"] = nextLink;
+    }
+    if (previousLink != null) {
+      output["previousLink"] = previousLink;
+    }
+    if (startIndex != null) {
+      output["startIndex"] = startIndex;
+    }
+    if (totalResults != null) {
+      output["totalResults"] = totalResults;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of EntityAdWordsLinks */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
 /** JSON template for an Analytics Entity-User Link. Returns permissions that a user has for an entity. */
 class EntityUserLink {
 
@@ -1539,7 +1870,7 @@ class Experiment {
   /** Resource type for an Analytics experiment. This field is read-only. */
   core.String kind;
 
-  /** Specifies the minimum length of the experiment. Can be changed for a running experiment. This field may not be changed for an experiments whose status is ENDED. */
+  /** An integer number in [3, 90]. Specifies the minimum length of the experiment. Can be changed for a running experiment. This field may not be changed for an experiments whose status is ENDED. */
   core.int minimumExperimentLengthInDays;
 
   /** Experiment name. This field may not be changed for an experiment whose status is ENDED. This field is required when creating an experiment. */
@@ -1974,6 +2305,730 @@ class Experiments {
   }
 
   /** Return String representation of Experiments */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** JSON template for an Analytics account filter. */
+class Filter {
+
+  /** Account ID to which this filter belongs. */
+  core.String accountId;
+
+  /** Details for the filter of the type ADVANCED. */
+  FilterAdvancedDetails advancedDetails;
+
+  /** Time this filter was created. */
+  core.String created;
+
+  /** Details for the filter of the type EXCLUDE. */
+  FilterExpression excludeDetails;
+
+  /** Filter ID. */
+  core.String id;
+
+  /** Details for the filter of the type INCLUDE. */
+  FilterExpression includeDetails;
+
+  /** Resource type for Analytics filter. */
+  core.String kind;
+
+  /** Details for the filter of the type LOWER. */
+  FilterLowercaseDetails lowercaseDetails;
+
+  /** Name of this filter. */
+  core.String name;
+
+  /** Parent link for this filter. Points to the account to which this filter belongs. */
+  FilterParentLink parentLink;
+
+  /** Details for the filter of the type SEARCH_AND_REPLACE. */
+  FilterSearchAndReplaceDetails searchAndReplaceDetails;
+
+  /** Link for this filter. */
+  core.String selfLink;
+
+  /** Type of this filter. Possible values are INCLUDE, EXCLUDE, LOWERCASE, UPPERCASE, SEARCH_AND_REPLACE and ADVANCED. */
+  core.String type;
+
+  /** Time this filter was last modified. */
+  core.String updated;
+
+  /** Details for the filter of the type UPPER. */
+  FilterUppercaseDetails uppercaseDetails;
+
+  /** Create new Filter from JSON data */
+  Filter.fromJson(core.Map json) {
+    if (json.containsKey("accountId")) {
+      accountId = json["accountId"];
+    }
+    if (json.containsKey("advancedDetails")) {
+      advancedDetails = new FilterAdvancedDetails.fromJson(json["advancedDetails"]);
+    }
+    if (json.containsKey("created")) {
+      created = json["created"];
+    }
+    if (json.containsKey("excludeDetails")) {
+      excludeDetails = new FilterExpression.fromJson(json["excludeDetails"]);
+    }
+    if (json.containsKey("id")) {
+      id = json["id"];
+    }
+    if (json.containsKey("includeDetails")) {
+      includeDetails = new FilterExpression.fromJson(json["includeDetails"]);
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("lowercaseDetails")) {
+      lowercaseDetails = new FilterLowercaseDetails.fromJson(json["lowercaseDetails"]);
+    }
+    if (json.containsKey("name")) {
+      name = json["name"];
+    }
+    if (json.containsKey("parentLink")) {
+      parentLink = new FilterParentLink.fromJson(json["parentLink"]);
+    }
+    if (json.containsKey("searchAndReplaceDetails")) {
+      searchAndReplaceDetails = new FilterSearchAndReplaceDetails.fromJson(json["searchAndReplaceDetails"]);
+    }
+    if (json.containsKey("selfLink")) {
+      selfLink = json["selfLink"];
+    }
+    if (json.containsKey("type")) {
+      type = json["type"];
+    }
+    if (json.containsKey("updated")) {
+      updated = json["updated"];
+    }
+    if (json.containsKey("uppercaseDetails")) {
+      uppercaseDetails = new FilterUppercaseDetails.fromJson(json["uppercaseDetails"]);
+    }
+  }
+
+  /** Create JSON Object for Filter */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (accountId != null) {
+      output["accountId"] = accountId;
+    }
+    if (advancedDetails != null) {
+      output["advancedDetails"] = advancedDetails.toJson();
+    }
+    if (created != null) {
+      output["created"] = created;
+    }
+    if (excludeDetails != null) {
+      output["excludeDetails"] = excludeDetails.toJson();
+    }
+    if (id != null) {
+      output["id"] = id;
+    }
+    if (includeDetails != null) {
+      output["includeDetails"] = includeDetails.toJson();
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (lowercaseDetails != null) {
+      output["lowercaseDetails"] = lowercaseDetails.toJson();
+    }
+    if (name != null) {
+      output["name"] = name;
+    }
+    if (parentLink != null) {
+      output["parentLink"] = parentLink.toJson();
+    }
+    if (searchAndReplaceDetails != null) {
+      output["searchAndReplaceDetails"] = searchAndReplaceDetails.toJson();
+    }
+    if (selfLink != null) {
+      output["selfLink"] = selfLink;
+    }
+    if (type != null) {
+      output["type"] = type;
+    }
+    if (updated != null) {
+      output["updated"] = updated;
+    }
+    if (uppercaseDetails != null) {
+      output["uppercaseDetails"] = uppercaseDetails.toJson();
+    }
+
+    return output;
+  }
+
+  /** Return String representation of Filter */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** Details for the filter of the type ADVANCED. */
+class FilterAdvancedDetails {
+
+  /** Indicates if the filter expressions are case sensitive. */
+  core.bool caseSensitive;
+
+  /** Expression to extract from field A. */
+  core.String extractA;
+
+  /** Expression to extract from field B. */
+  core.String extractB;
+
+  /** Field A. */
+  core.String fieldA;
+
+  /** Indicates if field A is required to match. */
+  core.bool fieldARequired;
+
+  /** Field B. */
+  core.String fieldB;
+
+  /** Indicates if field B is required to match. */
+  core.bool fieldBRequired;
+
+  /** Expression used to construct the output value. */
+  core.String outputConstructor;
+
+  /** Output field. */
+  core.String outputToField;
+
+  /** Indicates if the existing value of the output field, if any, should be overridden by the output expression. */
+  core.bool overrideOutputField;
+
+  /** Create new FilterAdvancedDetails from JSON data */
+  FilterAdvancedDetails.fromJson(core.Map json) {
+    if (json.containsKey("caseSensitive")) {
+      caseSensitive = json["caseSensitive"];
+    }
+    if (json.containsKey("extractA")) {
+      extractA = json["extractA"];
+    }
+    if (json.containsKey("extractB")) {
+      extractB = json["extractB"];
+    }
+    if (json.containsKey("fieldA")) {
+      fieldA = json["fieldA"];
+    }
+    if (json.containsKey("fieldARequired")) {
+      fieldARequired = json["fieldARequired"];
+    }
+    if (json.containsKey("fieldB")) {
+      fieldB = json["fieldB"];
+    }
+    if (json.containsKey("fieldBRequired")) {
+      fieldBRequired = json["fieldBRequired"];
+    }
+    if (json.containsKey("outputConstructor")) {
+      outputConstructor = json["outputConstructor"];
+    }
+    if (json.containsKey("outputToField")) {
+      outputToField = json["outputToField"];
+    }
+    if (json.containsKey("overrideOutputField")) {
+      overrideOutputField = json["overrideOutputField"];
+    }
+  }
+
+  /** Create JSON Object for FilterAdvancedDetails */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (caseSensitive != null) {
+      output["caseSensitive"] = caseSensitive;
+    }
+    if (extractA != null) {
+      output["extractA"] = extractA;
+    }
+    if (extractB != null) {
+      output["extractB"] = extractB;
+    }
+    if (fieldA != null) {
+      output["fieldA"] = fieldA;
+    }
+    if (fieldARequired != null) {
+      output["fieldARequired"] = fieldARequired;
+    }
+    if (fieldB != null) {
+      output["fieldB"] = fieldB;
+    }
+    if (fieldBRequired != null) {
+      output["fieldBRequired"] = fieldBRequired;
+    }
+    if (outputConstructor != null) {
+      output["outputConstructor"] = outputConstructor;
+    }
+    if (outputToField != null) {
+      output["outputToField"] = outputToField;
+    }
+    if (overrideOutputField != null) {
+      output["overrideOutputField"] = overrideOutputField;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of FilterAdvancedDetails */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** Details for the filter of the type LOWER. */
+class FilterLowercaseDetails {
+
+  /** Field to use in the filter. */
+  core.String field;
+
+  /** Create new FilterLowercaseDetails from JSON data */
+  FilterLowercaseDetails.fromJson(core.Map json) {
+    if (json.containsKey("field")) {
+      field = json["field"];
+    }
+  }
+
+  /** Create JSON Object for FilterLowercaseDetails */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (field != null) {
+      output["field"] = field;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of FilterLowercaseDetails */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** Parent link for this filter. Points to the account to which this filter belongs. */
+class FilterParentLink {
+
+  /** Link to the account to which this filter belongs. */
+  core.String href;
+
+  /** Value is "analytics#account". */
+  core.String type;
+
+  /** Create new FilterParentLink from JSON data */
+  FilterParentLink.fromJson(core.Map json) {
+    if (json.containsKey("href")) {
+      href = json["href"];
+    }
+    if (json.containsKey("type")) {
+      type = json["type"];
+    }
+  }
+
+  /** Create JSON Object for FilterParentLink */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (href != null) {
+      output["href"] = href;
+    }
+    if (type != null) {
+      output["type"] = type;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of FilterParentLink */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** Details for the filter of the type SEARCH_AND_REPLACE. */
+class FilterSearchAndReplaceDetails {
+
+  /** Determines if the filter is case sensitive. */
+  core.bool caseSensitive;
+
+  /** Field to use in the filter. */
+  core.String field;
+
+  /** Term to replace the search term with. */
+  core.String replaceString;
+
+  /** Term to search. */
+  core.String searchString;
+
+  /** Create new FilterSearchAndReplaceDetails from JSON data */
+  FilterSearchAndReplaceDetails.fromJson(core.Map json) {
+    if (json.containsKey("caseSensitive")) {
+      caseSensitive = json["caseSensitive"];
+    }
+    if (json.containsKey("field")) {
+      field = json["field"];
+    }
+    if (json.containsKey("replaceString")) {
+      replaceString = json["replaceString"];
+    }
+    if (json.containsKey("searchString")) {
+      searchString = json["searchString"];
+    }
+  }
+
+  /** Create JSON Object for FilterSearchAndReplaceDetails */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (caseSensitive != null) {
+      output["caseSensitive"] = caseSensitive;
+    }
+    if (field != null) {
+      output["field"] = field;
+    }
+    if (replaceString != null) {
+      output["replaceString"] = replaceString;
+    }
+    if (searchString != null) {
+      output["searchString"] = searchString;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of FilterSearchAndReplaceDetails */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** Details for the filter of the type UPPER. */
+class FilterUppercaseDetails {
+
+  /** Field to use in the filter. */
+  core.String field;
+
+  /** Create new FilterUppercaseDetails from JSON data */
+  FilterUppercaseDetails.fromJson(core.Map json) {
+    if (json.containsKey("field")) {
+      field = json["field"];
+    }
+  }
+
+  /** Create JSON Object for FilterUppercaseDetails */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (field != null) {
+      output["field"] = field;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of FilterUppercaseDetails */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** JSON template for an Analytics filter expression. */
+class FilterExpression {
+
+  /** Determines if the filter is case sensitive. */
+  core.bool caseSensitive;
+
+  /** Filter expression value */
+  core.String expressionValue;
+
+  /** Field to filter. Possible values:  
+- Reserved  
+- UNUSED,   
+- Content and Traffic  
+- PAGE_REQUEST_URI, 
+- PAGE_HOSTNAME, 
+- PAGE_TITLE, 
+- REFERRAL, 
+- COST_DATA_URI (Campaign target URL), 
+- HIT_TYPE, 
+- INTERNAL_SEARCH_TERM, 
+- INTERNAL_SEARCH_TYPE, 
+- SOURCE_PROPERTY_TRACKING_ID,   
+- Campaign or AdGroup  
+- CAMPAIGN_SOURCE, 
+- CAMPAIGN_MEDIUM, 
+- CAMPAIGN_NAME, 
+- CAMPAIGN_AD_GROUP, 
+- CAMPAIGN_TERM, 
+- CAMPAIGN_CONTENT, 
+- CAMPAIGN_CODE, 
+- CAMPAIGN_REFERRAL_PATH,   
+- E-Commerce  
+- TRANSACTION_COUNTRY, 
+- TRANSACTION_REGION, 
+- TRANSACTION_CITY, 
+- TRANSACTION_AFFILIATION (Store or order location), 
+- ITEM_NAME, 
+- ITEM_CODE, 
+- ITEM_VARIATION, 
+- TRANSACTION_ID, 
+- TRANSACTION_CURRENCY_CODE, 
+- PRODUCT_ACTION_TYPE,   
+- Audience/Users  
+- BROWSER, 
+- BROWSER_VERSION, 
+- BROWSER_SIZE, 
+- PLATFORM, 
+- PLATFORM_VERSION, 
+- LANGUAGE, 
+- SCREEN_RESOLUTION, 
+- SCREEN_COLORS, 
+- JAVA_ENABLED, 
+- FLASH_VERSION, 
+- GEO_SPEED (Connection speed), 
+- VISITOR_TYPE, 
+- GEO_ORGANIZATION (ISP organization), 
+- GEO_DOMAIN, 
+- GEO_IP_ADDRESS, 
+- GEO_IP_VERSION,   
+- Location  
+- GEO_COUNTRY, 
+- GEO_REGION, 
+- GEO_CITY,   
+- Event  
+- EVENT_CATEGORY, 
+- EVENT_ACTION, 
+- EVENT_LABEL,   
+- Other  
+- CUSTOM_FIELD_1, 
+- CUSTOM_FIELD_2, 
+- USER_DEFINED_VALUE,   
+- Application  
+- APP_ID, 
+- APP_INSTALLER_ID, 
+- APP_NAME, 
+- APP_VERSION, 
+- SCREEN, 
+- IS_APP, 
+- IS_FATAL_EXCEPTION, 
+- EXCEPTION_DESCRIPTION,   
+- Mobile device  
+- IS_MOBILE, 
+- IS_TABLET, 
+- MOBILE_HAS_QWERTY_KEYBOARD, 
+- MOBILE_HAS_NFC_SUPPORT, 
+- MOBILE_HAS_CELLULAR_RADIO, 
+- MOBILE_HAS_WIFI_SUPPORT, 
+- MOBILE_BRAND_NAME, 
+- MOBILE_MODEL_NAME, 
+- MOBILE_MARKETING_NAME, 
+- MOBILE_POINTING_METHOD,   
+- Social  
+- SOCIAL_NETWORK, 
+- SOCIAL_ACTION, 
+- SOCIAL_ACTION_TARGET, */
+  core.String field;
+
+  /** Kind value for filter expression */
+  core.String kind;
+
+  /** Match type for this filter. Possible values are BEGINS_WITH, EQUAL, ENDS_WITH, CONTAINS, MATCHES. Include and Exclude filters can use any match type. Match type is not applicable to Upper case and Lower case filters. Search and Replace expressions in the Search and Replace filter and all filter expressions in the Advanced filter default to MATCHES. User should not set match type for those filters. */
+  core.String matchType;
+
+  /** Create new FilterExpression from JSON data */
+  FilterExpression.fromJson(core.Map json) {
+    if (json.containsKey("caseSensitive")) {
+      caseSensitive = json["caseSensitive"];
+    }
+    if (json.containsKey("expressionValue")) {
+      expressionValue = json["expressionValue"];
+    }
+    if (json.containsKey("field")) {
+      field = json["field"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("matchType")) {
+      matchType = json["matchType"];
+    }
+  }
+
+  /** Create JSON Object for FilterExpression */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (caseSensitive != null) {
+      output["caseSensitive"] = caseSensitive;
+    }
+    if (expressionValue != null) {
+      output["expressionValue"] = expressionValue;
+    }
+    if (field != null) {
+      output["field"] = field;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (matchType != null) {
+      output["matchType"] = matchType;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of FilterExpression */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** JSON template for a profile filter link. */
+class FilterRef {
+
+  /** Account ID to which this filter belongs. */
+  core.String accountId;
+
+  /** Link for this filter. */
+  core.String href;
+
+  /** Filter ID. */
+  core.String id;
+
+  /** Kind value for filter reference. */
+  core.String kind;
+
+  /** Name of this filter. */
+  core.String name;
+
+  /** Create new FilterRef from JSON data */
+  FilterRef.fromJson(core.Map json) {
+    if (json.containsKey("accountId")) {
+      accountId = json["accountId"];
+    }
+    if (json.containsKey("href")) {
+      href = json["href"];
+    }
+    if (json.containsKey("id")) {
+      id = json["id"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("name")) {
+      name = json["name"];
+    }
+  }
+
+  /** Create JSON Object for FilterRef */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (accountId != null) {
+      output["accountId"] = accountId;
+    }
+    if (href != null) {
+      output["href"] = href;
+    }
+    if (id != null) {
+      output["id"] = id;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (name != null) {
+      output["name"] = name;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of FilterRef */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** A filter collection lists filters created by users in an Analytics account. Each resource in the collection corresponds to a filter. */
+class Filters {
+
+  /** A list of filters. */
+  core.List<Filter> items;
+
+  /** The maximum number of resources the response can contain, regardless of the actual number of resources returned. Its value ranges from 1 to 1,000 with a value of 1000 by default, or otherwise specified by the max-results query parameter. */
+  core.int itemsPerPage;
+
+  /** Collection type. */
+  core.String kind;
+
+  /** Link to next page for this filter collection. */
+  core.String nextLink;
+
+  /** Link to previous page for this filter collection. */
+  core.String previousLink;
+
+  /** The starting index of the resources, which is 1 by default or otherwise specified by the start-index query parameter. */
+  core.int startIndex;
+
+  /** The total number of results for the query, regardless of the number of results in the response. */
+  core.int totalResults;
+
+  /** Email ID of the authenticated user */
+  core.String username;
+
+  /** Create new Filters from JSON data */
+  Filters.fromJson(core.Map json) {
+    if (json.containsKey("items")) {
+      items = json["items"].map((itemsItem) => new Filter.fromJson(itemsItem)).toList();
+    }
+    if (json.containsKey("itemsPerPage")) {
+      itemsPerPage = json["itemsPerPage"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("nextLink")) {
+      nextLink = json["nextLink"];
+    }
+    if (json.containsKey("previousLink")) {
+      previousLink = json["previousLink"];
+    }
+    if (json.containsKey("startIndex")) {
+      startIndex = json["startIndex"];
+    }
+    if (json.containsKey("totalResults")) {
+      totalResults = json["totalResults"];
+    }
+    if (json.containsKey("username")) {
+      username = json["username"];
+    }
+  }
+
+  /** Create JSON Object for Filters */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (items != null) {
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
+    }
+    if (itemsPerPage != null) {
+      output["itemsPerPage"] = itemsPerPage;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (nextLink != null) {
+      output["nextLink"] = nextLink;
+    }
+    if (previousLink != null) {
+      output["previousLink"] = previousLink;
+    }
+    if (startIndex != null) {
+      output["startIndex"] = startIndex;
+    }
+    if (totalResults != null) {
+      output["totalResults"] = totalResults;
+    }
+    if (username != null) {
+      output["username"] = username;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of Filters */
   core.String toString() => JSON.encode(this.toJson());
 
 }
@@ -3915,6 +4970,174 @@ class ProfilePermissions {
 
 }
 
+/** JSON template for an Analytics profile filter link. */
+class ProfileFilterLink {
+
+  /** Filter for this link. */
+  FilterRef filterRef;
+
+  /** Profile filter link ID. */
+  core.String id;
+
+  /** Resource type for Analytics filter. */
+  core.String kind;
+
+  /** View (Profile) for this link. */
+  ProfileRef profileRef;
+
+  /** The rank of this profile filter link relative to the other filters linked to the same profile.
+For readonly (i.e., list and get) operations, the rank always starts at 1.
+For write (i.e., create, update, or delete) operations, you may specify a value between 0 and 255 inclusively, [0, 255]. In order to insert a link at the end of the list, either don't specify a rank or set a rank to a number greater than the largest rank in the list. In order to insert a link to the beginning of the list specify a rank that is less than or equal to 1. The new link will move all existing filters with the same or lower rank down the list. After the link is inserted/updated/deleted all profile filter links will be renumbered starting at 1. */
+  core.int rank;
+
+  /** Link for this profile filter link. */
+  core.String selfLink;
+
+  /** Create new ProfileFilterLink from JSON data */
+  ProfileFilterLink.fromJson(core.Map json) {
+    if (json.containsKey("filterRef")) {
+      filterRef = new FilterRef.fromJson(json["filterRef"]);
+    }
+    if (json.containsKey("id")) {
+      id = json["id"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("profileRef")) {
+      profileRef = new ProfileRef.fromJson(json["profileRef"]);
+    }
+    if (json.containsKey("rank")) {
+      rank = json["rank"];
+    }
+    if (json.containsKey("selfLink")) {
+      selfLink = json["selfLink"];
+    }
+  }
+
+  /** Create JSON Object for ProfileFilterLink */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (filterRef != null) {
+      output["filterRef"] = filterRef.toJson();
+    }
+    if (id != null) {
+      output["id"] = id;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (profileRef != null) {
+      output["profileRef"] = profileRef.toJson();
+    }
+    if (rank != null) {
+      output["rank"] = rank;
+    }
+    if (selfLink != null) {
+      output["selfLink"] = selfLink;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of ProfileFilterLink */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** A profile filter link collection lists profile filter links between profiles and filters. Each resource in the collection corresponds to a profile filter link. */
+class ProfileFilterLinks {
+
+  /** A list of profile filter links. */
+  core.List<ProfileFilterLink> items;
+
+  /** The maximum number of resources the response can contain, regardless of the actual number of resources returned. Its value ranges from 1 to 1,000 with a value of 1000 by default, or otherwise specified by the max-results query parameter. */
+  core.int itemsPerPage;
+
+  /** Collection type. */
+  core.String kind;
+
+  /** Link to next page for this profile filter link collection. */
+  core.String nextLink;
+
+  /** Link to previous page for this profile filter link collection. */
+  core.String previousLink;
+
+  /** The starting index of the resources, which is 1 by default or otherwise specified by the start-index query parameter. */
+  core.int startIndex;
+
+  /** The total number of results for the query, regardless of the number of results in the response. */
+  core.int totalResults;
+
+  /** Email ID of the authenticated user */
+  core.String username;
+
+  /** Create new ProfileFilterLinks from JSON data */
+  ProfileFilterLinks.fromJson(core.Map json) {
+    if (json.containsKey("items")) {
+      items = json["items"].map((itemsItem) => new ProfileFilterLink.fromJson(itemsItem)).toList();
+    }
+    if (json.containsKey("itemsPerPage")) {
+      itemsPerPage = json["itemsPerPage"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("nextLink")) {
+      nextLink = json["nextLink"];
+    }
+    if (json.containsKey("previousLink")) {
+      previousLink = json["previousLink"];
+    }
+    if (json.containsKey("startIndex")) {
+      startIndex = json["startIndex"];
+    }
+    if (json.containsKey("totalResults")) {
+      totalResults = json["totalResults"];
+    }
+    if (json.containsKey("username")) {
+      username = json["username"];
+    }
+  }
+
+  /** Create JSON Object for ProfileFilterLinks */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (items != null) {
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
+    }
+    if (itemsPerPage != null) {
+      output["itemsPerPage"] = itemsPerPage;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (nextLink != null) {
+      output["nextLink"] = nextLink;
+    }
+    if (previousLink != null) {
+      output["previousLink"] = previousLink;
+    }
+    if (startIndex != null) {
+      output["startIndex"] = startIndex;
+    }
+    if (totalResults != null) {
+      output["totalResults"] = totalResults;
+    }
+    if (username != null) {
+      output["username"] = username;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of ProfileFilterLinks */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
 /** JSON template for a linked view (profile). */
 class ProfileRef {
 
@@ -4630,6 +5853,356 @@ class Segments {
   }
 
   /** Return String representation of Segments */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** JSON template for Analytics unsampled report resource. */
+class UnsampledReport {
+
+  /** Account ID to which this unsampled report belongs. */
+  core.String accountId;
+
+  /** Download details for a file stored in Google Cloud Storage. */
+  UnsampledReportCloudStorageDownloadDetails cloudStorageDownloadDetails;
+
+  /** Time this unsampled report was created. */
+  core.String created;
+
+  /** The dimensions for the unsampled report. */
+  core.String dimensions;
+
+  /** The type of download you need to use for the report data file. */
+  core.String downloadType;
+
+  /** Download details for a file stored in Google Drive. */
+  UnsampledReportDriveDownloadDetails driveDownloadDetails;
+
+  /** The end date for the unsampled report. */
+  core.String end_date;
+
+  /** The filters for the unsampled report. */
+  core.String filters;
+
+  /** Unsampled report ID. */
+  core.String id;
+
+  /** Resource type for an Analytics unsampled report. */
+  core.String kind;
+
+  /** The metrics for the unsampled report. */
+  core.String metrics;
+
+  /** View (Profile) ID to which this unsampled report belongs. */
+  core.String profileId;
+
+  /** The segment for the unsampled report. */
+  core.String segment;
+
+  /** Link for this unsampled report. */
+  core.String selfLink;
+
+  /** The start date for the unsampled report. */
+  core.String start_date;
+
+  /** Status of this unsampled report. Possible values are PENDING, COMPLETED, or FAILED. */
+  core.String status;
+
+  /** Title of the unsampled report. */
+  core.String title;
+
+  /** Time this unsampled report was last modified. */
+  core.String updated;
+
+  /** Web property ID to which this unsampled report belongs. The web property ID is of the form UA-XXXXX-YY. */
+  core.String webPropertyId;
+
+  /** Create new UnsampledReport from JSON data */
+  UnsampledReport.fromJson(core.Map json) {
+    if (json.containsKey("accountId")) {
+      accountId = json["accountId"];
+    }
+    if (json.containsKey("cloudStorageDownloadDetails")) {
+      cloudStorageDownloadDetails = new UnsampledReportCloudStorageDownloadDetails.fromJson(json["cloudStorageDownloadDetails"]);
+    }
+    if (json.containsKey("created")) {
+      created = json["created"];
+    }
+    if (json.containsKey("dimensions")) {
+      dimensions = json["dimensions"];
+    }
+    if (json.containsKey("downloadType")) {
+      downloadType = json["downloadType"];
+    }
+    if (json.containsKey("driveDownloadDetails")) {
+      driveDownloadDetails = new UnsampledReportDriveDownloadDetails.fromJson(json["driveDownloadDetails"]);
+    }
+    if (json.containsKey("end-date")) {
+      end_date = json["end-date"];
+    }
+    if (json.containsKey("filters")) {
+      filters = json["filters"];
+    }
+    if (json.containsKey("id")) {
+      id = json["id"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("metrics")) {
+      metrics = json["metrics"];
+    }
+    if (json.containsKey("profileId")) {
+      profileId = json["profileId"];
+    }
+    if (json.containsKey("segment")) {
+      segment = json["segment"];
+    }
+    if (json.containsKey("selfLink")) {
+      selfLink = json["selfLink"];
+    }
+    if (json.containsKey("start-date")) {
+      start_date = json["start-date"];
+    }
+    if (json.containsKey("status")) {
+      status = json["status"];
+    }
+    if (json.containsKey("title")) {
+      title = json["title"];
+    }
+    if (json.containsKey("updated")) {
+      updated = json["updated"];
+    }
+    if (json.containsKey("webPropertyId")) {
+      webPropertyId = json["webPropertyId"];
+    }
+  }
+
+  /** Create JSON Object for UnsampledReport */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (accountId != null) {
+      output["accountId"] = accountId;
+    }
+    if (cloudStorageDownloadDetails != null) {
+      output["cloudStorageDownloadDetails"] = cloudStorageDownloadDetails.toJson();
+    }
+    if (created != null) {
+      output["created"] = created;
+    }
+    if (dimensions != null) {
+      output["dimensions"] = dimensions;
+    }
+    if (downloadType != null) {
+      output["downloadType"] = downloadType;
+    }
+    if (driveDownloadDetails != null) {
+      output["driveDownloadDetails"] = driveDownloadDetails.toJson();
+    }
+    if (end_date != null) {
+      output["end-date"] = end_date;
+    }
+    if (filters != null) {
+      output["filters"] = filters;
+    }
+    if (id != null) {
+      output["id"] = id;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (metrics != null) {
+      output["metrics"] = metrics;
+    }
+    if (profileId != null) {
+      output["profileId"] = profileId;
+    }
+    if (segment != null) {
+      output["segment"] = segment;
+    }
+    if (selfLink != null) {
+      output["selfLink"] = selfLink;
+    }
+    if (start_date != null) {
+      output["start-date"] = start_date;
+    }
+    if (status != null) {
+      output["status"] = status;
+    }
+    if (title != null) {
+      output["title"] = title;
+    }
+    if (updated != null) {
+      output["updated"] = updated;
+    }
+    if (webPropertyId != null) {
+      output["webPropertyId"] = webPropertyId;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of UnsampledReport */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** Download details for a file stored in Google Cloud Storage. */
+class UnsampledReportCloudStorageDownloadDetails {
+
+  /** Id of the bucket the file object is stored in. */
+  core.String bucketId;
+
+  /** Id of the file object containing the report data. */
+  core.String objectId;
+
+  /** Create new UnsampledReportCloudStorageDownloadDetails from JSON data */
+  UnsampledReportCloudStorageDownloadDetails.fromJson(core.Map json) {
+    if (json.containsKey("bucketId")) {
+      bucketId = json["bucketId"];
+    }
+    if (json.containsKey("objectId")) {
+      objectId = json["objectId"];
+    }
+  }
+
+  /** Create JSON Object for UnsampledReportCloudStorageDownloadDetails */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (bucketId != null) {
+      output["bucketId"] = bucketId;
+    }
+    if (objectId != null) {
+      output["objectId"] = objectId;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of UnsampledReportCloudStorageDownloadDetails */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** Download details for a file stored in Google Drive. */
+class UnsampledReportDriveDownloadDetails {
+
+  /** Id of the document/file containing the report data. */
+  core.String documentId;
+
+  /** Create new UnsampledReportDriveDownloadDetails from JSON data */
+  UnsampledReportDriveDownloadDetails.fromJson(core.Map json) {
+    if (json.containsKey("documentId")) {
+      documentId = json["documentId"];
+    }
+  }
+
+  /** Create JSON Object for UnsampledReportDriveDownloadDetails */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (documentId != null) {
+      output["documentId"] = documentId;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of UnsampledReportDriveDownloadDetails */
+  core.String toString() => JSON.encode(this.toJson());
+
+}
+
+/** An unsampled report collection lists Analytics unsampled reports to which the user has access. Each view (profile) can have a set of unsampled reports. Each resource in the unsampled report collection corresponds to a single Analytics unsampled report. */
+class UnsampledReports {
+
+  /** A list of unsampled reports. */
+  core.List<UnsampledReport> items;
+
+  /** The maximum number of resources the response can contain, regardless of the actual number of resources returned. Its value ranges from 1 to 1000 with a value of 1000 by default, or otherwise specified by the max-results query parameter. */
+  core.int itemsPerPage;
+
+  /** Collection type. */
+  core.String kind;
+
+  /** Link to next page for this unsampled report collection. */
+  core.String nextLink;
+
+  /** Link to previous page for this unsampled report collection. */
+  core.String previousLink;
+
+  /** The starting index of the resources, which is 1 by default or otherwise specified by the start-index query parameter. */
+  core.int startIndex;
+
+  /** The total number of results for the query, regardless of the number of resources in the result. */
+  core.int totalResults;
+
+  /** Email ID of the authenticated user */
+  core.String username;
+
+  /** Create new UnsampledReports from JSON data */
+  UnsampledReports.fromJson(core.Map json) {
+    if (json.containsKey("items")) {
+      items = json["items"].map((itemsItem) => new UnsampledReport.fromJson(itemsItem)).toList();
+    }
+    if (json.containsKey("itemsPerPage")) {
+      itemsPerPage = json["itemsPerPage"];
+    }
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("nextLink")) {
+      nextLink = json["nextLink"];
+    }
+    if (json.containsKey("previousLink")) {
+      previousLink = json["previousLink"];
+    }
+    if (json.containsKey("startIndex")) {
+      startIndex = json["startIndex"];
+    }
+    if (json.containsKey("totalResults")) {
+      totalResults = json["totalResults"];
+    }
+    if (json.containsKey("username")) {
+      username = json["username"];
+    }
+  }
+
+  /** Create JSON Object for UnsampledReports */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (items != null) {
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
+    }
+    if (itemsPerPage != null) {
+      output["itemsPerPage"] = itemsPerPage;
+    }
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (nextLink != null) {
+      output["nextLink"] = nextLink;
+    }
+    if (previousLink != null) {
+      output["previousLink"] = previousLink;
+    }
+    if (startIndex != null) {
+      output["startIndex"] = startIndex;
+    }
+    if (totalResults != null) {
+      output["totalResults"] = totalResults;
+    }
+    if (username != null) {
+      output["username"] = username;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of UnsampledReports */
   core.String toString() => JSON.encode(this.toJson());
 
 }

@@ -6,6 +6,7 @@ import 'package:google_analytics_v3_api/src/browser_client.dart';
 import "package:google_analytics_v3_api/analytics_v3_api_client.dart";
 
 /** View and manage your Google Analytics data */
+@deprecated
 class Analytics extends Client with BrowserClient {
 
   /** OAuth Scope2: View and manage your Google Analytics data */
@@ -16,6 +17,9 @@ class Analytics extends Client with BrowserClient {
 
   /** OAuth Scope2: Manage Google Analytics Account users by email address */
   static const String ANALYTICS_MANAGE_USERS_SCOPE = "https://www.googleapis.com/auth/analytics.manage.users";
+
+  /** OAuth Scope2: Create a new Google Analytics account along with its default property and view */
+  static const String ANALYTICS_PROVISION_SCOPE = "https://www.googleapis.com/auth/analytics.provision";
 
   /** OAuth Scope2: View your Google Analytics data */
   static const String ANALYTICS_READONLY_SCOPE = "https://www.googleapis.com/auth/analytics.readonly";
